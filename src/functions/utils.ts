@@ -39,7 +39,7 @@ async function errorhandling(err: string, message: Message) {
 }
 
 async function errorchannelsend(err: string) {
-    const errorchannel = this.client.channels.cache.get('824680761470746646') as TextChannel
+    const errorchannel = this.client.channels.cache.get('840621314322202715') as TextChannel
     const errorembed = new MessageEmbed()
         .setTitle(`Something went really wrong!`)
         .setDescription(`\`\`\`js\n${err}\`\`\``)
@@ -48,8 +48,8 @@ async function errorchannelsend(err: string) {
 }
 
 async function resetToken(message: Message) {
-    const tokenresetchannel = message.client.channels.cache.get('834470179332816958') as TextChannel
-    const errorchannel = message.client.channels.cache.get('824680761470746646') as TextChannel
+    const tokenresetchannel = message.client.channels.cache.get('840621216289390592') as TextChannel
+    const errorchannel = message.client.channels.cache.get('840621314322202715') as TextChannel
 
     //await errorchannel.send(`Resetting token.`)
 
@@ -65,7 +65,7 @@ async function console(thingToLog: string, message: Message) {
     let output = thingToLog
     if (thingToLog.length > 1000) { let output = haste(thingToLog) }
 
-    const consoleChannel = message.client.channels.cache.get(`839215645715595316`) as TextChannel
+    const consoleChannel = message.client.channels.cache.get(`840621386061971477`) as TextChannel
     const consoleEmbed = new MessageEmbed()
         .setDescription(output)
         
