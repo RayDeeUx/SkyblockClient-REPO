@@ -16,6 +16,9 @@ class f extends BotListener {
             if (message.content.toLowerCase() == `f`) {
                 message.react(`🇫`)
             }
+            if (message.content.toLowerCase() == 'l') {
+                message.react(`🇱`)
+            }
         }
         catch (err) {
             return
