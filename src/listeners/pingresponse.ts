@@ -19,7 +19,7 @@ class misclisteners extends BotListener {
         }
 
         if (message.content.toLowerCase().includes(`bad bot`)) {
-            message.channel.send(`<:wahh:830935205341560895>`)
+            message.channel.send(`<a:wahh:841055174302629948>`)
         }
     }
 }
