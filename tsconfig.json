@@ -15,7 +15,7 @@
 	"include": [
 		"src/**/*",
 		"src/*"
-	],
+, "src/commands/skyclient/.ts"	],
 	"exclude": [
 		"node_modules"
 	]
