@@ -2,8 +2,9 @@ import axios from "axios";
 import { Command } from "discord-akairo";
 import { MessageEmbed } from "discord.js";
 import prettyBytes from "pretty-bytes";
+import { BotCommand } from "../../../extensions/BotCommand";
 
-export default class modinfo extends Command {
+export default class modinfo extends BotCommand {
     constructor() {
         super("modinfo", {
             aliases: ["mod", "modinfo"],
