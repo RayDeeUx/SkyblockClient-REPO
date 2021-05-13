@@ -33,6 +33,7 @@ async function haste(content: string) {
 async function errorhandling(err: string, message: Message) {
     const errorembed = new MessageEmbed()
         .setTitle(`Something went wrong!`)
+        .setColor(`ff0000`)
         .setDescription(`\`\`\`js\n${err}\`\`\``)
 
     await message.channel.send(errorembed)
