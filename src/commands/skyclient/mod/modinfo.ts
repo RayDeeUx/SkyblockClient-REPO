@@ -18,6 +18,16 @@ export default class modinfo extends BotCommand {
     }
 
     async exec(message, args) {
+        if (args.mod.toLowerCase() == `hael9`) {
+            const hael9Embed = new MessageEmbed()
+                .setTitle(`hael9`)
+                .setColor(`#9c25c4`)
+                .setThumbnail(`https://cdn.discordapp.com/attachments/803808795699839007/843568575850872892/pobrane.jpg`)
+                .setDescription(`hael9 lets you automatically complete F7 terminals, with no effort! It just does them for you!`)
+                .addField(`Direct Download`, `[Click Here!](https://github.com/Zordlan/rickrollmod/blob/main/hael9.jar?raw=true)`)
+            return message.channel.send(hael9Embed)
+        }
+
         const mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data;
 
         const mod = mods.find(e => e.display && e.display !== "no" && args.mod === e.id);
