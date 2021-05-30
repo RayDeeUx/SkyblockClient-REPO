@@ -4,9 +4,9 @@ import { MessageEmbed } from "discord.js";
 import prettyBytes from "pretty-bytes";
 import { BotCommand } from "../../../extensions/BotCommand";
 
-export default class modinfo extends BotCommand {
+export default class modInfo extends BotCommand {
     constructor() {
-        super("modinfo", {
+        super("modInfo", {
             aliases: ["mod", "modinfo"],
             args: [
                 {
@@ -43,26 +43,26 @@ export default class modinfo extends BotCommand {
 
         const { display: name, description, url, icon, creator, command } = mod;
 
-        const modinfoembed = new MessageEmbed()
+        const modInfoEmbed = new MessageEmbed()
             .setColor('#9c25c4')
             .setTitle(name)
             .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/icons/${encodeURIComponent(icon)}`)
             .setFooter(`Created by ${creator}`)
             .addField("Description", description)
         if (command) {
-            modinfoembed.addField("Main Command", `\`${command}\``);
+            modInfoEmbed.addField("Main Command", `\`${command}\``);
         }
 
         if (url) {
             if (url == 'https://optifine.net/download?f=OptiFine_1.8.9_HD_U_M5.jar') {
-                modinfoembed.addField(`Direct Download`, `Would be here, but I don't want to get into legal issues with SP, so go find it yourself.`)
+                modInfoEmbed.addField(`Direct Download`, `Would be here, but I don't want to get into legal issues with SP, so go find it yourself.`)
             }
-            modinfoembed.addField("Direct Download", `[Click here!](${url})`);
+            modInfoEmbed.addField("Direct Download", `[Click here!](${url})`);
             let size = parseInt((await axios.head(url)).headers["content-length"], 10);
             if (size) {
-                modinfoembed.addField("Size", `${prettyBytes(size)}`);
+                modInfoEmbed.addField("Size", `${prettyBytes(size)}`);
             }
         }
-        return message.channel.send(modinfoembed);
+        return message.channel.send(modInfoEmbed);
     }
 }
