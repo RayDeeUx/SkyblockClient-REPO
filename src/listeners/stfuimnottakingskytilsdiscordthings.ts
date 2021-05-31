@@ -18,11 +18,13 @@ class notStolenFromSkytilsDiscord extends BotListener {
             const triggers = (trigger.triggers[1])
             const response = (trigger.response)
             const content = message.content.toLowerCase()
+            let triggered = false
 
             words.forEach(word => {
                 triggers.forEach(trigger => {
-                    if (content.includes(word.toLowerCase()) && content.includes(trigger.toLowerCase()) && message.author.bot == false) {
+                    if (content.includes(word.toLowerCase()) && content.includes(trigger.toLowerCase()) && message.author.bot == false && triggered == false) {
                         message.channel.send(response)
+                        triggered = true
                     }
                 })
             })
