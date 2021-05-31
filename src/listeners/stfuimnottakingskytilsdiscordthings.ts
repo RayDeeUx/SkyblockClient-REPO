@@ -11,20 +11,22 @@ class notStolenFromSkytilsDiscord extends BotListener {
     }
 
     async exec(message) {
-        const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/bottags.json`, { method: "get" })
+        const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/botautoresponse.json`, { method: "get" })
 
         notStolenFromSkytilsDiscordJson.data.forEach(trigger => {
-            if (trigger.trigger2) {
-                if (message.content.includes(`how`) && message.content.includes(trigger.trigger) && message.content.includes(trigger.trigger2)) {
-                    message.channel.send(trigger.response)
-                }
-            }
-            else {
-                if (message.content.includes(`how`) && message.content.includes(trigger.trigger)) {
-                    message.channel.send(trigger.response)
-                }
-            }
+            const words = (trigger.triggers[0])
+            const triggers = (trigger.triggers[1])
+            const response = (trigger.response)
+
+            words.forEach(word => {
+                triggers.forEach(trigger => {
+                    if (message.content.includes(word) && message.content.includes(trigger) && message.author.bot == false) {
+                        message.channel.send(response)
+                    }
+                })
+            })
         })
+
     }
 }
 
