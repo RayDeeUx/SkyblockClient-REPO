@@ -62,9 +62,8 @@ export default class evaluate extends BotCommand {
 
             //im going to make something that disables eval embed in specific channels in the database later
             if (message.guild.id == `794610828317032458` && message.channel.id != `834878498941829181`) {
-                if (args.codetoeval.includes('message.delete')) {
-                    return
-                }
+                if (args.codetoeval.includes('message.delete')) {return}
+                
                 return message.react(`<:success:838816341007269908>`)
             }
 
