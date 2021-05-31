@@ -30,7 +30,7 @@ export default class modInfo extends BotCommand {
 
         const mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data;
 
-        const mod = mods.find(e => e.display && e.display !== "no" && args.mod === e.id.toLowerCase());
+        const mod = mods.find(e => e.display && e.display !== "no" && args.mod.toLowerCase() === e.id.toLowerCase());
 
         if (!mod) {
             const errEmbed = new MessageEmbed()
