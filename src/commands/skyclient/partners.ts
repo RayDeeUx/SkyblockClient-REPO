@@ -20,15 +20,15 @@ export default class partners extends BotCommand {
         if (SkyClientGuilds.includes(message.guild.id)) {
             const res = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
 
-            for (const element of res.data) {
+            for (const server of res.data) {
 
-                if (element.partner) {
+                if (server.partner) {
                     const partnerEmbed = new MessageEmbed()
-                        .setTitle(element.fancyname)
-                        .setURL(`https://discord.gg/${element.code}`)
+                        .setTitle(server.fancyname)
+                        .setURL(`https://discord.gg/${server.code}`)
                         .setColor(`00ff00`)
-                        .setDescription(`${element.description}\n\nDiscord Invite: \`https://discord.gg/${element.code}\``)
-                        .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${element.icon}`)
+                        .setDescription(`${server.description}\n\nDiscord Invite: \`https://discord.gg/${server.code}\``)
+                        .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${server.icon}`)
 
                     await utils.sleep(1000)
                     await message.channel.send(partnerEmbed)
