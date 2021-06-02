@@ -34,7 +34,7 @@ export default class discord extends BotCommand {
                                 .setDescription(`${discord.description}\n\nDiscord Invite: \`https://discord.gg/${discord.code}\``)
                                 .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
 
-                            message.channel.send(partnerEmbed)
+                            message.channel.send(`discord.gg/${discord.code}`, partnerEmbed)
                         }
                         else {
                             message.channel.send(`discord.gg/${discord.code}`)
