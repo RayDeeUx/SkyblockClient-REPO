@@ -24,11 +24,12 @@ export default class discord extends BotCommand {
             let found = false
 
             for (const discord of res.data) {
-                discord.nicknames.forEach(element => {
-                    if (args.discordServer == element) {
+                discord.nicknames.forEach(nickname => {
+                    if (args.discordServer == nickname && found == false|| args.discordServer == discord.id && found == false) {
                         message.channel.send(`discord.gg/${discord.code}`)
+                        found = true
                     }
-                });
+                })
             }
         }
         else { return }
