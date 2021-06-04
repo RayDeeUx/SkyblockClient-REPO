@@ -11,7 +11,8 @@ class autorole extends BotListener {
     }
 
     async exec(message) {
-        if (message.member && !message.member.roles.cache.has('780449281760428042') && message.author.bot == false) {
+        const person = message.guild.members.cache.get(message.author.id)
+        if (person.member && !person.roles.cache.has('780449281760428042') && person.bot == false) {
             message.member.roles.add('780449281760428042')
         }
     }
