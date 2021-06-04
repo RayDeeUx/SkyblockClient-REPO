@@ -11,6 +11,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
     }
 
     async exec(message) {
+        if (message.member.bot != false) {return}
         const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/botautoresponse.json`, { method: "get" })
 
         notStolenFromSkytilsDiscordJson.data.forEach(trigger => {
