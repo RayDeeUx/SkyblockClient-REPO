@@ -23,6 +23,7 @@ export default class packinfo extends BotCommand {
             `824680357936103497` //testing server
         ]
         if (SkyClientGuilds.includes(message.guild.id)) {
+            let packDownloadURL
             const packjson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
             //const creatorsjson = await axios(/*url goes here*/``, { method: "get" })
 
@@ -36,7 +37,10 @@ export default class packinfo extends BotCommand {
                     }
 
                     let filteredPackFileName = pack.file.replace(/ /g, '%20')
-                    let packDownloadURL = `https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/packs/${filteredPackFileName}?raw=true`
+                    if (!pack.url) {
+                        packDownloadURL = `https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/packs/${filteredPackFileName}?raw=true`
+                    }
+                    else { packDownloadURL = pack.url }
                     packEmbed.addFields(
                         { name: 'Description', value: pack.description },
                         { name: 'Direct Download', value: `[Click Here](${packDownloadURL})!` },
@@ -57,7 +61,7 @@ export default class packinfo extends BotCommand {
                 }
             }
         }
-        else {return}
+        else { return }
 
 
     }
