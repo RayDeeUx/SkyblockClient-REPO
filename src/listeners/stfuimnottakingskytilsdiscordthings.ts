@@ -11,25 +11,27 @@ class notStolenFromSkytilsDiscord extends BotListener {
     }
 
     async exec(message) {
-        if (message.member.bot == false) {return}
-        const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/botautoresponse.json`, { method: "get" })
+        if (message.author.bot == true) { return }
+        else {
+            const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/botautoresponse.json`, { method: "get" })
 
-        notStolenFromSkytilsDiscordJson.data.forEach(trigger => {
-            const triggers = (trigger.triggers)
-            const response = (trigger.response)
-            const content = message.content.toLowerCase()
+            notStolenFromSkytilsDiscordJson.data.forEach(trigger => {
+                const triggers = (trigger.triggers)
+                const response = (trigger.response)
+                const content = message.content.toLowerCase()
 
-            let contains = recursiveSearch(content, triggers, 0)
-            if (contains) {
-                message.channel.send(response)
-            }
+                let contains = recursiveSearch(content, triggers, 0)
+                if (contains) {
+                    message.channel.send(response)
+                }
 
-        })
+            })
 
+        }
     }
 }
 
-function recursiveSearch(cutContent:string, triggers: Array<Array<string>>, index: number) : boolean {
+function recursiveSearch(cutContent: string, triggers: Array<Array<string>>, index: number): boolean {
     const wordlist = triggers[index];
     let indexOf = -1;
 
