@@ -6,9 +6,9 @@ import { BotCommand } from '../../../extensions/BotCommand';
 
 const sh = promisify(exec);
 
-export default class gitpull extends BotCommand {
+export default class gitPull extends BotCommand {
     constructor() {
-        super('gitpull', {
+        super('gitPull', {
             aliases: ['gitpull', 'pull'],
             ownerOnly: true,
             channel: 'guild'
@@ -16,12 +16,12 @@ export default class gitpull extends BotCommand {
     }
 
     async exec(message, args) {
-        const githubembed = new MessageEmbed()
-        
-        let pull = await eval(`sh('git pull')`)
-        githubembed.setDescription(`\`\`\`js\n${inspect(pull)}\`\`\``)
+        const githubEmbed = new MessageEmbed()
 
-        message.channel.send(githubembed)
+        let pull = await eval(`sh('git pull')`)
+        githubEmbed.setDescription(`\`\`\`js\n${inspect(pull)}\`\`\``)
+
+        message.channel.send(githubEmbed)
 
     }
 }

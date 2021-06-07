@@ -13,7 +13,7 @@ export default class evaluate extends BotCommand {
         super('eval', {
             aliases: ['eval', 'ev', 'exec'],
             args: [
-                { id: 'codetoeval', type: 'string', match: 'rest' },
+                { id: 'codeToEval', type: 'string', match: 'rest' },
                 { id: "silent", match: 'flag', flag: '--silent', },
                 { id: 'sudo', match: 'flag', flag: '--sudo' }
             ],
@@ -24,20 +24,20 @@ export default class evaluate extends BotCommand {
 
     async exec(message, args) {
         try {
-            if (args.codetoeval.includes(`token`)) {
+            if (args.codeToEval.includes(`token`)) {
                 return (message.channel.send(`no token`))
             }
-            if (args.codetoeval.includes(`env`)) {
+            if (args.codeToEval.includes(`env`)) {
                 return message.channel.send(`no env`)
             }
 
-            if (args.codetoeval.includes(`message.channel.delete`)) {
+            if (args.codeToEval.includes(`message.channel.delete`)) {
                 return message.channel.send(`Are you IRONM00N?`)
             }
-            if (args.codetoeval.includes(`message.guild.delete`)) {
+            if (args.codeToEval.includes(`message.guild.delete`)) {
                 return message.channel.send(`You're like IRONM00N but infinitely more stupid!`)
             }
-            if (args.codetoeval.includes(`delete`) && !args.sudo) {
+            if (args.codeToEval.includes(`delete`) && !args.sudo) {
                 return message.channel.send(`This would be blocked by smooth brain protection, but BushBot has a license`)
             }
 
@@ -54,7 +54,7 @@ export default class evaluate extends BotCommand {
             let botUser = this.client.user
             let botMember = message.guild.me
 
-            let output = await eval(args.codetoeval)
+            let output = await eval(args.codeToEval)
 
             if (inspect(output).includes(process.env["token"])) {
                 return message.channel.send(`Message containing token wasn't sent.`)
@@ -70,7 +70,7 @@ export default class evaluate extends BotCommand {
             if (!args.silent && !args.codetoeval.includes("message.channel.delete()")) {
                 const evalOutputEmbed = new MessageEmbed()
                     .setTitle('Evaluated Code')
-                    .addField(`:inbox_tray: **Input**`, `\`\`\`js\n${args.codetoeval}\`\`\``)
+                    .addField(`:inbox_tray: **Input**`, `\`\`\`js\n${args.codeToEval}\`\`\``)
 
                 if (inspect(output, { depth: 0 }).length > 1000) {
                     await evalOutputEmbed.addField(`:outbox_tray: **Output**`, await utils.haste(inspect(output)))

@@ -4,33 +4,26 @@ import axios from "axios"
 import utils from '../../../functions/utils';
 import { BotCommand } from '../../../extensions/BotCommand';
 
-export default class packlist extends BotCommand {
+export default class packList extends BotCommand {
     constructor() {
-        super('packlist', {
+        super('packList', {
             aliases: ['packlist', 'packs'],
-            args: [
-                {
-                    id: "packname",
-                    type: "string"
-                }
-            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message) {
         const SkyClientGuilds = [
             `780181693100982273`, //main server
             `824680357936103497` //testing server
         ]
         if (SkyClientGuilds.includes(message.guild.id)) {
-            const packjson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
-            //const creatorsjson = await axios(/*url goes here*/``, { method: "get" })
+            const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
 
             const packsEmbed = new MessageEmbed()
                 .setColor('#9c25c4')
                 .setTitle('SkyClient packs List')
 
-            packjson.data.forEach(pack => {
+                packJson.data.forEach(pack => {
                 if (pack.display && pack.display != "no" && pack.hidden != true) {
                     let packs = ""
 

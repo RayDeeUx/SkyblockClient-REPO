@@ -8,9 +8,9 @@ import { BotCommand } from '../../../extensions/BotCommand';
 
 const sh = promisify(exec);
 
-export default class gitpush extends BotCommand {
+export default class gitPush extends BotCommand {
     constructor() {
-        super('gitpush', {
+        super('gitPush', {
             aliases: ['gitpush', 'push'],
             args: [
                 {
@@ -29,23 +29,23 @@ export default class gitpush extends BotCommand {
             return message.channel.send(`Your commit message is too long!`)
         }
 
-        const hiyesthisisanembed = new MessageEmbed()
+        const pushingToGithubEmbed = new MessageEmbed()
             .setDescription(`Pushing changes to [GitHub](https://github.com/Zordlan/SkyClientBot)`)
-        message.channel.send(hiyesthisisanembed)
+        message.channel.send(pushingToGithubEmbed)
 
-        const githubembed = new MessageEmbed()
+        const githubEmbed = new MessageEmbed()
             .setTitle(`Command Output`)
 
-        let gitadd = await eval(`sh('git add .')`)
-        githubembed.addField(`\`git add .\``, `\`\`\`js\n${inspect(gitadd)}\`\`\``)
+        let gitAdd = await eval(`sh('git add .')`)
+        githubEmbed.addField(`\`git add .\``, `\`\`\`js\n${inspect(gitAdd)}\`\`\``)
 
-        let gitcommit = await eval(`sh('git commit -m "${args.commitReason}"')`)
-        githubembed.addField(`\`git commit "${args.commitReason}"\``, `\`\`\`js\n${inspect(gitcommit)}\`\`\``)
+        let gitCommit = await eval(`sh('git commit -m "${args.commitReason}"')`)
+        githubEmbed.addField(`\`git commit "${args.commitReason}"\``, `\`\`\`js\n${inspect(gitCommit)}\`\`\``)
 
-        let githubpush = await eval(`sh('git push')`)
-        githubembed.addField(`\`git push\``, `\`\`\`js\n${inspect(githubpush)}\`\`\``)
+        let githubPush = await eval(`sh('git push')`)
+        githubEmbed.addField(`\`git push\``, `\`\`\`js\n${inspect(githubPush)}\`\`\``)
 
-        message.channel.send(githubembed)
+        message.channel.send(githubEmbed)
 
     }
 }

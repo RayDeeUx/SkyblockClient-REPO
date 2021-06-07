@@ -29,10 +29,10 @@ class notStolenFromSkytilsDiscord extends BotListener {
 }
 
 function recursiveSearch(cutContent: string, triggers: Array<Array<string>>, index: number): boolean {
-    const wordlist = triggers[index];
+    const wordList = triggers[index];
     let indexOf = -1;
 
-    for (const word of wordlist) {
+    for (const word of wordList) {
         indexOf = cutContent.indexOf(word);
         if (indexOf != -1) {
             indexOf += word.length

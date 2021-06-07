@@ -4,13 +4,13 @@ import axios from "axios"
 import utils from '../../../functions/utils';
 import { BotCommand } from '../../../extensions/BotCommand';
 
-export default class packinfo extends BotCommand {
+export default class packName extends BotCommand {
     constructor() {
-        super('packinfo', {
+        super('packName', {
             aliases: ['packinfo', 'pack'],
             args: [
                 {
-                    id: "packname",
+                    id: "packName",
                     type: "string"
                 }
             ]
@@ -24,11 +24,10 @@ export default class packinfo extends BotCommand {
         ]
         if (SkyClientGuilds.includes(message.guild.id)) {
             let packDownloadURL
-            const packjson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
-            //const creatorsjson = await axios(/*url goes here*/``, { method: "get" })
+            const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
 
-            for (const pack of packjson.data) {
-                if (pack.id == args.packname) {
+            for (const pack of packJson.data) {
+                if (pack.id == args.packName) {
                     const packEmbed = new MessageEmbed()
                         .setTitle(pack.display)
                         .setColor('#9c25c4')

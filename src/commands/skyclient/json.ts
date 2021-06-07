@@ -8,7 +8,7 @@ export default class json extends BotCommand {
             aliases: ['json'],
             args: [
                 { id: "type", type: "string" },
-                { id: "thingtofind", match: "restContent", type: "string" }
+                { id: "thingToFind", match: "restContent", type: "string" }
             ]
         });
     }
@@ -24,7 +24,7 @@ export default class json extends BotCommand {
 
             if (args.type == `mod`) {
                 for (let mod of ModJson.data) {
-                    if (mod.id == args.thingtofind) {
+                    if (mod.id == args.thingToFind) {
                         mod = JSON.stringify(mod, null, '  ')
                         message.channel.send(`${await utils.haste(mod)}`)
                     }
@@ -32,13 +32,13 @@ export default class json extends BotCommand {
             }
             else if (args.type == `pack`) {
                 for (let pack of PacksJson.data) {
-                    if (pack.id == args.thingtofind) {
+                    if (pack.id == args.thingToFind) {
                         pack = JSON.stringify(pack, null, '  ')
                         message.channel.send(`${await utils.haste(pack)}`)
                     }
                 }
             }
-            else {}
+            else { }
         }
         else { return }
     }

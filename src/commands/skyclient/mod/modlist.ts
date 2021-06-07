@@ -4,33 +4,26 @@ import axios from "axios"
 import utils from '../../../functions/utils';
 import { BotCommand } from '../../../extensions/BotCommand';
 
-export default class modlist extends BotCommand {
+export default class modList extends BotCommand {
     constructor() {
-        super('modlist', {
+        super('modList', {
             aliases: ['modlist', 'mods'],
-            args: [
-                {
-                    id: "modname",
-                    type: "string"
-                }
-            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message) {
         const SkyClientGuilds = [
             `780181693100982273`, //main server
             `824680357936103497` //testing server
         ]
         if (SkyClientGuilds.includes(message.guild.id)) {
-            const modjson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
-            //const creatorsjson = await axios(/*url goes here*/``, { method: "get" })
+            const modJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
 
             const modsEmbed = new MessageEmbed()
                 .setColor('#9c25c4')
                 .setTitle('SkyClient Mods List')
 
-            modjson.data.forEach(mod => {
+                modJson.data.forEach(mod => {
                 if (mod.display && mod.display != "no" && mod.hidden != true) {
                     let mods = ""
 
@@ -44,6 +37,7 @@ export default class modlist extends BotCommand {
                         mods = mods.substring(0, mods.length - 2)
                     }
                     else {
+                        
                         if (mod.display && mod.creator && mod.display != "no" && mod.discordcode) {
                             mods = `Creator: [${mod.creator}](https://discord.gg/${mod.discordcode})\nMod ID: \`${mod.id}\``
                         }
