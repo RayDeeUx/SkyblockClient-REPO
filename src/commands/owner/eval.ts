@@ -88,7 +88,7 @@ export default class evaluate extends BotCommand {
                 if (args.codetoeval.includes('message.delete')) {
                     return
                 }
-                message.react(`<:success:838816341007269908>`)
+                message.react(`<:green_check:796548440266899526>`)
             }
 
         }
