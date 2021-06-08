@@ -13,7 +13,7 @@ export default class evaluate extends BotCommand {
         super('eval', {
             aliases: ['eval', 'ev', 'exec'],
             args: [
-                { id: 'codeToEval', type: 'string', match: 'rest' },
+                { id: 'codetoeval', type: 'string', match: 'rest' },
                 { id: "silent", match: 'flag', flag: '--silent', },
                 { id: 'sudo', match: 'flag', flag: '--sudo' }
             ],
@@ -24,20 +24,20 @@ export default class evaluate extends BotCommand {
 
     async exec(message, args) {
         try {
-            if (args.codeToEval.includes(`token`)) {
+            if (args.codetoeval.includes(`token`)) {
                 return (message.channel.send(`no token`))
             }
-            if (args.codeToEval.includes(`env`)) {
+            if (args.codetoeval.includes(`env`)) {
                 return message.channel.send(`no env`)
             }
 
-            if (args.codeToEval.includes(`message.channel.delete`)) {
+            if (args.codetoeval.includes(`message.channel.delete`)) {
                 return message.channel.send(`Are you IRONM00N?`)
             }
-            if (args.codeToEval.includes(`message.guild.delete`)) {
+            if (args.codetoeval.includes(`message.guild.delete`)) {
                 return message.channel.send(`You're like IRONM00N but infinitely more stupid!`)
             }
-            if (args.codeToEval.includes(`delete`) && !args.sudo) {
+            if (args.codetoeval.includes(`delete`) && !args.sudo) {
                 return message.channel.send(`This would be blocked by smooth brain protection, but BushBot has a license`)
             }
 
@@ -54,7 +54,7 @@ export default class evaluate extends BotCommand {
             let botUser = this.client.user
             let botMember = message.guild.me
 
-            let output = await eval(args.codeToEval)
+            let output = await eval(args.codetoeval)
 
             if (inspect(output).includes(process.env["token"])) {
                 return message.channel.send(`Message containing token wasn't sent.`)
@@ -62,15 +62,18 @@ export default class evaluate extends BotCommand {
 
             //im going to make something that disables eval embed in specific channels in the database later
             if (message.guild.id == `794610828317032458` && message.channel.id != `834878498941829181`) {
-                if (args.codetoeval.includes('message.delete')) {return}
-                
+                if (args.codetoeval.includes('message.delete')) {
+                    return
+                }
                 return message.react(`<:success:838816341007269908>`)
+                //                return message.react(`<:success:838816341007269908>`)
+
             }
 
             if (!args.silent && !args.codetoeval.includes("message.channel.delete()")) {
                 const evalOutputEmbed = new MessageEmbed()
                     .setTitle('Evaluated Code')
-                    .addField(`:inbox_tray: **Input**`, `\`\`\`js\n${args.codeToEval}\`\`\``)
+                    .addField(`:inbox_tray: **Input**`, `\`\`\`js\n${args.codetoeval}\`\`\``)
 
                 if (inspect(output, { depth: 0 }).length > 1000) {
                     await evalOutputEmbed.addField(`:outbox_tray: **Output**`, await utils.haste(inspect(output)))
