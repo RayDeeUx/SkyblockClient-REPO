@@ -41,7 +41,7 @@ export default class modInfo extends BotCommand {
             return message.channel.send(errEmbed);
         }
 
-        const { display: name, description, url, icon, creator, command } = mod;
+        let { display: name, description, url, icon, creator, command, file } = mod;
 
         const modInfoEmbed = new MessageEmbed()
             .setColor('#9c25c4')
@@ -57,11 +57,14 @@ export default class modInfo extends BotCommand {
             if (url == 'https://optifine.net/download?f=OptiFine_1.8.9_HD_U_M5.jar') {
                 modInfoEmbed.addField(`Direct Download`, `Would be here, but I don't want to get into legal issues with SP, so go find it yourself.`)
             }
-            modInfoEmbed.addField("Direct Download", `[${mod.file}](${url})`);
-            let size = parseInt((await axios.head(url)).headers["content-length"], 10);
-            if (size) {
-                modInfoEmbed.addField("Size", `${prettyBytes(size)}`);
-            }
+        }
+        else {
+            url = `https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/mods/${encodeURIComponent(mod.file)}?raw=true`
+        }
+        modInfoEmbed.addField("Direct Download", `[${file}](${url})`);
+        let size = parseInt((await axios.head(url)).headers["content-length"], 10);
+        if (size) {
+            modInfoEmbed.addField("Size", `${prettyBytes(size)}`);
         }
         return message.channel.send(modInfoEmbed);
     }
