@@ -12,6 +12,12 @@ class notStolenFromSkytilsDiscord extends BotListener {
 
     async exec(message) {
         if (message.author.bot == true) { return }
+        let noAutorespond = false
+        message.member.roles.cache.forEach(role => {
+            if (role.id == '852016624605462589') {
+                return noAutorespond = true
+            }
+        })
         const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/botautoresponse.json`, { method: "get" })
 
         notStolenFromSkytilsDiscordJson.data.forEach(trigger => {
@@ -20,10 +26,10 @@ class notStolenFromSkytilsDiscord extends BotListener {
             const content = message.content.toLowerCase()
 
             let contains = recursiveSearch(content, triggers, 0)
-            if (contains) {
+            if (contains && noAutorespond == false) {
                 message.channel.send(response)
             }
-
+            //if (noAutorespond == true && message.author.bot == false) {message.channel.send(`no u`)}
         })
     }
 }
