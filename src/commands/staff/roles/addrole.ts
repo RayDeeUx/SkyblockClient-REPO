@@ -14,7 +14,8 @@ export default class addrole extends BotCommand {
                 },
                 {
                     id: 'role',
-                    type: 'role'
+                    type: 'role',
+                    match: 'rest'
                 }
             ],
             clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
