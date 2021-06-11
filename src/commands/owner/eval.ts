@@ -45,6 +45,8 @@ export default class evaluate extends BotCommand {
                 message.channel.send(thingToSend)
             }
 
+            //const send = message.channel.send
+
             let guild = message.guild
             let client = this.client
             let channel = message.channel
@@ -57,7 +59,7 @@ export default class evaluate extends BotCommand {
             let output = await eval(args.codetoeval)
 
             if (inspect(output).includes(process.env["token"])) {
-                return message.channel.send(`Message containing token wasn't sent.`)
+                return message.util.send(`Message containing token wasn't sent.`)
             }
 
             //im going to make something that disables eval embed in specific channels in the database later
@@ -82,7 +84,7 @@ export default class evaluate extends BotCommand {
                     evalOutputEmbed.addField(`:outbox_tray: **Output**`, `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``)
                 }
 
-                await message.channel.send(evalOutputEmbed)
+                await message.util.send(evalOutputEmbed)
             }
             if (args.silent) {
                 if (args.codetoeval.includes('message.delete')) {
