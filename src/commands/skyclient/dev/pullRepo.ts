@@ -24,7 +24,8 @@ export default class pullRepo extends BotCommand {
         const peopleWithPerms = [
             '492488074442309642', //Zordlan
             '435443705055543306', //nacrt
-            '378587857796726785' //Koxx12
+            '378587857796726785', //Koxx12
+            '464851580370419733' // micro (he deserves it)
         ]
         if (SkyClientGuilds.includes(message.guild.id) && peopleWithPerms.includes(message.author.id)) {
             await fs.readFile('SkyblockClient-REPO/files/botautoresponse.json').then(autoresponse => {
