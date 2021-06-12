@@ -5,7 +5,7 @@ import { BotCommand } from '../../../extensions/BotCommand';
 import utils from "../../../functions/utils";
 
 const sh = promisify(exec)
-const fs = require('fs')
+const fs = require('fs/promises')
 
 
 export default class pullRepo extends BotCommand {
@@ -27,8 +27,9 @@ export default class pullRepo extends BotCommand {
             '378587857796726785' //Koxx12
         ]
         if (SkyClientGuilds.includes(message.guild.id) && peopleWithPerms.includes(message.author.id)) {
-            async function readFile(){ fs.readFile('SkyblockClient-REPO/files/botautoresponse.json')}
-            console.log(await readFile())
+            await fs.readFile('SkyblockClient-REPO/files/botautoresponse.json').then(autoresponse => {
+                console.log(autoresponse)
+            })
         }
         else { return }
     }
