@@ -142,4 +142,3 @@ config
 testing
 
 SkyblockClient-REPO
-pull.bat
