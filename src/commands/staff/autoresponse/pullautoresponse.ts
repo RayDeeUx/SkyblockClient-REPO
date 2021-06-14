@@ -23,13 +23,24 @@ export default class pullAutoresponse extends BotCommand {
             '378587857796726785', //koxx12
         ]
         if (coolPeople.includes(message.author.id)) {
-            sh('cd SkyblockClient-REPO ; git pull')
+            if (process.platform = 'win32') {
+                sh('pull.bat')
+                    .then(() => {
+                        message.channel.send('pulled')
+                    })
+                    .catch(err => {
+                        utils.errorhandling(err, message)
+                    })
+            }
+            else {
+                sh('cd SkyblockClient-REPO ; git pull')
                 .then(() => {
                     message.channel.send('pulled')
                 })
                 .catch(err => {
                     utils.errorhandling(err, message)
                 })
+            }
         }
         else {
             message.channel.send('hey so you dont have the perms to run this command, if you think you deserve them ping zord or make a pr')
