@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { Listener } from 'discord-akairo';
 import { BotListener } from '../extensions/BotListener';
+import fs from 'fs';
+
 
 class notStolenFromSkytilsDiscord extends BotListener {
     constructor() {
@@ -18,9 +19,11 @@ class notStolenFromSkytilsDiscord extends BotListener {
                 return noAutorespond = true
             }
         })
-        const notStolenFromSkytilsDiscordJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/botautoresponse.json`, { method: "get" })
+        
+        const fsJson = fs.readFileSync('SkyblockClient-REPO/files/botautoresponse.json','utf8')
+        let notStolenFromSkytilsDiscordJson = JSON.parse(fsJson)
 
-        notStolenFromSkytilsDiscordJson.data.forEach(trigger => {
+        notStolenFromSkytilsDiscordJson.forEach(trigger => {
             const triggers = (trigger.triggers)
             const response = (trigger.response)
             const content = message.content.toLowerCase()
@@ -29,7 +32,6 @@ class notStolenFromSkytilsDiscord extends BotListener {
             if (contains && noAutorespond == false) {
                 message.channel.send(response)
             }
-            //if (noAutorespond == true && message.author.bot == false) {message.channel.send(`no u`)}
         })
     }
 }

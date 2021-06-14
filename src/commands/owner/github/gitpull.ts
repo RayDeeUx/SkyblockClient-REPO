@@ -9,7 +9,7 @@ const sh = promisify(exec);
 export default class gitPull extends BotCommand {
     constructor() {
         super('gitPull', {
-            aliases: ['gitpull', 'pull'],
+            aliases: ['gitpull'],
             ownerOnly: true,
             channel: 'guild'
         });

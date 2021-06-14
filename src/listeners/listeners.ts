@@ -15,9 +15,6 @@ class ReadyListener extends BotListener {
     }
 
     async exec() {
-        try{await sh('git clone https://github.com/nacrt/SkyblockClient-REPO')}
-        catch(err){if (err = `fatal: destination path 'SkyblockClient-REPO' already exists and is not an empty directory.`) {console.log(chalk.red('repo found'))}}
-        console.log(chalk.red('Cloned nacrt/SkyblockClient-REPO, to make sure that it\'s there!'))
         console.log(chalk.magenta(`Bot Online!`))
         console.log(`\n`)
         console.log(chalk.magentaBright(`---Bot Output---`))
