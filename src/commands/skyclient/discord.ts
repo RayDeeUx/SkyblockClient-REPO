@@ -18,10 +18,10 @@ export default class discord extends BotCommand {
             `824680357936103497` //testing server
         ]
         if (SkyClientGuilds.includes(message.guild.id)) {
-            const res = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
+            const discords = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
             let found = false
 
-            for (const discord of res.data) {
+            for (const discord of discords.data) {
                 discord.nicknames.forEach(nickname => {
                     if (args.discordServer == nickname && found == false || args.discordServer == discord.id && found == false) {
                         if (discord.partner) {
