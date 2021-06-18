@@ -4,7 +4,7 @@ import { join } from "path";
 
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {
-		prefix: ["-"], 
+		prefix: ["-"],
 		commandUtil: true,
 		handleEdits: true,
 		directory: join(__dirname, "..", "commands"),
@@ -15,7 +15,7 @@ export class BotClient extends AkairoClient {
 		directory: join(__dirname, "..", "listeners"),
 		automateCategories: true
 	})
-	
+
 	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
 		directory: join(__dirname, "..", "inhibitors")
 	})
@@ -26,11 +26,11 @@ export class BotClient extends AkairoClient {
 				"545277690303741962"
 			]
 		},
-		{
-			allowedMentions: {
-				parse: ["users"] // Disables all mentions except for users
-			}
-		});
+			{
+				allowedMentions: {
+					parse: ["users"] // Disables all mentions except for users
+				}
+			});
 	}
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler);
@@ -58,6 +58,6 @@ export class BotClient extends AkairoClient {
 
 	public async start(): Promise<string> {
 		await this._init();
-		return this.login(process.env["devtoken"]);
+		return this.login(process.env["token"]);
 	}
 }
