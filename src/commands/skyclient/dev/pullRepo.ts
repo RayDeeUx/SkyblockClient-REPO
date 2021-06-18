@@ -1,8 +1,6 @@
-import axios from "axios"
 import { exec } from "child_process";
 import { promisify } from "util";
 import { BotCommand } from '../../../extensions/BotCommand';
-import utils from "../../../functions/utils";
 
 const sh = promisify(exec)
 const fs = require('fs/promises')

@@ -1,4 +1,3 @@
-import { Listener } from 'discord-akairo';
 import { BotListener } from '../extensions/BotListener';
 
 class f extends BotListener {

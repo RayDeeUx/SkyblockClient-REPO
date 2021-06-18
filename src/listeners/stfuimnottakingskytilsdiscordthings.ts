@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { BotListener } from '../extensions/BotListener';
 import fs from 'fs';
 

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Command } from "discord-akairo";
 import { MessageEmbed } from "discord.js";
 import prettyBytes from "pretty-bytes";
 import { BotCommand } from "../../../extensions/BotCommand";

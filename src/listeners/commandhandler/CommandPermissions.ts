@@ -4,7 +4,6 @@ import { BotClient } from "../../extensions/BotClient";
 import { BotListener } from "../../extensions/BotListener";
 
 export default class missingPermissions extends BotListener {
-    client: BotClient;
     public constructor(client: BotClient) {
         super("missingPermissions", {
             emitter: "commandHandler",
