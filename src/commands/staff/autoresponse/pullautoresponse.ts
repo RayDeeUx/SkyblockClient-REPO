@@ -20,7 +20,7 @@ export default class pullAutoresponse extends BotCommand {
             '378587857796726785', //koxx12
         ]
         if (coolPeople.includes(message.author.id)) {
-            if (process.platform = 'win32') {
+            if (process.platform == 'win32') {
                 sh('pull.bat')
                     .then(() => {
                         message.channel.send('pulled (probably)')
