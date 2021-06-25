@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, TextChannel } from "discord.js";
 import prettyBytes from "pretty-bytes";
 import { BotCommand } from "../../../extensions/BotCommand";
 import commandManager from "../../../functions/commandManager";
@@ -80,7 +80,15 @@ export default class modInfo extends BotCommand {
                 message.interaction.reply({ embeds: [embed] })
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                message.reply({embeds: [embed]})
+                if (message.type == 'REPLY') {
+                    if (message.channel.type == 'text') {
+                        const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                        repliedMessage.reply({embeds: [embed]})
+                    }
+                }
+                else {
+                    message.reply({embeds: [embed]})
+                }
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
                 message.reply('Please use this as a slashcommand (make sure you\'re using the right bot - fire has a `/mod` slashcommand also) if you want to use it in this channel.')
