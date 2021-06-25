@@ -20,9 +20,6 @@ export default class packName extends BotCommand {
     async exec(message, args) {
 
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            if (!message.interaction) {
-                return message.reply('Support for this command as a regular text command has been removed. If you want to use it, there is now a slashcommand for it.')
-            }
 
             let packDownloadURL
             const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
@@ -58,11 +55,17 @@ export default class packName extends BotCommand {
                     }
 
                     const embed = packEmbed
-                    if (commandManager.userCanUseCommand(message) == false) {
-                        message.interaction.reply({embeds:[embed], ephemeral: true})
+                    if (commandManager.userCanUseCommand(message) == false && message.interaction) {
+                        message.interaction.reply({ embeds: [embed], ephemeral: true })
                     }
-                    else {
-                        message.interaction.reply({embeds:[embed]})
+                    else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
+                        message.interaction.reply({ embeds: [embed] })
+                    }
+                    else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
+                        message.reply({embeds: [embed]})
+                    }
+                    else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
+                        message.reply('Please use this as a slashcommand if you want to use it in this channel.')
                     }
                 }
             }

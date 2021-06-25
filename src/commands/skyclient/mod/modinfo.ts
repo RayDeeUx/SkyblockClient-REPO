@@ -20,9 +20,7 @@ export default class modInfo extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            if (!message.interaction) {
-                return message.reply('Support for this command as a regular text command has been removed. If you want to use it, there is now a slashcommand for it.')
-            }
+            
 
             if (args.mod.toLowerCase() == `hael9`) {
                 const hael9Embed = new MessageEmbed()
@@ -74,11 +72,18 @@ export default class modInfo extends BotCommand {
             }
 
             const embed = modInfoEmbed
-            if (commandManager.userCanUseCommand(message) == false) {
+            
+            if (commandManager.userCanUseCommand(message) == false && message.interaction) {
                 message.interaction.reply({ embeds: [embed], ephemeral: true })
             }
-            else {
+            else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
                 message.interaction.reply({ embeds: [embed] })
+            }
+            else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
+                message.reply({embeds: [embed]})
+            }
+            else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
+                message.reply('Please use this as a slashcommand (make sure you\'re using the right bot - fire has a `/mod` slashcommand also) if you want to use it in this channel.')
             }
         }
     }
