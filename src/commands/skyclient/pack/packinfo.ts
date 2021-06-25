@@ -62,7 +62,15 @@ export default class packName extends BotCommand {
                         message.interaction.reply({ embeds: [embed] })
                     }
                     else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                        message.reply({embeds: [embed]})
+                        if (message.type == 'REPLY') {
+                            if (message.channel.type == 'text') {
+                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                                repliedMessage.reply({ embeds: [embed] })
+                            }
+                        }
+                        else {
+                            message.reply({ embeds: [embed] })
+                        }
                     }
                     else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
                         message.reply('Please use this as a slashcommand if you want to use it in this channel.')

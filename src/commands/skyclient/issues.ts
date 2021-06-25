@@ -19,11 +19,11 @@ export default class issue extends BotCommand {
                     type: 'STRING',
                     choices: [
                         {
-                            name: 'Windows is shit!',
+                            name: 'Windows says "Windows protected your PC" every time I try to launch it.',
                             value: 'windowsbad'
                         },
                         {
-                            name: 'Labymod is horrible!',
+                            name: 'It breaks when I add LabyMod.',
                             value: 'labybad'
                         },
                         {
@@ -54,7 +54,15 @@ export default class issue extends BotCommand {
                 embed.setDescription(`LabyMod is terribly designed. If you want to get other mods that do what it does but better, check out https://proudmuslim.tech/bad-mod-alternatives/labymod.html, or https://5zigreborn.eu/downloads/`)
             }
 
-            message.reply({ embeds: [embed] })
+            if (message.type == 'REPLY') {
+                if (message.channel.type == 'text') {
+                    const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                    repliedMessage.reply({ embeds: [embed] })
+                }
+            }
+            else {
+                message.reply({ embeds: [embed] })
+            }
         }
     }
 }

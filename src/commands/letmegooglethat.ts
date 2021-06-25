@@ -6,16 +6,16 @@ export default class letmegooglethat extends BotCommand {
     constructor() {
         super('letmegooglethat', {
             aliases: ['letmegooglethat', 'lmgt', 'lmgtfy'],
-            args: [{ id: 'thingtogoogle', type: 'string', match: 'restContent'}],
-            
-            slash:true,
+            args: [{ id: 'thingtogoogle', type: 'string', match: 'restContent' }],
+
+            slash: true,
             description: 'https://letmegooglethat.com',
             slashGuilds: utils.slashGuilds,
-            slashOptions:[
+            slashOptions: [
                 {
-                    name:'thingtogoogle', 
-                    description: 'What you want to google', 
-                    type:'STRING', 
+                    name: 'thingtogoogle',
+                    description: 'What you want to google',
+                    type: 'STRING',
                     required: true
                 }
             ],
@@ -23,6 +23,16 @@ export default class letmegooglethat extends BotCommand {
     }
 
     async exec(message, args) {
-        message.reply(`<${encodeURI(`https://letmegooglethat.com/?q=${args.thingtogoogle}`)}>`)
+        const googledthing = `<${encodeURI(`https://letmegooglethat.com/?q=${args.thingtogoogle}`)}>`
+
+        if (message.type == 'REPLY') {
+            if (message.channel.type == 'text') {
+                const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                repliedMessage.reply({ googledthing })
+            }
+        }
+        else {
+            message.reply({ googledthing })
+        }
     }
 }

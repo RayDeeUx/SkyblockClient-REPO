@@ -37,7 +37,15 @@ export default class rules extends BotCommand {
             }
             if (message.interaction && message.member.permissions.has('ADMINISTRATOR')) {
                 message.interaction.reply({ content: 'Rules sent!', ephemeral: true })
-                message.channel.send({ embeds: [rule1, rule2] })
+                if (message.type == 'REPLY') {
+                    if (message.channel.type == 'text') {
+                        const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                        repliedMessage.reply({ embeds: [rule1, rule2] })
+                    }
+                }
+                else {
+                    message.reply({ embeds: [rule1, rule2] })
+                }
             }
             if (!message.interaction && message.member.permissions.has('ADMINISTRATOR')) {
                 message.channel.send({ embeds: [rule1, rule2] })
