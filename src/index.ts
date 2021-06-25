@@ -1,7 +1,4 @@
 require('dotenv').config()
-const { MongoClient } = require("mongodb");
-const uri = process.env["mongodb"]
-
 
 //starting the bot
 
@@ -14,7 +11,6 @@ import chalk from "chalk";
 
 const sh = promisify(exec);
 
-console.log('The bot is working fine, it\'s just going to take a minute to launch.')
 sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
     .then(() => {
         console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red successfully cloned!}`)

@@ -1,7 +1,4 @@
-import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import axios from "axios"
-import utils from '../../functions/utils';
 import { BotCommand } from '../../extensions/BotCommand';
 
 export default class rules extends BotCommand {
@@ -30,8 +27,8 @@ export default class rules extends BotCommand {
                     {name: `Advertising is bad`, value: `Don't do it. Nobody likes advertising.`},
                     {name: `No NSFW Content`, value: `do I really need to explain this one? No porn, etc`},
                 )
-            message.channel.send(rule1)
-            message.channel.send(rule2)
+            message.channel.send({embeds:[rule1]})
+            message.channel.send({embeds:[rule2]})
         }
         else { return }
     }

@@ -9,6 +9,10 @@ export default class partners extends BotCommand {
         super('partners', {
             aliases: ['partners'],
             userPermissions: ['ADMINISTRATOR'],
+
+            slash: true,
+            slashGuilds: utils.slashGuilds,
+            description: 'Sends a list of all the partnered discords, with each one in its own embed (1 embed per message).'
         });
     }
 
@@ -17,11 +21,13 @@ export default class partners extends BotCommand {
             `780181693100982273`, //main server
             `824680357936103497` //testing server
         ]
-        if (SkyClientGuilds.includes(message.guild.id)) {
-            const res = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
+        // if (!message.member.permissions.has('ADMINISTRATOR')) {return message.reply('hey you need admin for that')}
+        // if (SkyClientGuilds.includes(message.guild.id)) {
+            const servers = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
 
-            for (const server of res.data) {
+            let embedArray = []
 
+            for (const server of servers.data) {
                 if (server.partner) {
                     const partnerEmbed = new MessageEmbed()
                         .setTitle(server.fancyname)
@@ -30,11 +36,22 @@ export default class partners extends BotCommand {
                         .setDescription(`${server.description}\n\nDiscord Invite: \`https://discord.gg/${server.code}\``)
                         .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${server.icon}`)
 
-                    await utils.sleep(1000)
-                    await message.channel.send(partnerEmbed)
+                    //await utils.sleep(1000)
+                    
+                    embedArray.push(partnerEmbed)
                 }
             }
-        }
-        else {return}
+
+            let msg                    
+            while (embedArray.length > 0) {
+              msg = embedArray.splice(0,10)
+              message.channel.send({embeds:msg})
+            }
+
+            if (message.interaction) {
+                message.interaction.reply({content:'Sent partner embeds', ephemeral:true})
+            }
+        // }
+        // else {return}
     }
 }

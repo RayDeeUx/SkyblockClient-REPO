@@ -25,39 +25,45 @@ export default class evaluate extends BotCommand {
     async exec(message, args) {
         try {
             if (args.codetoeval.includes('token')) {
-                return (message.channel.send('no token'))
+                return (message.util.reply('no token'))
             }
             if (args.codetoeval.includes('env')) {
-                return message.channel.send('no env')
+                return message.util.reply('no env')
             }
 
             if (args.codetoeval.includes('message.channel.delete')) {
-                return message.channel.send('Are you IRONM00N?')
+                return message.util.reply('Are you IRONM00N?')
             }
             if (args.codetoeval.includes('message.guild.delete')) {
-                return message.channel.send('You\'re like IRONM00N but infinitely more stupid!')
+                return message.util.reply('You\'re like IRONM00N but infinitely more stupid!')
             }
             if (args.codetoeval.includes('delete') && !args.sudo) {
-                return message.channel.send('This would be blocked by smooth brain protection, but BushBot has a license')
-            }
-
-            async function send(thingToSend: string) {
-                message.channel.send(thingToSend)
+                return message.util.reply('This would be blocked by smooth brain protection, but BushBot has a license')
             }
 
             let guild = message.guild
             let client = this.client
             let channel = message.channel
-            let embed = new MessageEmbed()
             let user = message.author
             let member = message.member
             let botUser = this.client.user
             let botMember = message.guild.me
 
+            let embed1 = new MessageEmbed()
+            let embed2 = new MessageEmbed()
+            let embed3 = new MessageEmbed()
+            let embed4 = new MessageEmbed()
+            let embed5 = new MessageEmbed()
+            let embed6 = new MessageEmbed()
+            let embed7 = new MessageEmbed()
+            let embed8 = new MessageEmbed()
+            let embed9 = new MessageEmbed()
+            let embed10 = new MessageEmbed()
+
             let output = await eval(args.codetoeval)
 
             if (inspect(output).includes(process.env.token)) {
-                return message.util.send('Message containing token wasn\'t sent.')
+                return message.util.reply('Message containing token wasn\'t sent.')
             }
 
             if (message.guild.id == '794610828317032458' && message.channel.id != '834878498941829181') {
@@ -79,7 +85,7 @@ export default class evaluate extends BotCommand {
                     evalOutputEmbed.addField(':outbox_tray: **Output**', `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``)
                 }
 
-                await message.util.send(evalOutputEmbed)
+                await message.util.send({embeds:[evalOutputEmbed]})
             }
             if (args.silent) {
                 if (args.codetoeval.includes('message.delete')) {
@@ -87,7 +93,6 @@ export default class evaluate extends BotCommand {
                 }
                 message.react('<:green_check:796548440266899526>')
             }
-
         }
         catch (err) {
             try { utils.errorhandling(err, message) }

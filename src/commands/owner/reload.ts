@@ -20,7 +20,7 @@ export default class reload extends BotCommand {
         try {
             const reloadEmbed = new MessageEmbed()
                 .setDescription(`Reloading!`)
-            message.channel.send(reloadEmbed).then(async sent => {
+            message.channel.send({embeds:[reloadEmbed]}).then(async sent => {
                 console.log(`Reloading!`)
                 
                 await sh("yarn build");
@@ -32,7 +32,7 @@ export default class reload extends BotCommand {
                 console.log(`Reloaded!\n`)
                 
                 reloadEmbed.setDescription(`Reloaded! Everything that changed in my files should now be loaded in the bot.`)
-                sent.channel.send(reloadEmbed)
+                sent.channel.send({embeds:[reloadEmbed]})
                 sent.delete()
             })
         }

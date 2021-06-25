@@ -11,6 +11,7 @@ interface hastebinRes {
     key: string;
 }
 
+const slashGuilds = ['824680357936103497', '780181693100982273', '794610828317032458']
 //this next function is taken from bush bot (https://github.com/NotEnoughUpdates/bush-bot), the repo is private so if you get a 404 then deal with it, removed a thing from the line under these comments because it didn't seem to be doing anything
 //and it works fine without it as far as i can tell
 async function haste(content: string) {
@@ -40,7 +41,7 @@ async function errorhandling(err: string, message: Message) {
         .setDescription(`\`\`\`\n${err}\`\`\``)
         .setColor(`ff0000`)
 
-    await message.channel.send(errorEmbed)
+    await message.channel.send({embeds:[errorEmbed]})
 }
 
 async function errorchannelsend(err: string) {
@@ -49,7 +50,7 @@ async function errorchannelsend(err: string) {
         .setTitle(`Something went really wrong!`)
         .setDescription(`\`\`\`js\n${err}\`\`\``)
 
-        errorChannel.send(errorEmbed)
+        errorChannel.send({embeds:[errorEmbed]})
 }
 
 async function resetToken(message: Message) {
@@ -74,7 +75,7 @@ async function dConsole(thingToLog: string, functionClient: Client) {
     const consoleEmbed = new MessageEmbed()
         .setDescription(output)
 
-    consoleChannel.send(consoleEmbed)
+    consoleChannel.send({embeds:[consoleEmbed]})
 }
 
 async function getObjectDifferences(object1: object, object2: object, thingToCheck: string = `all`) {
@@ -206,5 +207,6 @@ export = {
     dConsole,
     getObjectDifferences,
     getPronouns,
-    debug
+    debug,
+    slashGuilds
 }

@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } from "discord-akairo";
+import { Intents } from "discord.js";
 import { join } from "path";
 
 export class BotClient extends AkairoClient {
@@ -9,7 +10,9 @@ export class BotClient extends AkairoClient {
 		handleEdits: true,
 		directory: join(__dirname, "..", "commands"),
 		allowMention: true,
-		automateCategories: true
+		automateCategories: true,
+		autoRegisterSlashCommands: true,
+		autoDefer:false,
 	})
 	public listenerHandler: ListenerHandler = new ListenerHandler(this, {
 		directory: join(__dirname, "..", "listeners"),
@@ -20,17 +23,18 @@ export class BotClient extends AkairoClient {
 		directory: join(__dirname, "..", "inhibitors")
 	})
 	public constructor() {
-		super({
-			ownerID: [
-				"492488074442309642",
-				"545277690303741962"
-			]
-		},
+		super(
+			{
+				ownerID: ['492488074442309642'],
+				intents: Intents.NON_PRIVILEGED
+			},
 			{
 				allowedMentions: {
-					parse: ["users"] // Disables all mentions except for users
-				}
-			});
+					parse: ['users'] // Disables all mentions except for users
+				},
+				intents: Intents.NON_PRIVILEGED
+			}
+		)
 	}
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler);

@@ -1,14 +1,18 @@
 import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../extensions/BotCommand';
+import utils from '../../functions/utils';
 
 export default class discord extends BotCommand {
     constructor() {
         super('discord', {
             aliases: ['discord'],
-            args: [
-                { id: "discordServer", type: "string" }
-            ]
+            args: [{ id: "discord", type: "string" }],
+
+            slash: true,
+            slashGuilds: utils.slashGuilds,
+            slashOptions:[{name:'discord', description: 'The ID (neu, sba, things like that) of the discord server you want to get info on', type:'STRING'}],
+            description: 'Shows info on a specific discord server in SkyClient'
         });
     }
 
@@ -23,16 +27,16 @@ export default class discord extends BotCommand {
 
             for (const discord of discords.data) {
                 discord.nicknames.forEach(nickname => {
-                    if (args.discordServer == nickname && found == false || args.discordServer == discord.id && found == false) {
+                    if (args.discord == nickname && found == false || args.discord == discord.id && found == false) {
                         if (discord.partner) {
                             const partnerEmbed = new MessageEmbed()
                                 .setTitle(discord.fancyname)
                                 .setURL(`https://discord.gg/${discord.code}`)
-                                .setColor(`00ff00`)
+                                .setColor(message.member.displayColor)
                                 .setDescription(`${discord.description}\n\nDiscord Invite: \`https://discord.gg/${discord.code}\``)
                                 .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
 
-                            message.channel.send(`discord.gg/${discord.code}`, partnerEmbed)
+                            message.channel.send({content:`discord.gg/${discord.code}`, embeds:[partnerEmbed]})
                         }
                         else {
                             message.channel.send(`discord.gg/${discord.code}`)

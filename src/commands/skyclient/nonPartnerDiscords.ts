@@ -1,12 +1,29 @@
 import axios from 'axios';
 import { MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../extensions/BotCommand';
+import utils from '../../functions/utils';
 
-export default class nonPartneredDiscords extends BotCommand {
+export default class nonpartnereddiscords extends BotCommand {
     constructor() {
-        super('nonPartneredDiscords', {
-            aliases: ['nonPartneredDiscords'],
-            args: [{id: 'type', type: 'string'}]
+        super('nonpartnereddiscords', {
+            aliases: ['nonpartnereddiscords'],
+            args: [{id: 'type', type: 'string'}],
+
+            slash: true,
+            slashGuilds: utils.slashGuilds,
+            slashOptions:[
+                {
+                    name:'type', 
+                    description: 'choose between string or embed for how it displays the discords', 
+                    type:'STRING',
+                    required:false,
+                    choices:[
+                        {name:'string',value:'string'},
+                        {name:'embed',value:'embed'}
+                    ]
+                }
+            ],
+            description: 'Shows a list of all of the not partnered discord servers for mods and packs in SkyClient'
         })
     }
 
@@ -24,22 +41,23 @@ export default class nonPartneredDiscords extends BotCommand {
             
             discords.data.forEach(discord => {
                 if (!discord.partner) {
+                    discordsEmbed.setColor(message.member.displayColor)
                     discordsEmbed.addField(discord.fancyname, `[discord.gg/${discord.code}](https://discord.gg/${discord.code})`)
                     discordString = discordString+`discord.gg/${discord.code}\n`
                 }
             })
 
             if (!args.type) {
-                message.channel.send(discordsEmbed)
+                message.reply({embeds:[discordsEmbed]})
             }
             if (args.type && args.type.toLowerCase() == 'string') {
-                message.channel.send(discordString)
+                message.reply(discordString)
             }
             if (args.type && args.type.toLowerCase() == 'embed') {
-                message.channel.send(discordsEmbed)
+                message.reply({embeds:[discordsEmbed]})
             }
             if (args.type && args.type.toLowerCase() != 'string' && args.type.toLowerCase() != 'embed') {
-                message.channel.send('That isn\'t a valid type!\nValid types: `embed`, `string`')
+                message.reply('That isn\'t a valid type!\nValid types: `embed`, `string`')
             }
         }
         else { return }

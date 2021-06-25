@@ -7,19 +7,11 @@ export default class addrole extends BotCommand {
         super('addrole', {
             aliases: ['addrole', 'role', 'arole', 'ar'],
             args: [
-                {
-                    id: 'member',
-                    type: 'member'
-                },
-                {
-                    id: 'role',
-                    type: 'role',
-                    match: 'rest'
-                }
+                {id: 'member',type: 'member'},
+                {id: 'role',type: 'role',match: 'rest'}
             ],
             clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
             userPermissions: ['MANAGE_ROLES'],
-            channel: 'guild'
         });
     }
 
@@ -35,14 +27,14 @@ export default class addrole extends BotCommand {
                 const roleembed = new MessageEmbed()
                     .setDescription(`Added <@&${args.role.id}> to ${args.member.user}`)
 
-                await message.channel.send(roleembed)
+                await message.channel.send({embeds:[roleembed]})
             }
         }
         catch (err) {
             if (err == `TypeError: Cannot read property 'roles' of undefined`) {
                 const ihatelife = new MessageEmbed()
                     .setDescription(`Either that user isn't cached, or they aren't on this server. Please ping them instead of whatever you tried to do.`)
-                return message.channel.send(ihatelife)
+                return message.channel.send({embeds:[ihatelife]})
             }
             await utils.errorhandling(err, message)
         }

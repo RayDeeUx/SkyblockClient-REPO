@@ -1,11 +1,18 @@
 import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../../extensions/BotCommand';
+import utils from '../../../functions/utils';
+import commandManager from '../../../functions/commandManager';
 
 export default class modList extends BotCommand {
     constructor() {
         super('modList', {
             aliases: ['modlist', 'mods'],
+
+            slash: true,
+            slashGuilds: utils.slashGuilds,
+            //slashOptions:[{name:'name of the arg', description: 'description of the arg', type:'should be easy to figure out'}]
+            description: 'Shows a list of all the mods in SkyClient'
         });
     }
 
@@ -15,11 +22,15 @@ export default class modList extends BotCommand {
             `824680357936103497` //testing server
         ]
         if (SkyClientGuilds.includes(message.guild.id)) {
+            if (!message.interaction) {
+                return message.reply('Support for this command as a regular text command has been removed. If you want to use it, there is now a slashcommand for it.')
+            }
+
             const modJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
 
             const modsEmbed = new MessageEmbed()
-                .setColor('#9c25c4')
-                .setTitle('SkyClient Mods List')
+            .setColor(message.member.displayColor)
+            .setTitle('SkyClient Mods List')
 
                 modJson.data.forEach(mod => {
                 if (mod.display && mod.display != "no" && mod.hidden != true) {
@@ -45,10 +56,17 @@ export default class modList extends BotCommand {
                     }
 
                     modsEmbed.addField(`${mod.display}`, mods, true)
-
                 }
             });
-            message.channel.send(modsEmbed);
+
+
+            const embed = modsEmbed
+            if (commandManager.userCanUseCommand(message) == false) {
+                message.interaction.reply({embeds:[embed], ephemeral: true})
+            }
+            else {
+                message.interaction.reply({embeds:[embed]})
+            }
         }
         else { return }
     }

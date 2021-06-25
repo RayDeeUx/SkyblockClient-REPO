@@ -34,7 +34,7 @@ export default class removerole extends BotCommand {
                 const roleembed = new MessageEmbed()
                     .setDescription(`Removed <@&${args.role.id}> from ${args.member.user}`)
 
-                await message.channel.send(roleembed)
+                await message.channel.send({embeds:[roleembed]})
             }
         }
         catch (err) {
