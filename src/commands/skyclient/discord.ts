@@ -11,8 +11,8 @@ export default class discord extends BotCommand {
 
             slash: true,
             slashGuilds: utils.slashGuilds,
-            slashOptions:[{name:'discord', description: 'The ID (neu, sba, things like that) of the discord server you want to get info on', type:'STRING'}],
-            description: 'Shows info on a specific discord server in SkyClient'
+            slashOptions: [{ name: 'discord', description: 'The ID (neu, sba, things like that) of the discord server you want to get info on', type: 'STRING' }],
+            description: 'Shows info about a specific discord server in SkyClient'
         });
     }
 
@@ -22,7 +22,7 @@ export default class discord extends BotCommand {
             let found = false
 
             for (const discord of discords.data) {
-                discord.nicknames.forEach(nickname => {
+                discord.nicknames.forEach(async nickname => {
                     if (args.discord == nickname && found == false || args.discord == discord.id && found == false) {
                         if (discord.partner) {
                             const partnerEmbed = new MessageEmbed()
@@ -32,10 +32,26 @@ export default class discord extends BotCommand {
                                 .setDescription(`${discord.description}\n\nDiscord Invite: \`https://discord.gg/${discord.code}\``)
                                 .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
 
-                            message.channel.send({content:`discord.gg/${discord.code}`, embeds:[partnerEmbed]})
+                            if (message.type == 'REPLY') {
+                                if (message.channel.type == 'text') {
+                                    const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                                    repliedMessage.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
+                                }
+                            }
+                            else {
+                                message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
+                            }
                         }
                         else {
-                            message.channel.send(`discord.gg/${discord.code}`)
+                            if (message.type == 'REPLY') {
+                                if (message.channel.type == 'text') {
+                                    const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                                    repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
+                                }
+                            }
+                            else {
+                                message.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
+                            }
                         }
                         found = true
                     }

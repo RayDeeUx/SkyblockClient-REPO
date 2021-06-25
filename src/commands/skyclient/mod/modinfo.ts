@@ -34,7 +34,7 @@ export default class modInfo extends BotCommand {
                     .setURL('https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/mods.json')
                     .setDescription(`There doesn't seem to be a mod in our repo with the ID \`${args.mod}\`.\nTry again with a new ID, or browse the repository by clicking the title of this embed.`)
                     .setColor('#ff0000')
-                return message.channel.send({ embeds: [errEmbed] })
+                return message.reply({ embeds: [errEmbed] })
             }
 
             let { display: name, description, url, icon, creator, command, file } = mod
