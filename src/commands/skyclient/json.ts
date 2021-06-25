@@ -21,7 +21,7 @@ export default class json extends BotCommand {
                 for (let mod of modJson.data) {
                     if (mod.id == args.thingToFind) {
                         mod = JSON.stringify(mod, null, '  ')
-                        message.channel.send(`${await utils.haste(mod)}`)
+                        message.reply(await utils.haste(mod))
                     }
                 }
             }
@@ -31,7 +31,7 @@ export default class json extends BotCommand {
                 for (let pack of packJson.data) {
                     if (pack.id == args.thingToFind) {
                         pack = JSON.stringify(pack, null, '  ')
-                        message.channel.send(`${await utils.haste(pack)}`)
+                        message.reply(await utils.haste(pack))
                     }
                 }
             }

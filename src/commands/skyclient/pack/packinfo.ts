@@ -65,7 +65,7 @@ export default class packName extends BotCommand {
                         if (message.type == 'REPLY') {
                             if (message.channel.type == 'text') {
                                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                                repliedMessage.reply({ embeds: [embed] })
+                                repliedMessage.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
                             }
                         }
                         else {

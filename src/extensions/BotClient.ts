@@ -30,15 +30,15 @@ export class BotClient extends AkairoClient {
 			},
 			{
 				allowedMentions: {
-					parse: ['users'] // Disables all mentions except for users
+					parse: ['users']
 				},
 				intents: Intents.NON_PRIVILEGED
 			}
 		)
 	}
 	private async _init(): Promise<void> {
-		this.commandHandler.useListenerHandler(this.listenerHandler);
-		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
+		this.commandHandler.useListenerHandler(this.listenerHandler)
+		this.commandHandler.useInhibitorHandler(this.inhibitorHandler)
 		this.listenerHandler.setEmitters({
 			commandHandler: this.commandHandler,
 			listenerHandler: this.listenerHandler,
@@ -55,13 +55,13 @@ export class BotClient extends AkairoClient {
 				loaders[loader].loadAll();
 				console.log(chalk.blueBright(`Succesfully loaded ${loader}.`))
 			} catch (e) {
-				console.error(`Unable to load ${loader} with error ${e}.`);
+				console.error(`Unable to load ${loader} with error ${e}.`)
 			}
 		}
 	}
 
 	public async start(): Promise<string> {
-		await this._init();
-		return this.login(process.env["token"]);
+		await this._init()
+		return this.login(process.env["token"])
 	}
 }
