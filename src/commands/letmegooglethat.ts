@@ -32,7 +32,7 @@ export default class letmegooglethat extends BotCommand {
             }
         }
         else {
-            message.reply({ googledthing })
+            message.reply(googledthing)
         }
     }
 }
