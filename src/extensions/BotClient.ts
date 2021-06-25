@@ -12,7 +12,7 @@ export class BotClient extends AkairoClient {
 		allowMention: true,
 		automateCategories: true,
 		autoRegisterSlashCommands: true,
-		autoDefer:false,
+		autoDefer: false,
 	})
 	public listenerHandler: ListenerHandler = new ListenerHandler(this, {
 		directory: join(__dirname, "..", "listeners"),
@@ -62,6 +62,6 @@ export class BotClient extends AkairoClient {
 
 	public async start(): Promise<string> {
 		await this._init();
-		return this.login(process.env["token"]);
+		return this.login(process.env["devtoken"]);
 	}
 }

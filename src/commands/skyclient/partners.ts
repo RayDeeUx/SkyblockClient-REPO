@@ -1,4 +1,3 @@
-import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import utils from '../../functions/utils';
@@ -17,12 +16,9 @@ export default class partners extends BotCommand {
     }
 
     async exec(message) {
-        const SkyClientGuilds = [
-            `780181693100982273`, //main server
-            `824680357936103497` //testing server
-        ]
-        // if (!message.member.permissions.has('ADMINISTRATOR')) {return message.reply('hey you need admin for that')}
-        // if (SkyClientGuilds.includes(message.guild.id)) {
+        if (utils.SkyClientGuilds.includes(message.guild.id)) {
+            if (!message.member.permissions.has('ADMINISTRATOR')) { return message.reply('hey you need admin for that') }
+
             const servers = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
 
             let embedArray = []
@@ -36,22 +32,19 @@ export default class partners extends BotCommand {
                         .setDescription(`${server.description}\n\nDiscord Invite: \`https://discord.gg/${server.code}\``)
                         .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${server.icon}`)
 
-                    //await utils.sleep(1000)
-                    
                     embedArray.push(partnerEmbed)
                 }
             }
 
-            let msg                    
+            let msg
             while (embedArray.length > 0) {
-              msg = embedArray.splice(0,10)
-              message.channel.send({embeds:msg})
+                msg = embedArray.splice(0, 10)
+                message.channel.send({ embeds: msg })
             }
 
             if (message.interaction) {
-                message.interaction.reply({content:'Sent partner embeds', ephemeral:true})
+                message.interaction.reply({ content: 'Sent partner embeds', ephemeral: true })
             }
-        // }
-        // else {return}
+        }
     }
 }

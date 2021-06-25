@@ -18,11 +18,8 @@ export default class packName extends BotCommand {
     }
 
     async exec(message, args) {
-        const SkyClientGuilds = [
-            `780181693100982273`, //main server
-            `824680357936103497` //testing server
-        ]
-        if (SkyClientGuilds.includes(message.guild.id)) {
+
+        if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (!message.interaction) {
                 return message.reply('Support for this command as a regular text command has been removed. If you want to use it, there is now a slashcommand for it.')
             }

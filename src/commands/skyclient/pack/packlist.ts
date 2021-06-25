@@ -11,17 +11,12 @@ export default class packList extends BotCommand {
 
             slash: true,
             slashGuilds: utils.slashGuilds,
-            //slashOptions:[{name:'name of the arg', description: 'description of the arg', type:'should be easy to figure out'}],
             description: 'Shows a list of all the packs in SkyClient'
         });
     }
 
     async exec(message) {
-        const SkyClientGuilds = [
-            `780181693100982273`, //main server
-            `824680357936103497` //testing server
-        ]
-        if (SkyClientGuilds.includes(message.guild.id)) {
+        if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (!message.interaction) {
                 return message.reply('Support for this command as a regular text command has been removed. If you want to use it, there is now a slashcommand for it.')
             }

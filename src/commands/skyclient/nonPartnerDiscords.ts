@@ -28,11 +28,7 @@ export default class nonpartnereddiscords extends BotCommand {
     }
 
     async exec(message, args) {
-        const SkyClientGuilds = [
-            `780181693100982273`, //main server
-            `824680357936103497` //testing server
-        ]
-        if (SkyClientGuilds.includes(message.guild.id)) {
+        if (utils.SkyClientGuilds.includes(message.guild.id)) {
             const discords = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
             const discordsEmbed = new MessageEmbed()
                 .setTitle('Non-partnered discord servers')
@@ -60,6 +56,5 @@ export default class nonpartnereddiscords extends BotCommand {
                 message.reply('That isn\'t a valid type!\nValid types: `embed`, `string`')
             }
         }
-        else { return }
     }
 }

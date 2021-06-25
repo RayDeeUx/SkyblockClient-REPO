@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../extensions/BotCommand';
+import utils from '../../functions/utils';
 
 export default class issue extends BotCommand {
     constructor() {
@@ -16,11 +17,8 @@ export default class issue extends BotCommand {
     }
 
     async exec(message, args) {
-        const SkyClientGuilds = [
-            `780181693100982273`, //main server
-            `824680357936103497` //testing server
-        ]
-        if (SkyClientGuilds.includes(message.guild.id)) {
+
+        if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (args.issue.toLowerCase() == `windowsbad`) {
                 const fuckYouWindows = new MessageEmbed()
                     .setTitle(`THIS IS NOT A PROBLEM`)

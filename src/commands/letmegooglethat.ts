@@ -7,9 +7,10 @@ export default class letmegooglethat extends BotCommand {
         super('letmegooglethat', {
             aliases: ['letmegooglethat', 'lmgt', 'lmgtfy'],
             args: [{ id: 'thingtogoogle', type: 'string', match: 'restContent'}],
+            
             slash:true,
             description: 'https://letmegooglethat.com',
-            slashGuilds: ['824680357936103497', '780181693100982273', '794610828317032458'],
+            slashGuilds: utils.slashGuilds,
             slashOptions:[
                 {
                     name:'thingtogoogle', 
@@ -20,10 +21,8 @@ export default class letmegooglethat extends BotCommand {
             ],
         })
     }
+
     async exec(message, args) {
         message.reply(`<${encodeURI(`https://letmegooglethat.com/?q=${args.thingtogoogle}`)}>`)
-    }
-    async execSlash(message, slashOptions) {
-        message.reply(`<${encodeURI(`https://letmegooglethat.com/?q=${slashOptions.thingtogoogle}`)}>`)
     }
 }

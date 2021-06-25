@@ -12,6 +12,11 @@ interface hastebinRes {
 }
 
 const slashGuilds = ['824680357936103497', '780181693100982273', '794610828317032458']
+const SkyClientGuilds = [
+    `780181693100982273`, //main server
+    `824680357936103497` //testing server
+]
+
 //this next function is taken from bush bot (https://github.com/NotEnoughUpdates/bush-bot), the repo is private so if you get a 404 then deal with it, removed a thing from the line under these comments because it didn't seem to be doing anything
 //and it works fine without it as far as i can tell
 async function haste(content: string) {
@@ -208,5 +213,6 @@ export = {
     getObjectDifferences,
     getPronouns,
     debug,
-    slashGuilds
+    slashGuilds,
+    SkyClientGuilds
 }

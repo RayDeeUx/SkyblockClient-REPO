@@ -14,12 +14,7 @@ export default class json extends BotCommand {
     }
 
     async exec(message, args) {
-        const SkyClientGuilds = [
-            `780181693100982273`, //main server
-            `824680357936103497` //testing server
-        ]
-        if (SkyClientGuilds.includes(message.guild.id)) {
-
+        if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (args.type == `mod`) {
                 const modJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
 
