@@ -25,6 +25,10 @@ export default class faq extends BotCommand {
                         {
                             name: "Where's the download?",
                             value: 'wheredownload'
+                        },
+                        {
+                            name: 'How do I update a mod?',
+                            value: 'howupdate'
                         }
                     ]
                 }
@@ -48,6 +52,11 @@ export default class faq extends BotCommand {
                 embed.setTitle("Where's the download?")
                 embed.setDescription(`<#780940408175853609> if on Windows 10 (untested on 11)
                 <#782998702289059860> if on literally anything else (you will need [java 8](https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot))`)
+            }
+
+            if (args.question.toLowerCase() == 'howupdate') {
+                embed.setTitle('How do I update a mod?')
+                embed.setDescription('Go to your mods folder ([instructions on how to get to it here](https://youtu.be/Y7AyoDMsFdY)), delete the old version of the mod, and put the new version in.')
             }
 
             message.reply({ embeds: [embed] })
