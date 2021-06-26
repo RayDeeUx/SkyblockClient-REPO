@@ -39,7 +39,7 @@ export default class discord extends BotCommand {
                                 }
                             }
                             else {
-                                message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
+                                message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed] })
                             }
                         }
                         else {
@@ -50,7 +50,7 @@ export default class discord extends BotCommand {
                                 }
                             }
                             else {
-                                message.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
+                                message.reply(`discord.gg/${discord.code}`)
                             }
                         }
                         found = true
