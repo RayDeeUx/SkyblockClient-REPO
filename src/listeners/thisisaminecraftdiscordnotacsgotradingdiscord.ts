@@ -22,9 +22,6 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                         message.member.ban({ days: 1, reason: 'Sending a fake Steam link' })
                         message.delete()
                     }
-                    else {
-                        message.delete()
-                    }
                 }
             })
         }
