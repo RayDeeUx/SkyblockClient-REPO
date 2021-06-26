@@ -19,7 +19,7 @@ export default class say extends BotCommand {
             const sentEmbed = new MessageEmbed()
                 .setTitle('Message sent!')
                 .addField('Content', msg.content)
-                .setColor(message.member.roles.highest.color)
+                .setColor(message.member.displayColor)
             message.interaction.reply({ embeds: [sentEmbed], ephemeral: true })
         })
     }
