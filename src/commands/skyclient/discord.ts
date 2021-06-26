@@ -22,42 +22,40 @@ export default class discord extends BotCommand {
             let found = false
 
             for (const discord of discords.data) {
-                discord.nicknames.forEach(async nickname => {
-                    if (args.discord == nickname && found == false || args.discord == discord.id && found == false) {
-                        if (discord.partner) {
-                            const partnerEmbed = new MessageEmbed()
-                                .setTitle(discord.fancyname)
-                                .setURL(`https://discord.gg/${discord.code}`)
-                                .setColor(message.member.displayColor)
-                                .setDescription(`${discord.description}\n\nDiscord Invite: \`https://discord.gg/${discord.code}\``)
-                                .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
+                if (discord.nicknames.includes(args.discord) && found == false || discord.id == args.discord && found == false) {
+                    found = true
+                    
+                    if (discord.partner == true) {
+                        const partnerEmbed = new MessageEmbed()
+                            .setTitle(discord.fancyname)
+                            .setURL(`https://discord.gg/${discord.code}`)
+                            .setColor(message.member.displayColor)
+                            .setDescription(`${discord.description}\n\nDiscord Invite: \`https://discord.gg/${discord.code}\``)
+                            .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
 
-                            if (message.type == 'REPLY') {
-                                if (message.channel.type == 'text') {
-                                    const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                                    repliedMessage.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
-                                }
-                            }
-                            else {
-                                message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed] })
+                        if (message.type == 'REPLY') {
+                            if (message.channel.type == 'text') {
+                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                                repliedMessage.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
                             }
                         }
                         else {
-                            if (message.type == 'REPLY') {
-                                if (message.channel.type == 'text') {
-                                    const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                                    repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
-                                }
-                            }
-                            else {
-                                message.reply(`discord.gg/${discord.code}`)
+                            message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed] })
+                        }
+                    }
+                    else {
+                        if (message.type == 'REPLY') {
+                            if (message.channel.type == 'text') {
+                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                                repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
                             }
                         }
-                        found = true
+                        else {
+                            message.reply({ content: `discord.gg/${discord.code}`, })
+                        }
                     }
-                })
+                }
             }
         }
-        else { return }
     }
 }
