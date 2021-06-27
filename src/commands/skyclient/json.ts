@@ -7,16 +7,42 @@ export default class json extends BotCommand {
         super('json', {
             aliases: ['json'],
             args: [
-                { id: "type", type: "string" },
-                { id: "thingToFind", match: "restContent", type: "string" }
+                { id: 'type', type: 'string' },
+                { id: 'thingToFind', match: 'restContent', type: 'string' }
+            ],
+
+            slash: true,
+            slashGuilds: utils.slashGuilds,
+            description: 'Sends a hastebin link to the raw json from our repo for a mod or pack.',
+            slashOptions: [
+                {
+                    name: 'type',
+                    description: 'Mod or pack?',
+                    type: 'STRING',
+                    choices: [
+                        {
+                            name: 'mod',
+                            value: 'mod'
+                        },
+                        {
+                            name: 'resource pack',
+                            value: 'pack'
+                        }
+                    ]
+                },
+                {
+                    name: 'thingtofind',
+                    description: 'option',
+                    type: 'BOOLEAN'
+                }
             ]
         });
     }
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            if (args.type == `mod`) {
-                const modJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
+            if (args.type == 'mod') {
+                const modJson = await axios('https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json', { method: 'get' })
 
                 for (let mod of modJson.data) {
                     if (mod.id == args.thingToFind) {
@@ -25,8 +51,9 @@ export default class json extends BotCommand {
                     }
                 }
             }
-            else if (args.type == `pack`) {
-                const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
+
+            else if (args.type == 'pack') {
+                const packJson = await axios('https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json', { method: 'get' })
 
                 for (let pack of packJson.data) {
                     if (pack.id == args.thingToFind) {
