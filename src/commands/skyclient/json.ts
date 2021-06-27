@@ -8,7 +8,7 @@ export default class json extends BotCommand {
             aliases: ['json'],
             args: [
                 { id: 'type', type: 'string' },
-                { id: 'thingToFind', match: 'restContent', type: 'string' }
+                { id: 'thingtofind', match: 'restContent', type: 'string' }
             ],
 
             slash: true,
@@ -45,7 +45,7 @@ export default class json extends BotCommand {
                 const modJson = await axios('https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json', { method: 'get' })
 
                 for (let mod of modJson.data) {
-                    if (mod.id == args.thingToFind) {
+                    if (mod.id == args.thingtofind) {
                         mod = JSON.stringify(mod, null, '  ')
                         message.reply(await utils.haste(mod))
                     }
@@ -56,7 +56,7 @@ export default class json extends BotCommand {
                 const packJson = await axios('https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json', { method: 'get' })
 
                 for (let pack of packJson.data) {
-                    if (pack.id == args.thingToFind) {
+                    if (pack.id == args.thingtofind) {
                         pack = JSON.stringify(pack, null, '  ')
                         message.reply(await utils.haste(pack))
                     }
