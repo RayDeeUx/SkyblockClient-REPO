@@ -15,7 +15,7 @@ export default class templateSkyclientCommand extends BotCommand {
             message.util.reply(`This is a SkyClient server!`)
         }
         else {
-            message.util.channel.send(`e`)
+            message.util.send(`e`)
         }
     }
 }
