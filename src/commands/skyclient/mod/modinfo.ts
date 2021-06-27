@@ -20,13 +20,10 @@ export default class modInfo extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-
-
-
-
+            
             const mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data
 
-            const mod = mods.find(e => e.display && e.display !== "no" && args.mod.toLowerCase() === e.id.toLowerCase())
+            const mod = mods.find(e => e.display && e.display !== "no" && args.mod.toLowerCase() == e.id.toLowerCase() || e.nicknames && e.nicknames.includes(args.mod.toLowerCase()))
 
             if (!mod) {
                 const errEmbed = new MessageEmbed()
