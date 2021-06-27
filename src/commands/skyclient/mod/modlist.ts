@@ -60,10 +60,10 @@ export default class modList extends BotCommand {
                 message.interaction.reply({ embeds: [embed] })
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                message.reply({embeds: [embed]})
+                message.util.reply({embeds: [embed]})
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
-                message.reply('Please use this as a slashcommand if you want to use it in this channel.')
+                message.util.reply('Please use this as a slashcommand if you want to use it in this channel.')
             }
         }
         else { return }

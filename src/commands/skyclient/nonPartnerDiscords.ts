@@ -44,16 +44,16 @@ export default class nonpartnereddiscords extends BotCommand {
             })
 
             if (!args.type) {
-                message.reply({embeds:[discordsEmbed]})
+                message.util.reply({embeds:[discordsEmbed]})
             }
             if (args.type && args.type.toLowerCase() == 'string') {
-                message.reply(discordString)
+                message.util.reply(discordString)
             }
             if (args.type && args.type.toLowerCase() == 'embed') {
-                message.reply({embeds:[discordsEmbed]})
+                message.util.reply({embeds:[discordsEmbed]})
             }
             if (args.type && args.type.toLowerCase() != 'string' && args.type.toLowerCase() != 'embed') {
-                message.reply('That isn\'t a valid type!\nValid types: `embed`, `string`')
+                message.util.reply('That isn\'t a valid type!\nValid types: `embed`, `string`')
             }
         }
     }

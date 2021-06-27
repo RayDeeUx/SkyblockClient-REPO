@@ -39,7 +39,7 @@ export default class partners extends BotCommand {
             let msg
             while (embedArray.length > 0) {
                 msg = embedArray.splice(0, 10)
-                message.channel.send({ embeds: msg })
+                message.util.reply({ embeds: msg })
             }
 
             if (message.interaction) {

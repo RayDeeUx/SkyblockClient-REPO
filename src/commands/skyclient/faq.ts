@@ -59,7 +59,7 @@ export default class faq extends BotCommand {
                 embed.setDescription('Go to your mods folder ([instructions on how to get to it here](https://youtu.be/Y7AyoDMsFdY)), delete the old version of the mod, and put the new version in.')
             }
 
-            message.reply({ embeds: [embed] })
+            message.util.reply({ embeds: [embed] })
         }
     }
 }

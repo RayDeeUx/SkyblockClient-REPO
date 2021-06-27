@@ -84,15 +84,15 @@ export default class modInfo extends BotCommand {
                 if (message.type == 'REPLY') {
                     if (message.channel.type == 'text') {
                         const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                        repliedMessage.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
+                        repliedMessage.util.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
                     }
                 }
                 else {
-                    message.reply({ embeds: [embed] })
+                    message.util.reply({ embeds: [embed] })
                 }
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
-                message.reply('Please use this as a slashcommand (make sure you\'re using the right bot - fire has a `/mod` slashcommand also) if you want to use it in this channel.')
+                message.util.reply('Please use this as a slashcommand (make sure you\'re using the right bot - fire has a `/mod` slashcommand also) if you want to use it in this channel.')
             }
         }
     }

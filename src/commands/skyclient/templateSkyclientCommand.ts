@@ -12,10 +12,10 @@ export default class templateSkyclientCommand extends BotCommand {
     async exec(message) {
 
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            message.reply(`This is a SkyClient server!`)
+            message.util.reply(`This is a SkyClient server!`)
         }
         else {
-            message.channel.send(`e`)
+            message.util.channel.send(`e`)
         }
     }
 }

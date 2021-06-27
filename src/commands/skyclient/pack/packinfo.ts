@@ -65,15 +65,15 @@ export default class packName extends BotCommand {
                         if (message.type == 'REPLY') {
                             if (message.channel.type == 'text') {
                                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                                repliedMessage.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
+                                repliedMessage.util.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
                             }
                         }
                         else {
-                            message.reply({ embeds: [embed] })
+                            message.util.reply({ embeds: [embed] })
                         }
                     }
                     else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
-                        message.reply('Please use this as a slashcommand if you want to use it in this channel.')
+                        message.util.reply('Please use this as a slashcommand if you want to use it in this channel.')
                     }
                 }
             }
