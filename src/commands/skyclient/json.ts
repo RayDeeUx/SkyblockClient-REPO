@@ -33,7 +33,7 @@ export default class json extends BotCommand {
                 {
                     name: 'thingtofind',
                     description: 'option',
-                    type: 'BOOLEAN'
+                    type: 'STRING'
                 }
             ]
         });
