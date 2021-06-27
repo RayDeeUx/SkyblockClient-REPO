@@ -19,7 +19,9 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
             ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind.forEach(async fakeSteamLink => {
                 if (message.content.includes(fakeSteamLink)) {
                     if (message.member.bannable) {
-                        message.member.ban({ days: 1, reason: 'Sending a fake Steam link' })
+                        try{message.author.send('Hey, did you know that we ban for scamming?')}
+                        catch(err){return}
+                        message.member.ban({ days: 1, reason: 'Sending a scam link' })
                         message.delete()
                     }
                 }
