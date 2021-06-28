@@ -11,15 +11,17 @@ class notStolenFromSkytilsDiscord extends BotListener {
     }
 
     async exec(message) {
+        if (message.content.startsWith('.')) { return }
         if (message.author.bot == true) { return }
+
         let noAutorespond = false
         message.member.roles.cache.forEach(role => {
             if (role.id == '852016624605462589') {
                 return noAutorespond = true
             }
         })
-        
-        const fsJson = fs.readFileSync('SkyblockClient-REPO/files/botautoresponse.json','utf8')
+
+        const fsJson = fs.readFileSync('SkyblockClient-REPO/files/botautoresponse.json', 'utf8')
         let notStolenFromSkytilsDiscordJson = JSON.parse(fsJson)
 
         notStolenFromSkytilsDiscordJson.forEach(trigger => {
