@@ -29,6 +29,10 @@ export default class faq extends BotCommand {
                         {
                             name: 'How do I update a mod?',
                             value: 'howupdate'
+                        },
+                        {
+                            name: 'My game is crashing! How do I fix it?',
+                            value: 'crash'
                         }
                     ]
                 }
@@ -55,6 +59,11 @@ export default class faq extends BotCommand {
             }
 
             if (args.question.toLowerCase() == 'howupdate') {
+                embed.setTitle('How do I update a mod?')
+                embed.setDescription('Go to your mods folder ([instructions on how to get to it here](https://youtu.be/Y7AyoDMsFdY)), delete the old version of the mod, and put the new version in.')
+            }
+
+            if (args.question.toLowerCase() == 'crash') {
                 embed.setTitle('How do I update a mod?')
                 embed.setDescription('Go to your mods folder ([instructions on how to get to it here](https://youtu.be/Y7AyoDMsFdY)), delete the old version of the mod, and put the new version in.')
             }

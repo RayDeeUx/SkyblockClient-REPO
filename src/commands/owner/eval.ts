@@ -24,6 +24,8 @@ export default class evaluate extends BotCommand {
 
     async exec(message, args) {
         try {
+            const evUtils = utils
+            
             if (args.codetoeval.includes('token')) {
                 return (message.util.reply('no token'))
             }
