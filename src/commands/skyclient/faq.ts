@@ -79,6 +79,10 @@ export default class faq extends BotCommand {
                 Go into the \`crash-reports\` folder and upload the latest current crashlog.`)
             }
 
+            if (args.question.toLowerCase() == 'modfolder') {
+                return message.util.reply('https://youtu.be/Y7AyoDMsFdY')
+            }
+
             message.util.reply({ embeds: [embed] })
         }
     }

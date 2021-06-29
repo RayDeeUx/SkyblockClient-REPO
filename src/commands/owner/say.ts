@@ -1,6 +1,9 @@
 import { MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../extensions/BotCommand';
 
+import importUtils from '../../functions/utils'
+const utils = importUtils
+
 export default class say extends BotCommand {
     constructor() {
         super('say', {
@@ -8,7 +11,7 @@ export default class say extends BotCommand {
             args: [{ id: 'thingtosay', type: 'string', match: 'restContent' }],
             slash: true,
             description: 'Sends a message of your choice!',
-            slashGuilds: ['824680357936103497', '780181693100982273'],
+            slashGuilds: utils.slashGuilds,
             slashOptions: [
                 { name: 'thingtosay', description: 'What you want the bot to say!', type: 'STRING' }
             ],

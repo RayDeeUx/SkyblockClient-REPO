@@ -1,8 +1,10 @@
 import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../../extensions/BotCommand';
-import utils from '../../../functions/utils';
 import commandManager from '../../../functions/commandManager';
+
+import importUtils from '../../../functions/utils'
+const utils = importUtils
 
 export default class packList extends BotCommand {
     constructor() {

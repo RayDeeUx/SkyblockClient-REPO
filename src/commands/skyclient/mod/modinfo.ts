@@ -3,7 +3,9 @@ import { MessageEmbed, TextChannel } from "discord.js";
 import prettyBytes from "pretty-bytes";
 import { BotCommand } from "../../../extensions/BotCommand";
 import commandManager from "../../../functions/commandManager";
-import utils from "../../../functions/utils";
+
+import importUtils from '../../../functions/utils'
+const utils = importUtils
 
 export default class modInfo extends BotCommand {
     constructor() {
