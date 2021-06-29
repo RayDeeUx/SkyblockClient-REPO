@@ -64,8 +64,19 @@ export default class faq extends BotCommand {
             }
 
             if (args.question.toLowerCase() == 'crash') {
-                embed.setTitle('How do I update a mod?')
-                embed.setDescription('Go to your mods folder ([instructions on how to get to it here](https://youtu.be/Y7AyoDMsFdY)), delete the old version of the mod, and put the new version in.')
+                embed.setTitle('My game is crashing!')
+                embed.setDescription(`**\`How to access the SkyClient folder:\`**
+                **Windows**: Hit \`Windows Key + R\` and type in \`%appdata%\`. Open the \`.minecraft\` folder, then go to the \`skyclient\` folder.
+                **Mac**: On the bar at the top of your screen in Finder, click Go, then click Go to Folder and type \`~/Library/Application Support/Minecraft/skyclient\`, then hit enter.
+                **Linux**: if you use Linux and you don't know this, stop using Linux.
+                
+                
+                **\`Exit Code 0:\`**
+                Go into the \`logs\` folder and upload \`latest.log\`
+                If you don't see that file, look for it. Any other file will be useless.
+                
+                **\`Exit Code 1 (or -1):\`**
+                Go into the \`crash-reports\` folder and upload the latest current crashlog.`)
             }
 
             message.util.reply({ embeds: [embed] })
