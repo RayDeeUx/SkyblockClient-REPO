@@ -33,6 +33,10 @@ export default class faq extends BotCommand {
                         {
                             name: 'My game is crashing! How do I fix it?',
                             value: 'crash'
+                        },
+                        {
+                            name: 'How do I access my mod folder?',
+                            value: 'modfolder'
                         }
                     ]
                 }
