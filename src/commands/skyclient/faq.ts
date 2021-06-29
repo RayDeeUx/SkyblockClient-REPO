@@ -80,10 +80,10 @@ export default class faq extends BotCommand {
             }
 
             if (args.question.toLowerCase() == 'modfolder') {
-                return message.util.reply('https://youtu.be/Y7AyoDMsFdY')
+                return message.reply('https://youtu.be/Y7AyoDMsFdY')
             }
 
-            message.util.reply({ embeds: [embed] })
+            message.reply({ embeds: [embed] })
         }
     }
 }
