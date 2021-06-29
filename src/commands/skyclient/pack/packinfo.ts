@@ -61,11 +61,11 @@ export default class packName extends BotCommand {
                     if (commandManager.userCanUseCommand(message) == false && message.interaction) {
                         message.interaction.reply({ embeds: [embed], ephemeral: true })
                     }
-                    else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
-                        message.interaction.reply({ embeds: [embed] })
-                    }
-                    else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral == true) {
+                    else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral) {
                         message.interaction.reply({ embeds: [embed], ephemeral: true })
+                    }
+                    else if (message.interaction && commandManager.userCanUseCommand(message) == true && !args.ephemeral) {
+                        message.interaction.reply({ embeds: [embed] })
                     }
                     else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
                         if (message.type == 'REPLY') {
