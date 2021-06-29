@@ -21,7 +21,7 @@ export default class gitPull extends BotCommand {
         let pull = await eval(`sh('git pull')`)
         githubEmbed.setDescription(`\`\`\`js\n${inspect(pull)}\`\`\``)
 
-        message.channel.send(githubEmbed)
+        message.channel.send({embeds:[githubEmbed]})
 
     }
 }
