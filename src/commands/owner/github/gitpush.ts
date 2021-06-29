@@ -28,6 +28,7 @@ export default class gitPush extends BotCommand {
 
             const pushingToGithubEmbed = new MessageEmbed()
                 .setDescription(`Pushing changes to [GitHub](https://github.com/Zordlan/SkyClientBot)`)
+                .setColor(message.member.displayColor)
             message.channel.send(pushingToGithubEmbed)
 
             const githubEmbed = new MessageEmbed()

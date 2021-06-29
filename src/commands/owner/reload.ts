@@ -20,6 +20,7 @@ export default class reload extends BotCommand {
         try {
             const reloadEmbed = new MessageEmbed()
                 .setDescription(`Reloading!`)
+                .setColor(message.member.displayColor)
             message.channel.send({embeds:[reloadEmbed]}).then(async sent => {
                 console.log(`Reloading!`)
                 

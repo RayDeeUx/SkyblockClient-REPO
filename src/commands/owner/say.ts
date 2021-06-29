@@ -5,13 +5,13 @@ export default class say extends BotCommand {
     constructor() {
         super('say', {
             aliases: ['say'],
-            slash:true,
+            slash: true,
             description: 'Sends a message of your choice!',
             slashGuilds: ['824680357936103497', '780181693100982273'],
-            slashOptions:[
-                {name:'thingtosay', description: 'What you want the bot to say!', type:'STRING'}
+            slashOptions: [
+                { name: 'thingtosay', description: 'What you want the bot to say!', type: 'STRING' }
             ],
-            ownerOnly:true
+            ownerOnly: true
         })
     }
     async execSlash(message, slashOptions) {
@@ -20,7 +20,8 @@ export default class say extends BotCommand {
                 .setTitle('Message sent!')
                 .addField('Content', msg.content)
                 .setColor(message.member.displayColor)
-            message.interaction.reply({ embeds: [sentEmbed], ephemeral: true })
+            if (message.interaction) { message.interaction.reply({ embeds: [sentEmbed], ephemeral: true }) }
+            else { message.delete() }
         })
     }
 }
