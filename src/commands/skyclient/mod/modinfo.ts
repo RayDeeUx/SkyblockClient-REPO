@@ -12,7 +12,10 @@ export default class modInfo extends BotCommand {
             args: [{ id: 'mod', type: 'string' }],
 
             slash: true,
-            slashOptions: [{ name: 'mod', description: 'The mod ID that you want to get info on', type: 'STRING' }],
+            slashOptions: [
+                { name: 'mod', description: 'The mod ID that you want to get info on', type: 'STRING' },
+                { name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }
+            ],
             slashGuilds: utils.slashGuilds,
             description: 'Shows information on a specific mod from SkyClient'
         })
@@ -20,7 +23,7 @@ export default class modInfo extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            
+
             const mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data
 
             const mod = mods.find(e => e.display && e.display !== "no" && args.mod.toLowerCase() == e.id.toLowerCase() || e.nicknames && e.nicknames.includes(args.mod.toLowerCase()))
@@ -76,6 +79,9 @@ export default class modInfo extends BotCommand {
             }
             else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
                 message.interaction.reply({ embeds: [embed] })
+            }
+            else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral == true) {
+                message.interaction.reply({ embeds: [embed], ephemeral: true })
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
                 if (message.type == 'REPLY') {

@@ -11,20 +11,21 @@ export default class modList extends BotCommand {
 
             slash: true,
             slashGuilds: utils.slashGuilds,
-            description: 'Shows a list of all the mods in SkyClient'
+            description: 'Shows a list of all the mods in SkyClient',
+            slashOptions: [{ name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }]
         });
     }
 
-    async exec(message) {
+    async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
 
             const modJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
 
             const modsEmbed = new MessageEmbed()
-            .setColor(message.member.displayColor)
-            .setTitle('SkyClient Mods List')
+                .setColor(message.member.displayColor)
+                .setTitle('SkyClient Mods List')
 
-                modJson.data.forEach(mod => {
+            modJson.data.forEach(mod => {
                 if (mod.display && mod.display != "no" && mod.hidden != true) {
                     let mods = ""
 
@@ -38,7 +39,7 @@ export default class modList extends BotCommand {
                         mods = mods.substring(0, mods.length - 2)
                     }
                     else {
-                        
+
                         if (mod.display && mod.creator && mod.display != "no" && mod.discordcode) {
                             mods = `Creator: [${mod.creator}](https://discord.gg/${mod.discordcode})\nMod ID: \`${mod.id}\``
                         }
@@ -59,8 +60,11 @@ export default class modList extends BotCommand {
             else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
                 message.interaction.reply({ embeds: [embed] })
             }
+            else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral == true) {
+                message.interaction.reply({ embeds: [embed], ephemeral: true })
+            }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                message.util.reply({embeds: [embed]})
+                message.util.reply({ embeds: [embed] })
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
                 message.util.reply('Please use this as a slashcommand if you want to use it in this channel.')

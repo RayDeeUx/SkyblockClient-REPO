@@ -11,20 +11,21 @@ export default class packList extends BotCommand {
 
             slash: true,
             slashGuilds: utils.slashGuilds,
-            description: 'Shows a list of all the packs in SkyClient'
+            description: 'Shows a list of all the packs in SkyClient',
+            slashOptions: [{ name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }]
         });
     }
 
-    async exec(message) {
+    async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
 
             const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
 
             const packsEmbed = new MessageEmbed()
-            .setColor(message.member.displayColor)
-            .setTitle('SkyClient packs List')
+                .setColor(message.member.displayColor)
+                .setTitle('SkyClient packs List')
 
-                packJson.data.forEach(pack => {
+            packJson.data.forEach(pack => {
                 if (pack.display && pack.display != "no" && pack.hidden != true) {
                     let packs = ""
 
@@ -57,13 +58,16 @@ export default class packList extends BotCommand {
             else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
                 message.interaction.reply({ embeds: [embed] })
             }
+            else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral == true) {
+                message.interaction.reply({ embeds: [embed], ephemeral: true })
+            }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                message.util.reply({embeds: [embed]})
+                message.util.reply({ embeds: [embed] })
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
                 message.util.reply('Please use this as a slashcommand if you want to use it in this channel.')
             }
         }
-        else {return}
+        else { return }
     }
 }

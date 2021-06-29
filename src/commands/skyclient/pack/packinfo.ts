@@ -8,11 +8,14 @@ export default class packName extends BotCommand {
     constructor() {
         super('packName', {
             aliases: ['pack', 'packinfo'],
-            args: [{id: "pack",type: "string"}],
+            args: [{ id: "pack", type: "string" }],
 
             slash: true,
             slashGuilds: utils.slashGuilds,
-            slashOptions:[{name:'pack', description: 'The ID of the pack you want to get info on', type:'STRING'}],
+            slashOptions: [
+                { name: 'pack', description: 'The ID of the pack you want to get info on', type: 'STRING' },
+                { name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }
+            ],
             description: 'Shows a list of all the mods in SkyClient'
         })
     }
@@ -29,7 +32,7 @@ export default class packName extends BotCommand {
                     const packEmbed = new MessageEmbed()
                         .setTitle(pack.display)
                         .setColor(message.member.displayColor)
-                        if (pack.discordcode) {
+                    if (pack.discordcode) {
                         packEmbed.setURL(`https://discord.gg/${pack.discordcode}`)
                     }
 
@@ -60,6 +63,9 @@ export default class packName extends BotCommand {
                     }
                     else if (message.interaction && commandManager.userCanUseCommand(message) == true) {
                         message.interaction.reply({ embeds: [embed] })
+                    }
+                    else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral == true) {
+                        message.interaction.reply({ embeds: [embed], ephemeral: true })
                     }
                     else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
                         if (message.type == 'REPLY') {
