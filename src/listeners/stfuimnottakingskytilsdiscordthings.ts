@@ -21,8 +21,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
             }
         })
 
-        const fsJson = fs.readFileSync('SkyblockClient-REPO/files/botautoresponse.json', 'utf8')
-        let notStolenFromSkytilsDiscordJson = JSON.parse(fsJson)
+        let notStolenFromSkytilsDiscordJson = JSON.parse(fs.readFileSync('SkyblockClient-REPO/files/botautoresponse.json', 'utf8'))
 
         notStolenFromSkytilsDiscordJson.forEach(trigger => {
             const triggers = (trigger.triggers)
