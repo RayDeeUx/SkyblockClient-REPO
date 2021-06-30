@@ -27,14 +27,14 @@ export default class addrole extends BotCommand {
                 const roleembed = new MessageEmbed()
                     .setDescription(`Added <@&${args.role.id}> to ${args.member.user}`)
 
-                await message.channel.send({embeds:[roleembed]})
+                await message.util.reply({embeds:[roleembed]})
             }
         }
         catch (err) {
             if (err == `TypeError: Cannot read property 'roles' of undefined`) {
                 const ihatelife = new MessageEmbed()
                     .setDescription(`Either that user isn't cached, or they aren't on this server. Please ping them instead of whatever you tried to do.`)
-                return message.channel.send({embeds:[ihatelife]})
+                return message.util.reply({embeds:[ihatelife]})
             }
             await utils.errorhandling(err, message)
         }

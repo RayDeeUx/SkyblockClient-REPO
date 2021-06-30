@@ -34,12 +34,12 @@ export default class removerole extends BotCommand {
                 const roleembed = new MessageEmbed()
                     .setDescription(`Removed <@&${args.role.id}> from ${args.member.user}`)
 
-                await message.channel.send({embeds:[roleembed]})
+                await message.util.reply({embeds:[roleembed]})
             }
         }
         catch (err) {
             if (err == `TypeError: Cannot read property 'roles' of undefined`) {
-                return message.channel.send(`That user isn't cached! Please ping instead of using name!`)
+                return message.util.reply(`That user isn't cached! Please ping instead of using name!`)
             }
             await utils.errorhandling(err, message)
         }
