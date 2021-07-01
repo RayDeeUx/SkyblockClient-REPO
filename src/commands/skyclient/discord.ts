@@ -40,18 +40,18 @@ export default class discord extends BotCommand {
                             }
                         }
                         else {
-                            message.util.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed] })
+                            message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed] })
                         }
                     }
                     else {
                         if (message.type == 'REPLY') {
                             if (message.channel.type == 'text') {
                                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                                repliedMessage.util.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
+                                repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
                             }
                         }
                         else {
-                            message.util.reply({ content: `discord.gg/${discord.code}`, })
+                            message.reply({ content: `discord.gg/${discord.code}`, })
                         }
                     }
                 }
