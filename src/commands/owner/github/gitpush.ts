@@ -31,6 +31,7 @@ export default class gitPush extends BotCommand {
 
             const githubEmbed = new MessageEmbed()
                 .setTitle(`Command Output`)
+                .setColor(message.member.displayColor)
 
             let gitAdd = await sh('git add .')
             githubEmbed.addField(`\`git add .\``, `\`\`\`js\n${inspect(gitAdd)}\`\`\``)
