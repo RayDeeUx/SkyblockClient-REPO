@@ -19,17 +19,15 @@ export default class gitPush extends BotCommand {
                 },
             ],
             ownerOnly: true,
-            channel: 'guild'
-        });
+        })
     }
 
     async exec(message, args) {
         try {
-
             const pushingToGithubEmbed = new MessageEmbed()
                 .setDescription(`Pushing changes to [GitHub](https://github.com/Zordlan/SkyClientBot)`)
                 .setColor(message.member.displayColor)
-            message.channel.send(pushingToGithubEmbed)
+            message.reply({ embeds: [pushingToGithubEmbed] })
 
             const githubEmbed = new MessageEmbed()
                 .setTitle(`Command Output`)
@@ -43,7 +41,7 @@ export default class gitPush extends BotCommand {
             let githubPush = await sh('git push')
             githubEmbed.addField(`\`git push\``, `\`\`\`js\n${inspect(githubPush)}\`\`\``)
 
-            message.channel.send({ embeds: [githubEmbed] })
+            message.reply({ embeds: [githubEmbed] })
         }
         catch (err) { utils.errorhandling(err, message) }
     }
