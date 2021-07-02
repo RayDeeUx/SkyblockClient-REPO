@@ -93,7 +93,7 @@ export default class faq extends BotCommand {
 
             if (args.question.toLowerCase() == 'addmod') {
                 embed.setTitle('Can I add my own mods?')
-                embed.setDescription('Yes. Download them from wherever you get it normally, and put it in (.minecraft/skyclient/mods)[https://youtu.be/Y7AyoDMsFdY]\n(We have special instructions for SBE, as it doesn\'t work normally with SkyClient.)[https://github.com/MicrocontrollersDev/Alternatives/blob/1e409e056e3e14ca874a2368c045de96787e8cbd/SkyblockExtras.md#reasons-not-to-buy-or-use-sbe]')
+                embed.setDescription('Yes. Download them from wherever you get it normally, and put it in [.minecraft/skyclient/mods](https://youtu.be/Y7AyoDMsFdY)\n[We have special instructions for SBE, as it doesn\'t work normally with SkyClient.](https://github.com/MicrocontrollersDev/Alternatives/blob/1e409e056e3e14ca874a2368c045de96787e8cbd/SkyblockExtras.md#reasons-not-to-buy-or-use-sbe)')
             }
 
             message.reply({ embeds: [embed] })
