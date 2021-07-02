@@ -12,7 +12,9 @@ class notStolenFromSkytilsDiscord extends BotListener {
 
     async exec(message) {
         if (message.content.startsWith('.')) { return }
-        if (message.author.bot == true) { return }
+        if (message.content.startsWith('-')) { return }
+        if (message.content.startsWith('$')) { return }
+        if (message.author.bot != false) { return }
 
         let noAutorespond = false
         message.member.roles.cache.forEach(role => {
