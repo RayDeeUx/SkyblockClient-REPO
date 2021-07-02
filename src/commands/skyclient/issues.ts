@@ -61,7 +61,7 @@ export default class issue extends BotCommand {
                 }
             }
             else {
-                message.util.reply({ embeds: [embed] })
+                message.reply({ embeds: [embed] })
             }
         }
     }

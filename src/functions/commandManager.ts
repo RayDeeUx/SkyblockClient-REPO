@@ -17,7 +17,6 @@ function userCanUseCommand(message:Message) {
         '780202942321655858', //knowledgeable
     ] as unknown as Snowflake
 
-
     let userHasBypassRole = false
 
     const allowedChannels = [
