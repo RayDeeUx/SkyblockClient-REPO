@@ -5,6 +5,9 @@ import { promisify } from 'util';
 import { inspect } from 'util';
 import { BotCommand } from '../../extensions/BotCommand';
 
+import importMS from 'ms'
+const ms = importMS
+
 import importUtils from '../../functions/utils'
 const utils = importUtils
 
