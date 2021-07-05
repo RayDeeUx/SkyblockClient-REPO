@@ -14,7 +14,7 @@ function userCanUseCommand(message:Message) {
         '798163409467998249',
         '844275169010647050',
         '799020944487612428',
-        '780202942321655858', //knowledgeable
+        '780202942321655858',
     ] as unknown as Snowflake
 
     let userHasBypassRole = false
