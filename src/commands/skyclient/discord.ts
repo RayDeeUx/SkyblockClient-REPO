@@ -11,20 +11,22 @@ export default class discord extends BotCommand {
 
             slash: true,
             slashGuilds: utils.slashGuilds,
-            slashOptions: [{ name: 'discord', description: 'The ID (neu, sba, things like that) of the discord server you want to get info on', type: 'STRING' }],
-            description: 'Shows info about a specific discord server in SkyClient'
+            slashOptions: [{ name: 'discord', description: 'The ID (neu, sba, things like that) of the discord server you want to get info on', type: 'STRING', required: true }],
+            description: 'Shows info about a specific discord server in SkyClient',
+
         });
     }
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
+            if (!args.discord) { return message.reply('lemme just telepathically get the discord you want from you... oh wait i can\'t') }
             const discords = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
             let found = false
 
             for (const discord of discords.data) {
                 if (discord.nicknames.includes(args.discord) && found == false || discord.id == args.discord && found == false) {
                     found = true
-                    
+
                     if (discord.partner == true) {
                         const partnerEmbed = new MessageEmbed()
                             .setTitle(discord.fancyname)
