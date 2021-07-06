@@ -25,6 +25,7 @@ export default class modInfo extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
+            if (!args.mod) { return message.reply('let me just telepathically get the mod you want info on from you... oh wait i can\'t') }
 
             const mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data
 

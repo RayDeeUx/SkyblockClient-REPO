@@ -1,21 +1,20 @@
-import { Message } from "discord.js"
+import { Message, Snowflake } from "discord.js"
 
-import { Snowflake } from "discord.js"
 
-function userCanUseCommand(message:Message) {
-    
-    const bypassRoles = [
-        '780182606628782100',
-        '780183853628260352',
-        '832754819588292679',
-        '797158676309344268',
-        '829336516315971626',
-        '783441401492799518',
-        '798163409467998249',
-        '844275169010647050',
-        '799020944487612428',
-        '780202942321655858',
-    ] as unknown as Snowflake
+const bypassRoles = [
+    '780182606628782100',
+    '780183853628260352',
+    '832754819588292679',
+    '797158676309344268',
+    '829336516315971626',
+    '783441401492799518',
+    '798163409467998249',
+    '844275169010647050',
+    '799020944487612428',
+    '780202942321655858',
+] as unknown as Snowflake
+
+function userCanUseCommand(message: Message) {
 
     let userHasBypassRole = false
 
@@ -48,5 +47,6 @@ function userCanUseCommand(message:Message) {
 }
 
 export = {
-    userCanUseCommand
+    userCanUseCommand,
+    bypassRoles
 }

@@ -1,5 +1,7 @@
 import { BotListener } from '../extensions/BotListener';
 import fs from 'fs';
+import utils from '../functions/utils';
+import commandManager from '../functions/commandManager';
 
 
 class notStolenFromSkytilsDiscord extends BotListener {
