@@ -17,13 +17,17 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
             const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
             let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = JSON.parse(fsJson)
 
-            ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind.forEach(async fakeSteamLink => {
-                if (message.content.includes(fakeSteamLink)) {
+            // console.log(message.content.replace('<', '').replace('>', ''))
+            // console.log(message.content.match(/\/trade\/new\/\?partner=\d*&token=[a-z0-9]+/gi))
 
+
+
+            ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind.forEach(async fakeSteamLink => {
+                if (new RegExp(/\/trade\/\?partner=\d*&token=[a-z0-9]+|\/tradeoffer\/new\/\?partner=\d*&token=[a-z0-9]+/, "gi").test(message.content) && message.content.includes(fakeSteamLink)) {
                     if (message.member) {
                         let hasRole = false
                         message.member.roles.cache.forEach(role => {
-                            if (commandManager.bypassRoles.includes(role)) {
+                            if (commandManager.bypassRoles.includes(role) || message.author.id == message.guild.ownerID) {
                                 return hasRole = true
                             }
                         })
@@ -32,10 +36,10 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                             return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
                         }
                     }
-                    
+
                     if (message.member.bannable) {
-                        try{message.author.send('Hey, did you know that we ban for scamming?')}
-                        catch(err){return}
+                        try { await message.author.send('Hey, did you know that we ban for scamming?') }
+                        catch (err) { return }
                         message.member.ban({ days: 1, reason: 'Sending a scam link' })
                         message.delete()
                     }
