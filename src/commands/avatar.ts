@@ -25,9 +25,15 @@ export default class avatar extends BotCommand {
     }
 
     async exec(message, args) {
-        let user
-        if (args.person) { user = args.person.user }
-        else { user = message.author }
-        message.reply(user.displayAvatarURL({ size: 2048, format: 'png', dynamic: true }))
+        let person
+        if (args.person) { person = args.person }
+        else { person = message.member }
+
+        const avatarEmbed = new MessageEmbed()
+        .setTitle(`${person.user.username}'s avatar`)
+        .setImage(person.user.displayAvatarURL({ size: 2048, format: 'png', dynamic: true }))
+        .setColor(person.displayColor)
+
+        message.reply(avatarEmbed)
     }
 }
