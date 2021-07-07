@@ -30,10 +30,10 @@ export default class avatar extends BotCommand {
         else { person = message.member }
 
         const avatarEmbed = new MessageEmbed()
-        .setTitle(`${person.user.username}'s avatar`)
-        .setImage(person.user.displayAvatarURL({ size: 2048, format: 'png', dynamic: true }))
-        .setColor(person.displayColor)
+            .setTitle(`${person.user.username}'s avatar`)
+            .setImage(person.user.displayAvatarURL({ size: 2048, format: 'png', dynamic: true }))
+            .setColor(person.displayColor)
 
-        message.reply(avatarEmbed)
+        message.reply({ embeds: [avatarEmbed] })
     }
 }
