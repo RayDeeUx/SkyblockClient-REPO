@@ -1,0 +1,30 @@
+<component name="libraryTable">
+  <library name="packs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/FurfSky Reborn OV+ [1.3.1].zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Mob Packet 1.8.9 1.4.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/[Full] v6.8 vTays Skyblock Smoothie.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/1.14 Packport.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/v13 32x Skyblock Pack.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/RNBW+ v0.5.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/JustBaldEnoughUpdates.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/ActuallyAssetsv1.8.1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/ActuallyMobsv0.1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Smoll_Icons.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/DUNGEONS_TEXTURE_PACK_V1.2.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/HSB Texturepack V1.7.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/ActuallyAssetsv1.6.6.2 no mobs.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/ActuallyPacketsv0.1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Faithful_1.14_in_1.8 [v4].zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Worlds and Beyond [16x] - Release 1.3.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/SkyMobs.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/v13 16x Skyblock Pack.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Faithful_1.14_in_1.8 [v3] - Dark Mode.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Nameless [Beta 0.2].zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/Dark_Skyblock_UI.zip!/" />
+      <root url="jar://$PROJECT_DIR$/SkyblockClient-REPO/files/packs/TooBaldUpdates.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
