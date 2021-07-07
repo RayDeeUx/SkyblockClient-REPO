@@ -28,6 +28,6 @@ export default class avatar extends BotCommand {
         let user
         if (args.person) { user = args.person.user }
         else { user = message.author }
-        message.reply(user.displayAvatarURL({ dynamic: true }))
+        message.reply(user.displayAvatarURL({ size: 2048, dynamic: true }))
     }
 }
