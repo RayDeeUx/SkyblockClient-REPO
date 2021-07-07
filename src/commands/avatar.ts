@@ -11,12 +11,13 @@ export default class avatar extends BotCommand {
             ],
 
             slash: true,
-            slashGuilds:utils.slashGuilds,
+            slashGuilds: utils.slashGuilds,
             slashOptions: [
                 {
                     name: 'person',
                     description: 'The person you want the PFP of',
                     type: 'USER',
+                    required: false
                 }
             ],
             description: 'Shows you the profile picture of someone'
@@ -24,6 +25,9 @@ export default class avatar extends BotCommand {
     }
 
     async exec(message, args) {
-        message.reply(args.person.user.displayAvatarURL({dynamic: true}))
+        let user
+        if (args.person) { user = args.person.user }
+        else { user = message.author }
+        message.reply(user.displayAvatarURL({ dynamic: true }))
     }
 }
