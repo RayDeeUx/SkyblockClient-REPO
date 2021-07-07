@@ -29,6 +29,9 @@ export default class evaluate extends BotCommand {
 
     async exec(message, args) {
         try {
+            if (args.codetoeval.includes('process.exit()') && !args.sudo) { return message.util.reply('if you want to shut me down, go to my console') }
+            if (args.codetoeval.includes('client.destroy()') && !args.sudo) { return message.util.reply('if you want to shut me down, go to my console') }
+
             if (args.codetoeval.includes('token')) {
                 return (message.util.reply('no token'))
             }
@@ -91,7 +94,7 @@ export default class evaluate extends BotCommand {
                     evalOutputEmbed.addField(':outbox_tray: **Output**', `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``)
                 }
 
-                await message.util.reply({embeds:[evalOutputEmbed]})
+                await message.util.reply({ embeds: [evalOutputEmbed] })
             }
             if (args.silent) {
                 if (args.codetoeval.includes('message.delete')) {
