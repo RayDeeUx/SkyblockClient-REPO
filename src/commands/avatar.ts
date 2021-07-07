@@ -24,6 +24,6 @@ export default class avatar extends BotCommand {
     }
 
     async exec(message, args) {
-        message.reply(args.person.user.displayAvatarURL())
+        message.reply(args.person.user.displayAvatarURL({dynamic: true}))
     }
 }
