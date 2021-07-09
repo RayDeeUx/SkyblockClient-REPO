@@ -33,6 +33,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                         })
                         if (hasRole = true) {
                             message.delete()
+                            message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link`)
                             return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
                         }
                     }
