@@ -20,8 +20,6 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
             // console.log(message.content.replace('<', '').replace('>', ''))
             // console.log(message.content.match(/\/trade\/new\/\?partner=\d*&token=[a-z0-9]+/gi))
 
-
-
             ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind.forEach(async fakeSteamLink => {
                 if ( /*new RegExp(/\/trade\/\?partner=\d*&token=[a-z0-9]+|\/tradeoffer\/new\/\?partner=\d/, "gi").test(message.content) && */ message.content.includes(fakeSteamLink)) {
                     if (message.member) {

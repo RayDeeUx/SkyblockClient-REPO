@@ -202,6 +202,16 @@ async function getPronouns(user: User, context: string) {
 function debug(thingToLog: string) {
     console.log(chalk`{bgRed DEBUG:} ${thingToLog}`)
 }
+
+function splitArrayIntoMultiple(array: Array<object>, number: number) {
+    let outputArray = []
+    let fakeOutputArray
+    while (array.length > 0) {
+        fakeOutputArray = array.splice(0, number)
+        outputArray.push(fakeOutputArray)
+    }
+    return outputArray
+}
     
 export = {
     haste,
@@ -213,6 +223,7 @@ export = {
     getObjectDifferences,
     getPronouns,
     debug,
+    splitArrayIntoMultiple,
     slashGuilds,
     SkyClientGuilds
 }

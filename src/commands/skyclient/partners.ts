@@ -37,10 +37,17 @@ export default class partners extends BotCommand {
             }
 
             let msg
-            while (embedArray.length > 0) {
-                msg = embedArray.splice(0, 10)
-                message.util.reply({ embeds: msg })
-            }
+
+            
+
+            // while (embedArray.length > 0) {
+            //     msg = embedArray.splice(0, 10)
+            //     message.util.reply({ embeds: msg })
+            // }
+
+            utils.splitArrayIntoMultiple(embedArray, 10).forEach(embed => {
+                message.channel.send({ embeds: embed })
+            })
 
             if (message.interaction) {
                 message.interaction.reply({ content: 'Sent partner embeds', ephemeral: true })
