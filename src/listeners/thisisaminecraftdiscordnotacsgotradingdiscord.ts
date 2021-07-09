@@ -23,7 +23,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 
             ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind.forEach(async fakeSteamLink => {
-                if (new RegExp(/\/trade\/\?partner=\d*&token=[a-z0-9]+|\/tradeoffer\/new\/\?partner=\d*&toke\/D\=[a-z0-9]+/, "gi").test(message.content) && message.content.includes(fakeSteamLink)) {
+                if ( /*new RegExp(/\/trade\/\?partner=\d*&token=[a-z0-9]+|\/tradeoffer\/new\/\?partner=\d/, "gi").test(message.content) && */ message.content.includes(fakeSteamLink)) {
                     if (message.member) {
                         let hasRole = false
                         message.member.roles.cache.forEach(role => {
