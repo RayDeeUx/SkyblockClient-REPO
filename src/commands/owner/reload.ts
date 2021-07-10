@@ -20,10 +20,11 @@ export default class reload extends BotCommand {
         try {
             const reloadEmbed = new MessageEmbed()
                 .setDescription(`Reloading!`)
-                .setColor(message.member.displayColor)
-            message.channel.send({embeds:[reloadEmbed]}).then(async sent => {
+            if (message.member) { reloadEmbed.setColor(message.member.displayColor) }
+            else { reloadEmbed.setColor(message.guild.me.displayColor) }
+            message.channel.send({ embeds: [reloadEmbed] }).then(async sent => {
                 console.log(`Reloading!`)
-                
+
                 await sh("yarn build");
 
                 await this.client.commandHandler.reloadAll()
@@ -31,9 +32,9 @@ export default class reload extends BotCommand {
                 await this.client.inhibitorHandler.reloadAll()
 
                 console.log(`Reloaded!\n`)
-                
+
                 reloadEmbed.setDescription(`Reloaded! Everything that changed in my files should now be loaded in the bot.`)
-                sent.channel.send({embeds:[reloadEmbed]})
+                sent.channel.send({ embeds: [reloadEmbed] })
                 sent.delete()
             })
         }

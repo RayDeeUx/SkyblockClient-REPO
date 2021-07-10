@@ -20,9 +20,10 @@ export default class gitPull extends BotCommand {
 
         let pull = await eval(`sh('git pull')`)
         githubEmbed.setDescription(`\`\`\`js\n${inspect(pull)}\`\`\``)
-        githubEmbed.setColor(message.member.displayColor)
+        if (message.member) { githubEmbed.setColor(message.member.displayColor) }
+        else { githubEmbed.setColor(message.guild.me.displayColor) }
 
-        message.channel.send({embeds:[githubEmbed]})
+        message.channel.send({ embeds: [githubEmbed] })
 
     }
 }
