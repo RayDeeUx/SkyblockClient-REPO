@@ -9,7 +9,7 @@ class autoUpdateListener extends BotListener {
     }
 
     async exec(message) {
-        if (message.channel.id == '829044767626493994') {
+        if (message.channel.id == '848931262248517732') {
 
             const regex = /\[SkyClientBot-TEMP:master] [1-9][1-9]? new commits?/g
             if (message.embeds[0] && regex.test(message.embeds[0].title)) {
