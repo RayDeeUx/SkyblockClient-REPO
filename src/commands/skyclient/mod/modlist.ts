@@ -25,7 +25,7 @@ export default class modList extends BotCommand {
 
             const modsEmbed = new MessageEmbed()
                 .setColor(message.member.displayColor)
-                .setTitle('SkyClient Mods List')
+                .setTitle('SkyClien\'t Mods List')
 
             modJson.data.forEach(mod => {
                 if (mod.display && mod.display != "no" && mod.hidden != true) {

@@ -25,7 +25,7 @@ export default class packList extends BotCommand {
 
             const packsEmbed = new MessageEmbed()
                 .setColor(message.member.displayColor)
-                .setTitle('SkyClient packs List')
+                .setTitle('SkyClien\'t packs List')
 
             packJson.data.forEach(pack => {
                 if (pack.display && pack.display != "no" && pack.hidden != true) {
