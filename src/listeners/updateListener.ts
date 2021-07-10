@@ -11,7 +11,7 @@ class autoUpdateListener extends BotListener {
     async exec(message) {
         if (message.channel.id == '829044767626493994') {
 
-            const regex = /\[SkyClientBot-TEMP:master] [1-9][1-9]? new commits?/g
+            const regex = /\[SkyClientBot-TEMP:master] [1-9][0-9]? new commits?/g
             if (message.embeds[0] && regex.test(message.embeds[0].title)) {
                 const gitPullCommand = this.client.commandHandler.modules.find(cmd => (cmd.id == 'gitPull'))
 
