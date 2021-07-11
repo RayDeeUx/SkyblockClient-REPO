@@ -99,11 +99,11 @@ export default class faq extends BotCommand {
             if (message.type == 'REPLY') {
                 if (message.channel.type == 'text') {
                     const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                    repliedMessage.util.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
+                    repliedMessage.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
                 }
             }
             else {
-                message.util.reply({ embeds: [embed] })
+                message.reply({ embeds: [embed] })
             }
 
         }
