@@ -38,7 +38,7 @@ export default class issue extends BotCommand {
             const embed = new MessageEmbed()
             if (args.issue.toLowerCase() == `windowsbad`) {
                     embed.setTitle(`THIS IS NOT A PROBLEM`)
-                    embed.setDescription(`To remove this error, we would have to pay $300 to Microsoft, which none of the devs can afford or are willing to pay.\n\nJust press \`More Info\`, then \`Run Anyways\` to run it.`)
+                    embed.setDescription(`To remove this message, we would have to pay $400-$500/year to a Trusted Authority, which none of the devs can afford or are willing to pay.\n\nJust press \`More Info\`, then \`Run Anyways\` to run it.`)
                     embed.setImage(`https://cdn.discordapp.com/attachments/780181693553704973/796869759190827108/unknown.png`)
             }
             if (args.issue.toLowerCase() == 'labybad') {
