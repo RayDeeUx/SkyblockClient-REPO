@@ -50,7 +50,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
 
                 const sent = await message.reply({ content: response, components: [row] })
 
-                const filter = i => i.customId === 'autoresponseDeleteMessage' && i.user.id === '492488074442309642'
+                const filter = i => i.customId === 'autoresponseDeleteMessage' && i.user.id == message.author.id
                 message.channel.awaitMessageComponent({ filter, time: 15000 })
                     .then(i => {
                         if (i.customId == 'autoresponseDeleteMessage') {
