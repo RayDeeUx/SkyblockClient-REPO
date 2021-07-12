@@ -8,7 +8,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
     constructor() {
         super('thisIsAMinecraftModDiscordNotACSGOTradingDiscord', {
             emitter: 'client',
-            event: 'message'
+            event: 'messageCreate'
         });
     }
 

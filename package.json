@@ -28,7 +28,7 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "discord-akairo": "git+https://github.com/SkyBlockDev/discord-akairo.git",
-    "discord.js": "^13.0.0-dev.6d3d00b44577a70e840f0187d6894043677c5329",
+    "discord.js": "^13.0.0-dev.d433fe8.1626004976",
     "dotenv": "^8.6.0",
     "got": "^11.8.2",
     "jsonfile": "^6.1.0",

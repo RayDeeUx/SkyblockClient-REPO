@@ -4,7 +4,7 @@ class autorole extends BotListener {
     constructor() {
         super('autorole', {
             emitter: 'client',
-            event: 'message'
+            event: 'messageCreate'
         });
     }
 

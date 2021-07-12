@@ -4,7 +4,7 @@ class autoUpdateListener extends BotListener {
     constructor() {
         super('autoUpdateListener', {
             emitter: 'client',
-            event: 'message'
+            event: 'messageCreate'
         });
     }
 

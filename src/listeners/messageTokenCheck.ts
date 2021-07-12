@@ -5,7 +5,7 @@ class tokenCheckListener extends BotListener {
     constructor() {
         super('tokenCheckListener', {
             emitter: 'client',
-            event: 'message'
+            event: 'messageCreate'
         });
     }
 

@@ -28,7 +28,7 @@ export default class partners extends BotCommand {
                     const partnerEmbed = new MessageEmbed()
                         .setTitle(server.fancyname)
                         .setURL(`https://discord.gg/${server.code}`)
-                        .setColor(`00ff00`)
+                        .setColor('#00ff00')
                         .setDescription(`${server.description}\n\nDiscord Invite: \`https://discord.gg/${server.code}\``)
                         .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${server.icon}`)
 

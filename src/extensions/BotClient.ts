@@ -5,14 +5,14 @@ import { join } from "path";
 
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {
+		autoRegisterSlashCommands: true,
 		prefix: ["-"],
 		commandUtil: true,
 		handleEdits: true,
 		directory: join(__dirname, "..", "commands"),
 		allowMention: true,
-		automateCategories: true,
-		autoRegisterSlashCommands: true,
 		autoDefer: false,
+		automateCategories: true,
 	})
 	public listenerHandler: ListenerHandler = new ListenerHandler(this, {
 		directory: join(__dirname, "..", "listeners"),
@@ -26,13 +26,13 @@ export class BotClient extends AkairoClient {
 		super(
 			{
 				ownerID: ['492488074442309642'],
-				intents: Intents.NON_PRIVILEGED
+				intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 			},
 			{
 				allowedMentions: {
 					parse: ['users']
 				},
-				intents: Intents.NON_PRIVILEGED
+				intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 			}
 		)
 	}

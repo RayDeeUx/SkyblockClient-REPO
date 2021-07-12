@@ -4,7 +4,7 @@ class f extends BotListener {
     constructor() {
         super('f', {
             emitter: 'client',
-            event: 'message'
+            event: 'messageCreate'
         });
     }
 

@@ -16,6 +16,8 @@ const bypassRoles = [
 
 function userCanUseCommand(message: Message) {
 
+    if (message.guild.id != '780181693100982273') { return true }
+    
     let userHasBypassRole = false
 
     const allowedChannels = [

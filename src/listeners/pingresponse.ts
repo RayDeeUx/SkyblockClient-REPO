@@ -4,7 +4,7 @@ class misclisteners extends BotListener {
     constructor() {
         super('misclisteners', {
             emitter: 'client',
-            event: 'message'
+            event: 'messageCreate'
         });
     }
 

@@ -44,9 +44,9 @@ async function errorhandling(err: string, message: Message) {
     const errorEmbed = new MessageEmbed()
         .setTitle(`Something went wrong!`)
         .setDescription(`\`\`\`\n${err}\`\`\``)
-        .setColor(`ff0000`)
+        .setColor('#ff0000')
 
-    await message.channel.send({embeds:[errorEmbed]})
+    await message.channel.send({ embeds: [errorEmbed] })
 }
 
 async function errorchannelsend(err: string) {
@@ -55,7 +55,7 @@ async function errorchannelsend(err: string) {
         .setTitle(`Something went really wrong!`)
         .setDescription(`\`\`\`js\n${err}\`\`\``)
 
-        errorChannel.send({embeds:[errorEmbed]})
+    errorChannel.send({ embeds: [errorEmbed] })
 }
 
 async function resetToken(message: Message) {
@@ -80,7 +80,7 @@ async function dConsole(thingToLog: string, functionClient: Client) {
     const consoleEmbed = new MessageEmbed()
         .setDescription(output)
 
-    consoleChannel.send({embeds:[consoleEmbed]})
+    consoleChannel.send({ embeds: [consoleEmbed] })
 }
 
 async function getObjectDifferences(object1: object, object2: object, thingToCheck: string = `all`) {
@@ -192,9 +192,9 @@ async function getPronouns(user: User, context: string) {
     catch (err) {
         //if they don't have pronouns set, or if pronoundb is down
         if (err == `Error: Request failed with status code 404`) {
-            if (context == `details`) {return await language.noPronounsSet(user)}
-            if (context == `ownedBy`) {return `this person's`}
-            if (context == `singular`) {return `this person`}
+            if (context == `details`) { return await language.noPronounsSet(user) }
+            if (context == `ownedBy`) { return `this person's` }
+            if (context == `singular`) { return `this person` }
         }
     }
 }
@@ -212,7 +212,7 @@ function splitArrayIntoMultiple(array: Array<object>, number: number) {
     }
     return outputArray
 }
-    
+
 export = {
     haste,
     errorhandling,
