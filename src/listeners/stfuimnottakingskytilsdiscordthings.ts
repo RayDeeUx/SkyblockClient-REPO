@@ -14,6 +14,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
 
     async exec(message) {
         if (message.channel.type != 'GUILD_TEXT') { return }
+        if (message.content.startsWith('```diff')) { return }
         if (message.content.startsWith('.')) { return }
         if (message.content.startsWith('-') && message.channel.id != '780181693553704973') { return }
         if (!message.content.startsWith('-') && message.channel.id == '780181693553704973') { return }
@@ -57,7 +58,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
                             sent.delete()
                         }
                     })
-                    
+
             }
         })
     }

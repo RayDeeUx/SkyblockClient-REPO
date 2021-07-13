@@ -3,6 +3,7 @@ import { MessageEmbed, TextChannel } from "discord.js";
 import prettyBytes from "pretty-bytes";
 import { BotCommand } from "../../../extensions/BotCommand";
 import commandManager from "../../../functions/commandManager";
+import fs from 'fs'
 
 import importUtils from '../../../functions/utils'
 const utils = importUtils
@@ -27,7 +28,11 @@ export default class modInfo extends BotCommand {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (!args.mod) { return message.reply('let me just telepathically get the mod you want info on from you... oh wait i can\'t') }
 
-            const mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data
+            const useLocalRepo = false
+            let mods
+            
+            if (useLocalRepo) { mods = JSON.parse(fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf8')) }
+            else { mods = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data }
 
             const mod = mods.find(e => e.display && e.display !== "no" && args.mod.toLowerCase() == e.id.toLowerCase() || e.nicknames && e.nicknames.includes(args.mod.toLowerCase()))
 
@@ -61,7 +66,11 @@ export default class modInfo extends BotCommand {
                 url = `https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/mods/${encodeURIComponent(mod.file)}?raw=true`
             }
             modInfoEmbed.addField('Direct Download', `[${file}](${url})`)
-            let size = parseInt((await axios.get(url)).headers['content-length'], 10)
+
+            let size
+            try { size = parseInt((await axios.get(url)).headers['content-length'], 10) }
+            catch (err) { size = false }
+
             if (size) {
                 modInfoEmbed.addField('Size', `${prettyBytes(size)}`)
             }
