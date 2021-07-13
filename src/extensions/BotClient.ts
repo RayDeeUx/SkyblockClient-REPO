@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } from "discord-akairo";
+import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler, TaskHandler } from "discord-akairo";
 import { Intents } from "discord.js";
 import { join } from "path";
 
@@ -22,6 +22,10 @@ export class BotClient extends AkairoClient {
 	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
 		directory: join(__dirname, "..", "inhibitors")
 	})
+
+	// public taskHandler: TaskHandler = new TaskHandler(this, {
+	// 	directory: join(__dirname, "..", "tasks")
+	// })
 	public constructor() {
 		super(
 			{
@@ -49,6 +53,7 @@ export class BotClient extends AkairoClient {
 			commands: this.commandHandler,
 			listeners: this.listenerHandler,
 			inhibitors: this.inhibitorHandler,
+			//tasks: this.taskHandler,
 		};
 		for (const loader of Object.keys(loaders)) {
 			try {
@@ -62,6 +67,6 @@ export class BotClient extends AkairoClient {
 
 	public async start(): Promise<string> {
 		await this._init()
-		return this.login(process.env["token"])
+		return this.login(process.env["devtoken"])
 	}
 }
