@@ -36,8 +36,8 @@ export default class discord extends BotCommand {
                             .setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
 
                         if (message.type == 'REPLY') {
-                            if (message.channel.type == 'text') {
-                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                            if (message.channel.type == 'GUILD_TEXT') {
+                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
                                 repliedMessage.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
                             }
                         }
@@ -48,7 +48,7 @@ export default class discord extends BotCommand {
                     else {
                         if (message.type == 'REPLY') {
                             if (message.channel.type == 'GUILD_TEXT') {
-                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
+                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
                                 repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
                             }
                         }
