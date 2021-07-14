@@ -97,7 +97,7 @@ export default class modInfo extends BotCommand {
             }
             else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
                 if (message.type == 'REPLY') {
-                    if (message.channel.type == 'text') {
+                    if (message.channel.type == 'GUILD_TEXT') {
                         const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
                         repliedMessage.util.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
                     }

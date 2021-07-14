@@ -41,7 +41,7 @@ export default class rules extends BotCommand {
             }
             if (!message.interaction && message.member.permissions.has('ADMINISTRATOR')) {
                 if (message.type == 'REPLY') {
-                    if (message.channel.type == 'text') {
+                    if (message.channel.type == 'GUILD_TEXT') {
                         const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
                         repliedMessage.util.reply({ embeds: [rule1, rule2] })
                     }

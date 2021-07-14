@@ -47,7 +47,7 @@ export default class discord extends BotCommand {
                     }
                     else {
                         if (message.type == 'REPLY') {
-                            if (message.channel.type == 'text') {
+                            if (message.channel.type == 'GUILD_TEXT') {
                                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
                                 repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
                             }

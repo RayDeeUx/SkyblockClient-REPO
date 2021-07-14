@@ -26,7 +26,7 @@ export default class httpcat extends BotCommand {
         const caterror = `https://http.cat/${args.caterror}`
 
         if (message.type == 'REPLY') {
-            if (message.channel.type == 'text') {
+            if (message.channel.type == 'GUILD_TEXT') {
                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
                 repliedMessage.reply(caterror)
             }

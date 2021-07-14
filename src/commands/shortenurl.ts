@@ -27,7 +27,7 @@ export default class shortenurl extends BotCommand {
         const shortenedurl = (await axios.get(`https://api.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com/a?url=${args.url}`)).data
 
         if (message.type == 'REPLY') {
-            if (message.channel.type == 'text') {
+            if (message.channel.type == 'GUILD_TEXT') {
                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
                 repliedMessage.reply({shortenedurl})
             }

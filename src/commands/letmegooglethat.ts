@@ -26,7 +26,7 @@ export default class letmegooglethat extends BotCommand {
         const googledthing = `<${encodeURI(`https://letmegooglethat.com/?q=${args.thingtogoogle}`)}>`
 
         if (message.type == 'REPLY') {
-            if (message.channel.type == 'text') {
+            if (message.channel.type == 'GUILD_TEXT') {
                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
                 repliedMessage.reply({ googledthing })
             }
