@@ -28,7 +28,7 @@ export default class letmegooglethat extends BotCommand {
         if (message.type == 'REPLY') {
             if (message.channel.type == 'GUILD_TEXT') {
                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
-                repliedMessage.reply({ googledthing })
+                repliedMessage.reply( googledthing )
             }
         }
         else {
