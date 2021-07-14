@@ -8,8 +8,8 @@ const sh = promisify(exec)
 export default class extends BotTasks {
     constructor() {
         super("hello", {
-            delay: 300000,
-            runOnStart: false
+            delay: 60000,
+            runOnStart: true
         });
     }
     async exec() {
