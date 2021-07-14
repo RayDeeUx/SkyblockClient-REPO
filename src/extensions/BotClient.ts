@@ -23,9 +23,9 @@ export class BotClient extends AkairoClient {
 		directory: join(__dirname, "..", "inhibitors")
 	})
 
-	// public taskHandler: TaskHandler = new TaskHandler(this, {
-	// 	directory: join(__dirname, "..", "tasks")
-	// })
+	public taskHandler: TaskHandler = new TaskHandler(this, {
+		directory: join(__dirname, "..", "tasks")
+	})
 	public constructor() {
 		super(
 			{
@@ -53,7 +53,7 @@ export class BotClient extends AkairoClient {
 			commands: this.commandHandler,
 			listeners: this.listenerHandler,
 			inhibitors: this.inhibitorHandler,
-			//tasks: this.taskHandler,
+			tasks: this.taskHandler,
 		};
 		for (const loader of Object.keys(loaders)) {
 			try {
