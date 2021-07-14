@@ -29,7 +29,7 @@ export default class shortenurl extends BotCommand {
         if (message.type == 'REPLY') {
             if (message.channel.type == 'text') {
                 const repliedMessage = await message.channel.messages.fetch(message.reference.messageID)
-                repliedMessage.reply(shortenedurl)
+                repliedMessage.reply({shortenedurl})
             }
         }
         else {
