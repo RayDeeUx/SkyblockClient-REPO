@@ -16,7 +16,7 @@ export default class extends BotTasks {
         if (process.platform == 'win32') {
             sh('pull.bat')
                 .then(() => {
-                    console.log('pulled nacrt/skyblockclient-repo')
+                    //console.log('pulled nacrt/skyblockclient-repo')
                 })
                 .catch(err => {
                     console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
@@ -25,7 +25,7 @@ export default class extends BotTasks {
         else {
             sh('cd SkyblockClient-REPO ; git pull')
                 .then(() => {
-                    console.log('pulled nacrt/skyblockclient-repo')
+                    //console.log('pulled nacrt/skyblockclient-repo')
                 })
                 .catch(err => {
                     console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)

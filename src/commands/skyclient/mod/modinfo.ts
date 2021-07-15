@@ -28,7 +28,7 @@ export default class modInfo extends BotCommand {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (!args.mod) { return message.reply('let me just telepathically get the mod you want info on from you... oh wait i can\'t') }
 
-            const useLocalRepo = true
+            const useLocalRepo = false
             let mods
             
             if (useLocalRepo) { mods = JSON.parse(fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf8')) }
