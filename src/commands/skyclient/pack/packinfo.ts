@@ -2,8 +2,12 @@ import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../../extensions/BotCommand';
 import commandManager from '../../../functions/commandManager';
+import fs from 'fs'
+
 
 import importUtils from '../../../functions/utils'
+import msgutils from '../../../functions/msgutils';
+import skyclientutils from '../../../functions/skyclientutils';
 const utils = importUtils
 
 export default class packName extends BotCommand {
@@ -18,76 +22,33 @@ export default class packName extends BotCommand {
                 { name: 'pack', description: 'The ID of the pack you want to get info on', type: 'STRING' },
                 { name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }
             ],
-            description: 'Shows a list of all the mods in SkyClient'
+            description: 'Shows a list of all the packs in SkyClient'
         })
     }
 
     async exec(message, args) {
+        let packJson
+        packJson = await skyclientutils.getRepo('packs.json')
 
-        if (utils.SkyClientGuilds.includes(message.guild.id)) {
+        let pack
 
-            let packDownloadURL
-            const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
+        pack = packJson.find(pack => pack.id == args.pack && pack.display != 'no' || pack.nicknames && pack.nicknames.includes(args.pack) && pack.display != 'no')
 
-            for (const pack of packJson.data) {
-                if (pack.id == args.pack) {
-                    const packEmbed = new MessageEmbed()
-                        .setTitle(pack.display)
-                        .setColor(message.member.displayColor)
-                    if (pack.discordcode) {
-                        packEmbed.setURL(`https://discord.gg/${pack.discordcode}`)
-                    }
+        const packEmbed = new MessageEmbed()
+            .setTitle(pack.display)
+            .setDescription(pack.description)
+        if (pack.command) packEmbed.addField('Command', pack.command)
+        if (pack.url && pack.id != 'optifine') packEmbed.addField('Direct Download', `[${pack.file}](${pack.url})`)
+        else if (!pack.url && pack.id != 'optifine') packEmbed.addField('Direct Download', `[${pack.file}](https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/packs/${encodeURIComponent(pack.file)}?raw=true)`)
 
-                    let filteredPackFileName = pack.file.replace(/ /g, '%20')
-                    if (!pack.url) {
-                        packDownloadURL = `https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/packs/${filteredPackFileName}?raw=true`
-                    }
-                    else { packDownloadURL = pack.url }
-                    packEmbed.addFields(
-                        { name: 'Description', value: pack.description },
-                        { name: 'Direct Download', value: `[${filteredPackFileName}](${packDownloadURL})` },
-                    )
-                    if (pack.command) {
-                        packEmbed.addField(`Main Command`, `\`${pack.command}\``)
-                    }
+        if (message.member && message.member.displayColor) packEmbed.setColor(message.member.displayColor)
+        else if (!message.member.displayColor && message.guild.me.displayColor) packEmbed.setColor(message.guild.me.displayColor)
+        else if (!message.member) packEmbed.setColor('#fd87d2')
 
-                    let icon = pack.icon
-                    icon = icon.replace(/ /g, '%20')
+        if (pack.icon) packEmbed.setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/icons/${encodeURIComponent(pack.icon)}`)
 
-                    packEmbed.setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/icons/${icon}`)
-                    if (pack.creator) {
-                        packEmbed.setFooter(`Created by ${pack.creator}`)
-                    }
+        if (pack.creator) packEmbed.setFooter(`Created by ${pack.creator}`)
 
-                    const embed = packEmbed
-                    if (commandManager.userCanUseCommand(message) == false && message.interaction) {
-                        message.interaction.reply({ embeds: [embed], ephemeral: true })
-                    }
-                    else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral) {
-                        message.interaction.reply({ embeds: [embed], ephemeral: true })
-                    }
-                    else if (message.interaction && commandManager.userCanUseCommand(message) == true && !args.ephemeral) {
-                        message.interaction.reply({ embeds: [embed] })
-                    }
-                    else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                        if (message.type == 'REPLY') {
-                            if (message.channel.type == 'GUILD_TEXT') {
-                                const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
-                                repliedMessage.util.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
-                            }
-                        }
-                        else {
-                            message.util.reply({ embeds: [embed] })
-                        }
-                    }
-                    else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
-                        message.util.reply('Please use this as a slashcommand if you want to use it in this channel.')
-                    }
-                }
-            }
-        }
-        else { return }
-
-
+        msgutils.reply(message, { embeds: [packEmbed] })
     }
 }

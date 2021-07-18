@@ -1,6 +1,9 @@
 import axios from "axios"
 import { BotCommand } from '../../extensions/BotCommand';
 import utils from "../../functions/utils";
+import fs from 'fs'
+import skyclientutils from "../../functions/skyclientutils";
+
 
 export default class json extends BotCommand {
     constructor() {
@@ -41,8 +44,9 @@ export default class json extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            if (args.type == 'mod') {
-                const modJson = await axios('https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json', { method: 'get' })
+            
+            if (args.type == 'mod') {                
+                let modJson = await skyclientutils.getRepo('mods.json')
 
                 for (let mod of modJson.data) {
                     if (mod.id == args.thingtofind) {
@@ -53,9 +57,9 @@ export default class json extends BotCommand {
             }
 
             else if (args.type == 'pack') {
-                const packJson = await axios('https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json', { method: 'get' })
+                let packJson = await skyclientutils.getRepo('packs.json')
 
-                for (let pack of packJson.data) {
+                for (let pack of packJson) {
                     if (pack.id == args.thingtofind) {
                         pack = JSON.stringify(pack, null, '  ')
                         message.util.reply(await utils.haste(pack))

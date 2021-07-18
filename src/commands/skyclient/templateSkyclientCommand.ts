@@ -1,5 +1,6 @@
 import { BotCommand } from '../../extensions/BotCommand';
 import utils from '../../functions/utils';
+import fs from 'fs'
 
 export default class templateSkyclientCommand extends BotCommand {
     constructor() {

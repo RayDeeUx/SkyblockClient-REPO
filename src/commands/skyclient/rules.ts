@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../extensions/BotCommand';
 import utils from '../../functions/utils';
+import fs from 'fs'
 
 export default class rules extends BotCommand {
     constructor() {

@@ -2,8 +2,11 @@ import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../../extensions/BotCommand';
 import commandManager from '../../../functions/commandManager';
+import fs from 'fs'
+
 
 import importUtils from '../../../functions/utils'
+import skyclientutils from '../../../functions/skyclientutils';
 const utils = importUtils
 
 export default class modList extends BotCommand {
@@ -21,13 +24,13 @@ export default class modList extends BotCommand {
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
 
-            const modJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json`, { method: "get" })
+            let mods = await skyclientutils.getRepo('mods.json')
 
             const modsEmbed = new MessageEmbed()
                 .setColor(message.member.displayColor)
                 .setTitle('SkyClien\'t Mods List')
 
-            modJson.data.forEach(mod => {
+            mods.data.forEach(mod => {
                 if (mod.display && mod.display != "no" && mod.hidden != true) {
                     let mods = ""
 
@@ -52,7 +55,7 @@ export default class modList extends BotCommand {
 
                     modsEmbed.addField(`${mod.display}`, mods, true)
                 }
-            });
+            })
 
 
             const embed = modsEmbed

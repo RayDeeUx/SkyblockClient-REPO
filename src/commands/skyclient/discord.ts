@@ -2,6 +2,8 @@ import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../extensions/BotCommand';
 import utils from '../../functions/utils';
+import fs from 'fs'
+import skyclientutils from '../../functions/skyclientutils';
 
 export default class discord extends BotCommand {
     constructor() {
@@ -20,7 +22,9 @@ export default class discord extends BotCommand {
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (!args.discord) { return message.reply('lemme just telepathically get the discord you want from you... oh wait i can\'t') }
-            const discords = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
+
+            let discords = await skyclientutils.getRepo('discords.json')
+
             let found = false
 
             for (const discord of discords.data) {

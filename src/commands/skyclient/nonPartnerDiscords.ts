@@ -2,6 +2,8 @@ import axios from 'axios';
 import { MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../extensions/BotCommand';
 import utils from '../../functions/utils';
+import fs from 'fs'
+import skyclientutils from '../../functions/skyclientutils';
 
 export default class nonpartnereddiscords extends BotCommand {
     constructor() {
@@ -29,7 +31,9 @@ export default class nonpartnereddiscords extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            const discords = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
+
+            const discords = await skyclientutils.getRepo('discords.json')
+
             const discordsEmbed = new MessageEmbed()
                 .setTitle('Non-partnered discord servers')
 

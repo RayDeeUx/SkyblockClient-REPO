@@ -2,6 +2,8 @@ import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import utils from '../../functions/utils';
 import { BotCommand } from '../../extensions/BotCommand';
+import fs from 'fs'
+import skyclientutils from '../../functions/skyclientutils';
 
 export default class partners extends BotCommand {
     constructor() {
@@ -19,8 +21,9 @@ export default class partners extends BotCommand {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
             if (!message.member.permissions.has('ADMINISTRATOR')) { return message.reply('hey you need admin for that') }
 
-            const servers = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json`, { method: "get" })
+            const servers = await skyclientutils.getRepo('discords.json')
 
+            
             let embedArray = []
 
             for (const server of servers.data) {

@@ -2,8 +2,11 @@ import { MessageEmbed } from 'discord.js';
 import axios from "axios"
 import { BotCommand } from '../../../extensions/BotCommand';
 import commandManager from '../../../functions/commandManager';
+import fs from 'fs'
+
 
 import importUtils from '../../../functions/utils'
+import skyclientutils from '../../../functions/skyclientutils';
 const utils = importUtils
 
 export default class packList extends BotCommand {
@@ -21,8 +24,8 @@ export default class packList extends BotCommand {
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
 
-            const packJson = await axios(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json`, { method: "get" })
-
+            let packJson = await skyclientutils.getRepo('packs.json')
+            
             const packsEmbed = new MessageEmbed()
                 .setColor(message.member.displayColor)
                 .setTitle('SkyClien\'t packs List')
