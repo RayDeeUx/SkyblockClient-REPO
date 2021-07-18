@@ -9,5 +9,7 @@ async function getRepo(thingToGet: string) {
 }
 
 export default {
+    useLocalRepo,
+    
     getRepo
 }
