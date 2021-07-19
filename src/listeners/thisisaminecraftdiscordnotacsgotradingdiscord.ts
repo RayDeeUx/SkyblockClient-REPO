@@ -3,6 +3,7 @@ import { promisify } from 'util';
 import { BotListener } from '../extensions/BotListener';
 import fs from 'fs';
 import commandManager from '../functions/commandManager';
+import skyclientutils from '../functions/skyclientutils';
 
 class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
     constructor() {
@@ -14,8 +15,8 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
     async exec(message) {
         try {
-            const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
-            let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = JSON.parse(fsJson)
+            //const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
+            let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = await skyclientutils.getRepo('scamlinks.json', true)
 
             // console.log(message.content.replace('<', '').replace('>', ''))
             // console.log(message.content.match(/\/trade\/new\/\?partner=\d*&token=[a-z0-9]+/gi))
