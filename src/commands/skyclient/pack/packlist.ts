@@ -30,7 +30,7 @@ export default class packList extends BotCommand {
                 .setColor(message.member.displayColor)
                 .setTitle('SkyClien\'t packs List')
 
-            packJson.data.forEach(pack => {
+            packJson.forEach(pack => {
                 if (pack.display && pack.display != "no" && pack.hidden != true) {
                     let packs = ""
 

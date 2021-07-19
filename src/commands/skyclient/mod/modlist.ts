@@ -30,7 +30,7 @@ export default class modList extends BotCommand {
                 .setColor(message.member.displayColor)
                 .setTitle('SkyClien\'t Mods List')
 
-            mods.data.forEach(mod => {
+            mods.forEach(mod => {
                 if (mod.display && mod.display != "no" && mod.hidden != true) {
                     let mods = ""
 
