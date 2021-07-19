@@ -48,7 +48,7 @@ export default class json extends BotCommand {
             if (args.type == 'mod') {                
                 let modJson = await skyclientutils.getRepo('mods.json')
 
-                for (let mod of modJson.data) {
+                for (let mod of modJson) {
                     if (mod.id == args.thingtofind) {
                         mod = JSON.stringify(mod, null, '  ')
                         message.util.reply(await utils.haste(mod))

@@ -26,7 +26,7 @@ export default class partners extends BotCommand {
             
             let embedArray = []
 
-            for (const server of servers.data) {
+            for (const server of servers) {
                 if (server.partner) {
                     const partnerEmbed = new MessageEmbed()
                         .setTitle(server.fancyname)

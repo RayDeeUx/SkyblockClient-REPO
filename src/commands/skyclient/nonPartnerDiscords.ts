@@ -39,7 +39,7 @@ export default class nonpartnereddiscords extends BotCommand {
 
             let discordString = new String
             
-            discords.data.forEach(discord => {
+            discords.forEach(discord => {
                 if (!discord.partner) {
                     discordsEmbed.setColor(message.member.displayColor)
                     discordsEmbed.addField(discord.fancyname, `[discord.gg/${discord.code}](https://discord.gg/${discord.code})`)
