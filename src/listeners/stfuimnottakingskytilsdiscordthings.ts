@@ -23,11 +23,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
         if (message.author.bot != false) { return }
 
         let noAutorespond = false
-        // message.member.roles.cache.forEach(role => {
-        //     if (role.id == '852016624605462589') {
-        //         return noAutorespond = true
-        //     }
-        // })
+        
         if (message.member.roles.cache.has('852016624605462589')) { return noAutorespond = true }
 
         let notStolenFromSkytilsDiscordJson = JSON.parse(fs.readFileSync('SkyblockClient-REPO/files/botautoresponse.json', 'utf8'))
@@ -58,7 +54,14 @@ class notStolenFromSkytilsDiscord extends BotListener {
                             sent.delete()
                         }
                     })
-
+                    .catch(err => {
+                        if (err == 'Error [INTERACTION_COLLECTOR_ERROR]: Collector received no interactions before ending with reason: time') {
+                            sent.edit({ content: sent.content, components: [] })
+                        }
+                        else {
+                            console.log(err)
+                        }
+                    })
             }
         })
     }

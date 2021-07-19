@@ -68,6 +68,6 @@ export class BotClient extends AkairoClient {
 
 	public async start(): Promise<string> {
 		await this._init()
-		return this.login(process.env["token"])
+		return this.login(process.env["devtoken"])
 	}
 }
