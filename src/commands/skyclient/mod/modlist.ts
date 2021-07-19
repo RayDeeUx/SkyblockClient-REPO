@@ -7,6 +7,7 @@ import fs from 'fs'
 
 import importUtils from '../../../functions/utils'
 import skyclientutils from '../../../functions/skyclientutils';
+import msgutils from '../../../functions/msgutils';
 const utils = importUtils
 
 export default class modList extends BotCommand {
@@ -17,7 +18,6 @@ export default class modList extends BotCommand {
             slash: true,
             slashGuilds: utils.slashGuilds,
             description: 'Shows a list of all the mods in SkyClient',
-            slashOptions: [{ name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }]
         });
     }
 
@@ -59,21 +59,8 @@ export default class modList extends BotCommand {
 
 
             const embed = modsEmbed
-            if (commandManager.userCanUseCommand(message) == false && message.interaction) {
-                message.interaction.reply({ embeds: [embed], ephemeral: true })
-            }
-            else if (message.interaction && commandManager.userCanUseCommand(message) == true && args.ephemeral) {
-                message.interaction.reply({ embeds: [embed], ephemeral: true })
-            }
-            else if (message.interaction && commandManager.userCanUseCommand(message) == true && !args.ephemeral) {
-                message.interaction.reply({ embeds: [embed] })
-            }
-            else if (!message.interaction && commandManager.userCanUseCommand(message) == true) {
-                message.util.reply({ embeds: [embed] })
-            }
-            else if (!message.interaction && commandManager.userCanUseCommand(message) == false) {
-                message.util.reply('Please use this as a slashcommand if you want to use it in this channel.')
-            }
+            await msgutils.reply(message, { embeds: [embed] })
+
         }
         else { return }
     }

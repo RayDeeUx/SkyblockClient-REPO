@@ -3,6 +3,7 @@ import { BotCommand } from '../../extensions/BotCommand';
 import utils from "../../functions/utils";
 import fs from 'fs'
 import skyclientutils from "../../functions/skyclientutils";
+import msgutils from "../../functions/msgutils";
 
 
 export default class json extends BotCommand {
@@ -44,14 +45,14 @@ export default class json extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
-            
-            if (args.type == 'mod') {                
+
+            if (args.type == 'mod') {
                 let modJson = await skyclientutils.getRepo('mods.json')
 
                 for (let mod of modJson) {
                     if (mod.id == args.thingtofind) {
                         mod = JSON.stringify(mod, null, '  ')
-                        message.util.reply(await utils.haste(mod))
+                        await msgutils.reply(message, { content: await utils.haste(mod) })
                     }
                 }
             }
@@ -62,7 +63,7 @@ export default class json extends BotCommand {
                 for (let pack of packJson) {
                     if (pack.id == args.thingtofind) {
                         pack = JSON.stringify(pack, null, '  ')
-                        message.util.reply(await utils.haste(pack))
+                        await msgutils.reply(message, { content: await utils.haste(pack) })
                     }
                 }
             }

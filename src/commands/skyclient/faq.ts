@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../extensions/BotCommand';
+import msgutils from '../../functions/msgutils';
 import utils from '../../functions/utils';
 
 export default class faq extends BotCommand {
@@ -96,15 +97,8 @@ export default class faq extends BotCommand {
                 embed.setDescription('Yes. Download the mod you want from wherever you get it normally, and put it in [.minecraft/skyclient/mods](https://youtu.be/Y7AyoDMsFdY)\n\n[We have special instructions for SBE, as it doesn\'t work normally with SkyClient.](https://github.com/MicrocontrollersDev/Alternatives/blob/1e409e056e3e14ca874a2368c045de96787e8cbd/SkyblockExtras.md#reasons-not-to-buy-or-use-sbe)')
             }
 
-            if (message.type == 'REPLY') {
-                if (message.channel.type == 'GUILD_TEXT') {
-                    const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
-                    repliedMessage.reply({ embeds: [embed], allowedMentions: { repliedUser: true } })
-                }
-            }
-            else {
-                message.reply({ embeds: [embed] })
-            }
+            await msgutils.reply(message, { embeds: [embed] })
+
 
         }
     }
