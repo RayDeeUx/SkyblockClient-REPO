@@ -38,7 +38,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
                         if (message.member.bannable && !hasRole) {
                             try { await message.author.send('Hey, did you know that we ban for scamming?') }
-                            catch (err) { return }
+                            catch (err) { }
                             message.member.ban({ reason: 'Sending a scam link' })
                             message.delete()
                             message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} has been banned for steam scam link`)
