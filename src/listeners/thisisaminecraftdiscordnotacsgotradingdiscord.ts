@@ -26,7 +26,9 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                     if (message.member) {
                         let hasRole = false
                         message.member.roles.cache.forEach(role => {
-                            if (commandManager.bypassRoles.includes(role) || message.author.id == message.guild.ownerID) {
+                            console.log(role.name)
+                            if (commandManager.bypassRoles.includes(role.id) || message.author.id == message.guild.ownerID) {
+                                console.log(role.name)
                                 console.log('Member has role, not banning')
                                 return hasRole = true
                             }
