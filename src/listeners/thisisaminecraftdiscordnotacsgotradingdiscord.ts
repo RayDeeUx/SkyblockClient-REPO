@@ -27,17 +27,20 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                         let hasRole = false
                         message.member.roles.cache.forEach(role => {
                             if (commandManager.bypassRoles.includes(role) || message.author.id == message.guild.ownerID) {
+                                console.log('Member has role, not banning')
                                 return hasRole = true
                             }
                         })
                         if (hasRole) {
                             message.delete()
+                            console.log('k actually not banning them this time')
                             message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link`)
                             return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
                         }
                     }
 
                     if (message.member.bannable) {
+                        console.log('banning')
                         try { await message.author.send('Hey, did you know that we ban for scamming?') }
                         catch (err) { return }
                         message.member.ban({ reason: 'Sending a scam link' })
