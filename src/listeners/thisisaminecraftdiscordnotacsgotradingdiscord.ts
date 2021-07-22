@@ -38,7 +38,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                             return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
                         }
 
-                        if (message.member.bannable) {
+                        if (message.member.bannable && !hasRole) {
                             console.log('banning')
                             try { await message.author.send('Hey, did you know that we ban for scamming?') }
                             catch (err) { return }
