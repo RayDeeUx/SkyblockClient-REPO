@@ -41,7 +41,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                             catch (err) { }
                             message.member.ban({ reason: 'Sending a scam link' })
                             message.delete()
-                            message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} has been banned for steam scam link`)
+                            message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} has been banned for a scam link`)
                         }
                     }
                 }
