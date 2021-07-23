@@ -12,7 +12,7 @@ export default class skycrypt extends BotCommand {
             description: 'Sends the SkyCrypt link for whoever you want',
             slashOptions: [
                 {
-                    name: 'player',
+                    name: 'ign',
                     description: 'The Minecraft account you want the SkyCrypt page of',
                     type: 'STRING'
                 }
