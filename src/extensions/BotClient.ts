@@ -112,7 +112,7 @@ export class BotClient extends AkairoClient {
 	public async start(): Promise<string> {
 		let token
 		config.forEach(thing => {
-			if (thing.id == 'tempbottoken') {
+			if (thing.id == 'token') {
 				token = thing.value
 			}
 		})
