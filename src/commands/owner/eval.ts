@@ -26,9 +26,6 @@ export default class evaluate extends BotCommand {
     }
 
     async exec(message, args) {
-        if (args.codeToEval.includes('token')) { return (message.util.send('no token')) }
-        if (args.codeToEval.includes('env')) { return message.util.send('no env') }
-
         if (args.codeToEval.includes('channel.delete')) { return message.util.send('Are you IRONM00N?') }
         if (args.codeToEval.includes('message.guild.delete')) { return message.util.send('You\'re like IRONM00N but infinitely more stupid!') }
         if (args.codeToEval.includes('delete') && !args.sudo) { return message.util.send('This would be blocked by smooth brain protection, but BushBot has a license') }
@@ -54,10 +51,11 @@ export default class evaluate extends BotCommand {
             output = errorStack
         }
 
-        if (inspect(output).includes(process.env['token'])) { return message.util.send('Message containing token wasn\'t sent.') }
-        if (inspect(output).includes(process.env['pctoken'])) { return message.util.send('Message containing token wasn\'t sent.') }
-        if (inspect(output).includes(process.env['devtoken'])) { return message.util.send('Message containing token wasn\'t sent.') }
-
+        this.client.config.forEach(thing => {
+            if (output.includes(thing.value)) {
+                output = output.replace(thing.value, thing.id)
+            }
+        })
 
         if (!args.silent && !args.codeToEval.includes('message.channel.delete()')) {
             const evalOutputEmbed = new MessageEmbed()

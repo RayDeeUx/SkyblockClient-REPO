@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 import { BotCommand } from '../extensions/BotCommand';
 import utils from "../functions/utils";
 
@@ -12,7 +13,7 @@ export default class bestbot extends BotCommand {
         })
     }
 
-    async exec(message) {
+    async exec(message: Message) {
         message.reply('fire ofc')
     }
 }
