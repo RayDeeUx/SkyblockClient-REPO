@@ -17,30 +17,25 @@ export default class reload extends BotCommand {
 
 
     async exec(message) {
-        try {
-            const reloadEmbed = new MessageEmbed()
-                .setDescription(`Reloading!`)
-            if (message.member) { reloadEmbed.setColor(message.member.displayColor) }
-            else { reloadEmbed.setColor(message.guild.me.displayColor) }
-            message.channel.send({ embeds: [reloadEmbed] }).then(async sent => {
-                console.log(`Reloading!`)
+        const reloadEmbed = new MessageEmbed()
+            .setDescription(`Reloading!`)
+        if (message.member) { reloadEmbed.setColor(message.member.displayColor) }
+        else { reloadEmbed.setColor(message.guild.me.displayColor) }
+        message.channel.send({ embeds: [reloadEmbed] }).then(async sent => {
+            console.log(`Reloading!`)
 
-                await sh("yarn build");
+            await sh("yarn build");
 
-                await this.client.commandHandler.reloadAll()
-                await this.client.listenerHandler.reloadAll()
-                await this.client.inhibitorHandler.reloadAll()
-                await this.client.taskHandler.reloadAll()
+            await this.client.commandHandler.reloadAll()
+            await this.client.listenerHandler.reloadAll()
+            await this.client.inhibitorHandler.reloadAll()
+            await this.client.taskHandler.reloadAll()
 
-                console.log(`Reloaded!\n`)
+            console.log(`Reloaded!\n`)
 
-                reloadEmbed.setDescription(`Reloaded! Everything that changed in my files should now be loaded in the bot.`)
-                sent.channel.send({ embeds: [reloadEmbed] })
-                sent.delete()
-            })
-        }
-        catch (err) {
-            utils.errorhandling(err, message)
-        }
+            reloadEmbed.setDescription(`Reloaded! Everything that changed in my files should now be loaded in the bot.`)
+            sent.channel.send({ embeds: [reloadEmbed] })
+            sent.delete()
+        })
     }
 }

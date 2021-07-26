@@ -38,7 +38,7 @@ export default class rules extends BotCommand {
             }
             if (message.interaction && message.member.permissions.has('ADMINISTRATOR')) {
                 message.interaction.reply({ content: 'Rules sent!', ephemeral: true })
-                
+                message.channel.send({ embeds: [rule1, rule2] })
             }
             if (!message.interaction && message.member.permissions.has('ADMINISTRATOR')) {
                 if (message.type == 'REPLY') {
@@ -48,7 +48,7 @@ export default class rules extends BotCommand {
                     }
                 }
                 else {
-                    message.util.send({ embeds: [rule1, rule2] })
+                    message.channel.send({ embeds: [rule1, rule2] })
                 }
             }
         }

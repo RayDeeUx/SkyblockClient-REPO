@@ -39,9 +39,13 @@ export default class removerole extends BotCommand {
         }
         catch (err) {
             if (err == `TypeError: Cannot read property 'roles' of undefined`) {
-                return message.util.reply(`That user isn't cached! Please ping instead of using name!`)
+                const ihatelife = new MessageEmbed()
+                    .setDescription(`Either that user isn't cached, or they aren't on this server. Please ping them instead of whatever you tried to do.`)
+                return message.util.reply({embeds:[ihatelife]})
             }
-            await utils.errorhandling(err, message)
+            else {
+                this.handler.emitError(err, message, this)
+            }
         }
     }
 }

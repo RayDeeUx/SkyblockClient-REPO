@@ -23,27 +23,24 @@ export default class gitPush extends BotCommand {
     }
 
     async exec(message, args) {
-        try {
-            const pushingToGithubEmbed = new MessageEmbed()
-                .setDescription(`Pushing changes to [GitHub](https://github.com/Zordlan/SkyClientBot)`)
-                .setColor(message.member.displayColor)
-            message.reply({ embeds: [pushingToGithubEmbed] })
+        const pushingToGithubEmbed = new MessageEmbed()
+            .setDescription(`Pushing changes to [GitHub](https://github.com/Zordlan/SkyClientBot)`)
+            .setColor(message.member.displayColor)
+        message.reply({ embeds: [pushingToGithubEmbed] })
 
-            const githubEmbed = new MessageEmbed()
-                .setTitle(`Command Output`)
-                .setColor(message.member.displayColor)
+        const githubEmbed = new MessageEmbed()
+            .setTitle(`Command Output`)
+            .setColor(message.member.displayColor)
 
-            let gitAdd = await sh('git add .')
-            githubEmbed.addField(`\`git add .\``, `\`\`\`js\n${inspect(gitAdd)}\`\`\``)
+        let gitAdd = await sh('git add .')
+        githubEmbed.addField(`\`git add .\``, `\`\`\`js\n${inspect(gitAdd)}\`\`\``)
 
-            let gitCommit = await sh(`git commit -m "${args.commitReason}"`)
-            githubEmbed.addField(`\`git commit "${args.commitReason}"\``, `\`\`\`js\n${inspect(gitCommit)}\`\`\``)
+        let gitCommit = await sh(`git commit -m "${args.commitReason}"`)
+        githubEmbed.addField(`\`git commit "${args.commitReason}"\``, `\`\`\`js\n${inspect(gitCommit)}\`\`\``)
 
-            let githubPush = await sh('git push')
-            githubEmbed.addField(`\`git push\``, `\`\`\`js\n${inspect(githubPush)}\`\`\``)
+        let githubPush = await sh('git push')
+        githubEmbed.addField(`\`git push\``, `\`\`\`js\n${inspect(githubPush)}\`\`\``)
 
-            message.channel.send({ embeds: [githubEmbed] })
-        }
-        catch (err) { utils.errorhandling(err, message) }
+        message.channel.send({ embeds: [githubEmbed] })
     }
 }

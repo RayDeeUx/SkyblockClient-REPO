@@ -49,7 +49,6 @@ export default class issue extends BotCommand {
             
 
             await msgutils.reply(message, { embeds: [embed] })
-
         }
     }
 }

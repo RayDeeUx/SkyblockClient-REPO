@@ -98,8 +98,6 @@ export default class faq extends BotCommand {
             }
 
             await msgutils.reply(message, { embeds: [embed] })
-
-
         }
     }
 }

@@ -1,116 +1,82 @@
-import chalk from 'chalk';
-import { exec } from 'child_process';
-import { MessageEmbed } from 'discord.js';
-import { promisify } from 'util';
-import { inspect } from 'util';
-import { BotCommand } from '../../extensions/BotCommand';
-
-import importMS from 'ms'
-const ms = importMS
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import chalk from 'chalk'
+import { exec } from 'child_process'
+import { MessageEmbed } from 'discord.js'
+import { promisify, inspect } from 'util'
+import { BotCommand } from '../../extensions/BotCommand'
 
 import importUtils from '../../functions/utils'
 const utils = importUtils
 
-import importScutils from '../../functions/skyclientutils'
-const skyclientutils = importScutils
+const sh = promisify(exec)
 
-const sh = promisify(exec);
+import ms from 'ms'
 
 export default class evaluate extends BotCommand {
     constructor() {
         super('eval', {
             aliases: ['eval', 'ev', 'exec'],
             args: [
-                { id: 'codetoeval', type: 'string', match: 'rest' },
-                { id: "silent", match: 'flag', flag: '--silent', },
+                { id: 'codeToEval', type: 'string', match: 'rest' },
+                { id: 'silent', match: 'flag', flag: '--silent', },
                 { id: 'sudo', match: 'flag', flag: '--sudo' }
             ],
             ownerOnly: true,
-            channel: 'guild'
-        });
+        })
     }
 
     async exec(message, args) {
+        if (args.codeToEval.includes('token')) { return (message.util.send('no token')) }
+        if (args.codeToEval.includes('env')) { return message.util.send('no env') }
+
+        if (args.codeToEval.includes('channel.delete')) { return message.util.send('Are you IRONM00N?') }
+        if (args.codeToEval.includes('message.guild.delete')) { return message.util.send('You\'re like IRONM00N but infinitely more stupid!') }
+        if (args.codeToEval.includes('delete') && !args.sudo) { return message.util.send('This would be blocked by smooth brain protection, but BushBot has a license') }
+
+        const guild = message.guild
+        const client = this.client
+        const channel = message.channel
+        const embed = new MessageEmbed()
+        const user = message.author
+        const member = message.member
+        const botUser = this.client.user
+        const botMember = message.guild.me
+
+        let output
+
         try {
-            if (args.codetoeval.includes('process.exit()') && !args.sudo) { return message.util.reply('if you want to shut me down, go to my console') }
-            if (args.codetoeval.includes('client.destroy()') && !args.sudo) { return message.util.reply('if you want to shut me down, go to my console') }
-
-            if (args.codetoeval.includes('token')) {
-                return (message.util.reply('no token'))
-            }
-            if (args.codetoeval.includes('env')) {
-                return message.util.reply('no env')
-            }
-
-            if (args.codetoeval.includes('message.channel.delete')) {
-                return message.util.reply('Are you IRONM00N?')
-            }
-            if (args.codetoeval.includes('message.guild.delete')) {
-                return message.util.reply('You\'re like IRONM00N but infinitely more stupid!')
-            }
-            if (args.codetoeval.includes('delete') && !args.sudo) {
-                return message.util.reply('This would be blocked by smooth brain protection, but BushBot has a license')
-            }
-
-            let guild = message.guild
-            let client = this.client
-            let channel = message.channel
-            let user = message.author
-            let member = message.member
-            let botUser = this.client.user
-            let botMember = message.guild.me
-
-            let embed1 = new MessageEmbed()
-            let embed2 = new MessageEmbed()
-            let embed3 = new MessageEmbed()
-            let embed4 = new MessageEmbed()
-            let embed5 = new MessageEmbed()
-            let embed6 = new MessageEmbed()
-            let embed7 = new MessageEmbed()
-            let embed8 = new MessageEmbed()
-            let embed9 = new MessageEmbed()
-            let embed10 = new MessageEmbed()
-
-            let output = await eval(args.codetoeval)
-
-            if (inspect(output).includes(process.env.token)) {
-                return message.util.reply('Message containing token wasn\'t sent.')
-            }
-
-            if (message.guild.id == '794610828317032458' && message.channel.id != '834878498941829181') {
-                if (args.codetoeval.includes('message.delete')) {
-                    return
-                }
-                return message.react('<:success:838816341007269908>')
-            }
-
-            if (!args.silent && !args.codetoeval.includes('message.channel.delete()')) {
-                const evalOutputEmbed = new MessageEmbed()
-                    .setTitle('Evaluated Code')
-                    .setColor(message.member.displayColor)
-                    .addField(':inbox_tray: **Input**', `\`\`\`js\n${args.codetoeval}\`\`\``)
-
-                if (inspect(output, { depth: 0 }).length > 1000) {
-                    await evalOutputEmbed.addField(':outbox_tray: **Output**', await utils.haste(inspect(output)))
-                }
-                else {
-                    evalOutputEmbed.addField(':outbox_tray: **Output**', `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``)
-                }
-
-                await message.util.reply({ embeds: [evalOutputEmbed] })
-            }
-            if (args.silent) {
-                if (args.codetoeval.includes('message.delete')) {
-                    return
-                }
-                message.react('<:green_check:796548440266899526>')
-            }
+            output = await eval(`(async () => {${args.codeToEval}})()`)
+            output = inspect(output, { depth: 0 })
         }
         catch (err) {
-            try { utils.errorhandling(err, message) }
-            catch (err) {
-                utils.errorchannelsend(err)
+            const errorStack = err.stack.substring(0, 1000)
+
+            output = errorStack
+        }
+
+        if (inspect(output).includes(process.env['token'])) { return message.util.send('Message containing token wasn\'t sent.') }
+        if (inspect(output).includes(process.env['pctoken'])) { return message.util.send('Message containing token wasn\'t sent.') }
+        if (inspect(output).includes(process.env['devtoken'])) { return message.util.send('Message containing token wasn\'t sent.') }
+
+
+        if (!args.silent && !args.codeToEval.includes('message.channel.delete()')) {
+            const evalOutputEmbed = new MessageEmbed()
+                .setTitle('Evaluated Code')
+                .addField(':inbox_tray: **Input**', `\`\`\`js\n${args.codeToEval}\`\`\``)
+                .setColor(message.member.displayColor)
+
+            if (inspect(output, { depth: 0 }).length > 1000) {
+                await evalOutputEmbed.addField(':outbox_tray: **Output**', await utils.haste(inspect(output, { depth: 0 })))
             }
+
+            evalOutputEmbed.addField(':outbox_tray: **Output**', `\`\`\`js\n${output}\`\`\``)
+
+            await message.util.reply({ embeds: [evalOutputEmbed] })
+        }
+        if (args.silent) {
+            if (args.codeToEval.includes('message.delete')) { return }
+            message.react('<a:CheckMark:869014185349111818>')
         }
     }
 }
+
