@@ -1,7 +1,8 @@
 import chalk from "chalk";
 import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler, TaskHandler } from "discord-akairo";
-import { Intents } from "discord.js";
+import { Intents, Message, MessageEmbed, TextChannel } from "discord.js";
 import { join } from "path";
+import utils from '../functions/utils';
 
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {
@@ -40,6 +41,45 @@ export class BotClient extends AkairoClient {
 			}
 		)
 	}
+
+	public error = (error: Error, type?: string, message? :Message) => {
+		const errorChannel = this.channels.cache.get('840621314322202715') as TextChannel
+	
+		const errorCode = utils.getRandomInt(69696969696969)
+	
+		let errorStack = error.stack
+	
+		if (errorStack.length > 1000) {
+			errorStack = errorStack.substring(0, 1000)
+		}
+	
+		const errorEmbed = new MessageEmbed()
+		if (!type) { errorEmbed.setTitle('An error occured!') }
+		else { errorEmbed.setTitle(`A${type} error occured!`) }
+		errorEmbed.addField('Error code', `\`${errorCode}\``)
+		errorEmbed.setDescription(`\`\`\`js\n${errorStack}\`\`\``)
+		errorEmbed.setColor('DARK_RED')
+	
+		if (message) {
+			errorEmbed.addField('More Info', `Guild: ${message.guild.name} (\`${message.guild.id}\`)
+			Channel: ${(message.channel as TextChannel).name} (\`${message.channel.id}\`)
+			Message ID: \`${message.id}\`
+			
+			Author: ${message.author.tag} (\`${message.author.id}\`)
+			
+			[Message Link](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`)
+		}
+	
+		errorChannel.send({ /*content: `\`\`\`js\n${errorStack}\`\`\``,*/ embeds: [errorEmbed] })
+	
+		const returnErrorEmbed = new MessageEmbed()
+			.setTitle('An error occured!')
+			.setDescription(`Please give my developer code \`${errorCode}\``)
+			.setColor('DARK_RED')
+	
+		return returnErrorEmbed
+	}
+	
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler)
 		this.commandHandler.useInhibitorHandler(this.inhibitorHandler)
@@ -68,6 +108,6 @@ export class BotClient extends AkairoClient {
 
 	public async start(): Promise<string> {
 		await this._init()
-		return this.login(process.env["token"])
+		return this.login(process.env["devtoken"])
 	}
 }

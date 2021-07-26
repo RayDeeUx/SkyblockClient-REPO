@@ -213,6 +213,11 @@ function splitArrayIntoMultiple(array: Array<object>, number: number) {
     return outputArray
 }
 
+//this is stolen from javascript docs
+function getRandomInt(max: number = 10) {
+    return Math.floor(Math.random() * max)
+}
+
 export = {
     haste,
     errorhandling,
@@ -225,5 +230,6 @@ export = {
     debug,
     splitArrayIntoMultiple,
     slashGuilds,
-    SkyClientGuilds
+    SkyClientGuilds,
+    getRandomInt
 }

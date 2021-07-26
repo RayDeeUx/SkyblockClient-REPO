@@ -13,7 +13,6 @@ class autoUpdateListener extends BotListener {
             const gitPullCommand = this.client.commandHandler.modules.find(cmd => (cmd.id == 'gitPull'))
             const reloadCommand = this.client.commandHandler.modules.find(cmd => (cmd.id == 'reload'))
 
-
             const regex = /\[SkyClientBot-TEMP:master\] [0-9]+ new commits?/g
             if (message.embeds[0] && regex.test(message.embeds[0].title)) {
 
