@@ -56,6 +56,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
                     })
                     .catch(err => {
                         if (err == 'Error [INTERACTION_COLLECTOR_ERROR]: Collector received no interactions before ending with reason: time') {
+                            if (!sent) {return}
                             sent.edit({ content: sent.content, components: [] })
                         }
                         else {
