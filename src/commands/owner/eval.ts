@@ -10,7 +10,11 @@ const utils = importUtils
 
 const sh = promisify(exec)
 
-import ms from 'ms'
+import importMs from 'ms'
+const ms = importMs
+
+import importScutils from '../../functions/skyclientutils'
+const scutils = importScutils
 
 export default class evaluate extends BotCommand {
     constructor() {
