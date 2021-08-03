@@ -10,7 +10,7 @@ class tokenCheckListener extends BotListener {
     }
 
     async exec(message) {
-        if (message.content.includes(process.env["token"]) && message.channel.id != `834470179332816958`) {
+        if (message.content.includes(this.client.token) && message.channel.id != `834470179332816958`) {
             await message.channel.send(`Hey, that's my token! I don't like you sending it, so I'm going to go reset it now.`)
             await message.delete()
             await utils.resetToken(message)
