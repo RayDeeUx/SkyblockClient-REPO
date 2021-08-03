@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler, TaskHandler } from "discord-akairo";
-import { Intents, Message, MessageEmbed, TextChannel } from "discord.js";
+import { Intents, Message, MessageEmbed, Snowflake, TextChannel } from "discord.js";
 import { join } from "path";
 import utils from '../functions/utils';
 import config from './config/config'
@@ -46,7 +46,7 @@ export class BotClient extends AkairoClient {
 	public config = config
 	
 	public error = (error: Error, type?: string, message?: Message) => {
-		const errorChannel = this.channels.cache.get(config.find(thing => thing.id === 'errorChannelID').value) as TextChannel
+		const errorChannel = this.channels.cache.get(config.find(thing => thing.id === 'errorChannelID').value as Snowflake) as TextChannel
 
 		const errorCode = utils.getRandomInt(69696969696969)
 
