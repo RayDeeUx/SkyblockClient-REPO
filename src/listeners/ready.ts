@@ -14,7 +14,7 @@ class ReadyListener extends BotListener {
     }
 
     async exec() {
-        console.log(chalk.magenta(`Bot Online!`))
+        console.log(chalk`{magenta Succesfully logged in as }{magentaBright.bold ${this.client.user.tag}}`)
         console.log(`\n`)
         console.log(chalk.magentaBright(`---Bot Output---`))
 

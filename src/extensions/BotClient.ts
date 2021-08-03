@@ -46,7 +46,7 @@ export class BotClient extends AkairoClient {
 	public config = config
 	
 	public error = (error: Error, type?: string, message?: Message) => {
-		const errorChannel = this.channels.cache.get('840621314322202715') as TextChannel
+		const errorChannel = this.channels.cache.get(config.find(thing => thing.id === 'errorChannelID').value) as TextChannel
 
 		const errorCode = utils.getRandomInt(69696969696969)
 
@@ -70,7 +70,9 @@ export class BotClient extends AkairoClient {
 			
 			Author: ${message.author.tag} (\`${message.author.id}\`)
 			
-			[Message Link](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`)
+			[Message Link](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id})
+			Message Content: ${message.content}
+			`)
 		}
 
 		errorChannel.send({ /*content: `\`\`\`js\n${errorStack}\`\`\``,*/ embeds: [errorEmbed] })
