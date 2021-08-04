@@ -47,7 +47,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
 
                 const sent = await message.reply({ content: response, components: [row] })
 
-                const filter = i => i.customId === 'autoresponseDeleteMessage' && i.user.id == message.author.id
+                const filter = i => i.customId === 'autoresponseDeleteMessage' && i.user.id == message.author.id || i.customId === 'autoresponseDeleteMessage' && message.member.roles.contains('780182606628782100')
                 message.channel.awaitMessageComponent({ filter, time: 15000 })
                     .then(i => {
                         if (i.customId == 'autoresponseDeleteMessage') {
@@ -59,8 +59,9 @@ class notStolenFromSkytilsDiscord extends BotListener {
                             if (!sent) {return}
                             sent.edit({ content: sent.content, components: [] })
                         }
+                        else if (err == 'DiscordAPIError: Unknown Message') {return}
                         else {
-                            console.log(err)
+                            this.handler.emit('error', err)
                         }
                     })
             }

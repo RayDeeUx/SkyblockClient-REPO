@@ -28,26 +28,52 @@ async function reply(message: Message, content: ReplyMessageOptions) {
     if (!commandManager.userCanUseCommand(message) && !message.interaction) message.reply('<#796546551878516766> or use as a slashcommand')
 }
 
-async function prompt(message:Message, content: ReplyMessageOptions, argTime?: Number) {
-    let time
-    if (!argTime) {
-        time = 15000
-    }
-    else {time = argTime}
+// async function prompt(message:Message, content: ReplyMessageOptions, argTime?: Number) {
+//     let time
+//     if (!argTime) {
+//         time = 15000
+//     }
+//     else {time = argTime}
     
-    const filter = m => m.author.id == message.author.id
+//     const filter = m => m.author.id == message.author.id
 
-    message.reply(content)
+//     await message.reply(content)
 
-    const dotThen = message.channel.createMessageCollector({ filter, time })
+//     const dotThen = await message.channel.createMessageCollector({ filter, time })
 
-    let newContent
+//     let newContent
 
-    dotThen.once('collect', async (msg: Message) => {
-        newContent = msg.content
-    })
+//     // await dotThen.once('collect', async (msg: Message) => {
+//     //     newContent = msg.content
+//     //     console.log('dotThen ran')
+//     //     fuckYouTypescriptIWantMyCodeRunningInOrderv2.push(newContent)
+//     //     return newContent
+//     // })
+    
+//     const fuckYouTypescriptIWantMyCodeRunningInOrderv1 = await new Promise(
+//         (async (resolve, reject) => {
+//             return await dotThen.once('collect', async (msg: Message) => {
+//                 newContent = msg.content
+//                 console.log('dotThen ran')
+//                 return newContent
+//             })
+//         }
+//     ))
 
-    return newContent
+//     // const arrayContent = [newContent]
+    
+//     // return Promise.all(arrayContent).then(content => {
+//     //     return content
+//     // })
+
+//     // return Promise.resolve(fuckYouTypescriptIWantMyCodeRunningInOrderv2).then(() => {
+//     //     return newContent
+//     // })
+
+//     .then(thing => {return thing})
+// }
+async function prompt(message:Message, content:ReplyMessageOptions) {
+    
 }
 
 export = {
