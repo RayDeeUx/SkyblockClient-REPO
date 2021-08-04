@@ -51,6 +51,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
                 message.channel.awaitMessageComponent({ filter, time: 15000 })
                     .then(i => {
                         if (i.customId == 'autoresponseDeleteMessage') {
+                            i.defer()
                             sent.delete()
                         }
                     })
