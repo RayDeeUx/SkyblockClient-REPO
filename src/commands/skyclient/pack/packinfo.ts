@@ -34,7 +34,7 @@ export default class packName extends BotCommand {
 
         pack = packJson.find(pack => pack.id == args.pack && pack.display != 'no' || pack.nicknames && pack.nicknames.includes(args.pack) && pack.display != 'no')
 
-        if (!pack) return message.reply('I couldn\'t find a pack with that ID')
+        if (!pack) return msgutils.reply(message, {content:'I couldn\'t find a pack with that ID'})
 
         const packEmbed = new MessageEmbed()
             .setTitle(pack.display)

@@ -34,7 +34,7 @@ export default class modInfo extends BotCommand {
 
         mod = modJson.find(mod => mod.id == args.mod && mod.display != 'no' || mod.nicknames && mod.nicknames.includes(args.mod) && mod.display != 'no')
 
-        if (!mod) return message.reply('I couldn\'t find a mod with that ID')
+        if (!mod) return msgutils.reply(message, {content:'I couldn\'t find a mod with that ID'})
 
         const modEmbed = new MessageEmbed()
             .setTitle(mod.display)
