@@ -10,16 +10,23 @@ export default class invite extends BotCommand {
             slash: true,
             description: '"Invite the bot"',
             slashGuilds: utils.slashGuilds,
+            slashOptions:[
+                {
+                    name:'ephemeral',
+                    description:'ephemeral or not ephemeral',
+                    type:'BOOLEAN'
+                }
+            ]
         })
     }
 
-    async exec(message) {
+    async exec(message, args) {
         const inviteEmbed = new MessageEmbed()
             .setTitle('Invite me to your server!')
             .setDescription('[A few things you should know](https://genius.com/Rick-astley-never-gonna-give-you-up-lyrics)')
             .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
             .setColor(message.member.displayColor)
 
-        await message.reply({embeds:[inviteEmbed]})
+        await message.reply({embeds:[inviteEmbed], ephemeral:args.ephemeral})
     }
 }
