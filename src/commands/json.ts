@@ -1,9 +1,9 @@
 import axios from "axios"
-import { BotCommand } from '../../extensions/BotCommand';
-import utils from "../../functions/utils";
+import { BotCommand } from '../extensions/BotCommand';
+import utils from "../functions/utils";
 import fs from 'fs'
-import skyclientutils from "../../functions/skyclientutils";
-import msgutils from "../../functions/msgutils";
+import skyclientutils from "../functions/skyclientutils";
+import msgutils from "../functions/msgutils";
 
 
 export default class json extends BotCommand {
@@ -31,7 +31,11 @@ export default class json extends BotCommand {
                         {
                             name: 'resource pack',
                             value: 'pack'
-                        }
+                        },
+                        {
+                            name: 'user',
+                            value: 'user'
+                        },
                     ]
                 },
                 {
@@ -66,6 +70,12 @@ export default class json extends BotCommand {
                         await msgutils.reply(message, { content: await utils.haste(pack) })
                     }
                 }
+            }
+            else if (args.type == 'user') {
+                const user = await this.client.util.resolveUser(args.thingtofind, this.client.users.cache)
+
+                const stringUser = JSON.stringify(user, null, '  ')
+                await msgutils.reply(message, { content: await utils.haste(stringUser) })
             }
         }
     }
