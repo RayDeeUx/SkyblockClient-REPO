@@ -36,6 +36,10 @@ export default class json extends BotCommand {
                             name: 'user',
                             value: 'user'
                         },
+                        {
+                            name: 'channel',
+                            value: 'channel'
+                        },
                     ]
                 },
                 {
@@ -76,6 +80,12 @@ export default class json extends BotCommand {
 
                 const stringUser = JSON.stringify(user, null, '  ')
                 await msgutils.reply(message, { content: await utils.haste(stringUser) })
+            }
+            else if (args.type == 'channel') {
+                const channel = await this.client.util.resolveChannel(args.thingtofind, message.guild.channels.cache)
+
+                const stringChannel = JSON.stringify(channel, null, '  ')
+                await msgutils.reply(message, { content: await utils.haste(stringChannel) })
             }
         }
     }
