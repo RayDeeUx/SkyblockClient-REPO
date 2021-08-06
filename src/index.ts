@@ -9,6 +9,8 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import chalk from "chalk";
 
+const client = new BotClient();
+
 const sh = promisify(exec);
 
 sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
@@ -16,7 +18,6 @@ sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
         console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red successfully cloned!}`)
 
         //start the bot if the repo isnt there
-        const client = new BotClient();
         client.start();
     })
     .catch(err => {
@@ -28,6 +29,7 @@ sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
         else { sh('cd SkyblockClient-REPO ; git pull') }
 
         //start the bot if the repo is there
-        const client = new BotClient();
         client.start();
     })
+
+export default client

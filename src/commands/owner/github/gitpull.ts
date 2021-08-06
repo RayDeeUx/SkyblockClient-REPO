@@ -23,6 +23,6 @@ export default class gitPull extends BotCommand {
         if (message.member) { githubEmbed.setColor(message.member.displayColor) }
         else { githubEmbed.setColor(message.guild.me.displayColor) }
 
-        message.channel.send({ embeds: [githubEmbed] })
+        message.reply({ embeds: [githubEmbed] })
     }
 }

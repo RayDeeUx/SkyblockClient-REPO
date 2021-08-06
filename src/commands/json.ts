@@ -64,7 +64,6 @@ export default class json extends BotCommand {
                     }
                 }
             }
-
             else if (args.type == 'pack') {
                 let packJson = await skyclientutils.getRepo('packs.json')
 
@@ -75,6 +74,7 @@ export default class json extends BotCommand {
                     }
                 }
             }
+            
             else if (args.type == 'user') {
                 const user = await this.client.util.resolveUser(args.thingtofind, this.client.users.cache)
 

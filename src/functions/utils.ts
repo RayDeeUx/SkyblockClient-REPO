@@ -5,7 +5,10 @@ import { User } from "discord.js";
 import { Client } from "discord.js";
 import { Message, MessageEmbed } from "discord.js";
 import got from "got/dist/source";
+import client from '../index'
 //import language from "../constants/language";
+import config from '../extensions/config/config'
+
 
 interface hastebinRes {
     key: string;
@@ -218,6 +221,73 @@ function getRandomInt(max: number = 10) {
     return Math.floor(Math.random() * max)
 }
 
+async function resolveMessage(url:string) {
+    const parsedLink = url.split(`/`)
+
+    const msgChannel = await client.channels.fetch(parsedLink[5]) as TextChannel
+    const msgToQuote = await msgChannel.messages.fetch(parsedLink[6])
+    const parsedLinkURL = parsedLink[2].split('.')
+
+    const quoteEmbed = new MessageEmbed()
+        .setAuthor(msgToQuote.author.tag, msgToQuote.author.displayAvatarURL())
+        .setDescription(msgToQuote.content)
+    if (msgToQuote.attachments) {
+        let msgAttachments
+
+        msgToQuote.attachments.forEach(a => {
+            const splitURL = a.proxyURL.split(`.`)
+
+            if (a.proxyURL) {
+                quoteEmbed.setImage(a.proxyURL)
+            }
+        })
+    }
+
+    if (parsedLinkURL.length == 3 && parsedLink[0] == 'https:' && parsedLink[1] == '' && parsedLinkURL[1] == 'discord' && parsedLinkURL[2] == 'com') {
+        return msgToQuote
+    }
+    if (parsedLinkURL.length == 2 && parsedLink[0] == 'https:' && parsedLink[1] == '' && parsedLinkURL[0] == 'discord' && parsedLinkURL[1] == 'com') {
+        return msgToQuote
+    }
+}
+
+function resolveCommand(id:string) {
+    return client.commandHandler.modules.find(cmd => (cmd.id == id))
+}
+function resolveListener(id:string) {
+    return client.commandHandler.modules.find(cmd => (cmd.id == id))
+}
+
+function funnyNumber(number: number) {
+	const num = `${number}`;
+
+	if (num.includes("69") || num.includes("420") || num.includes("69420") || num.includes("42096")) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function regExpEscape(string:string) {
+    return string.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, '\\$&')
+}
+
+function censorString(string:string){
+	Object.keys(config).forEach((key:string) => {
+		const configObject = config[key as keyof typeof config]
+
+		Object.keys(configObject).forEach((key:string) => {
+			const fuckRegex = new RegExp(regExpEscape(configObject[key as keyof typeof configObject]), 'g')
+			if (key === 'tokenToUse') {
+				return
+			}
+			string = string.replace(fuckRegex, key)
+		})
+	})
+
+	return string
+}
+
 export = {
     haste,
     errorhandling,
@@ -231,5 +301,10 @@ export = {
     splitArrayIntoMultiple,
     slashGuilds,
     SkyClientGuilds,
-    getRandomInt
+    getRandomInt,
+    resolveMessage,
+    resolveCommand,
+    resolveListener,
+    funnyNumber,
+    censorString
 }

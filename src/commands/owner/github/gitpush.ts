@@ -41,6 +41,6 @@ export default class gitPush extends BotCommand {
         let githubPush = await sh('git push')
         githubEmbed.addField(`\`git push\``, `\`\`\`js\n${inspect(githubPush)}\`\`\``)
 
-        message.channel.send({ embeds: [githubEmbed] })
+        message.reply({ embeds: [githubEmbed] })
     }
 }

@@ -44,9 +44,10 @@ export class BotClient extends AkairoClient {
 	}
 
 	public config = config
+	public utils = utils
 	
 	public error = (error: Error, type?: string, message?: Message) => {
-		const errorChannel = this.channels.cache.get(config.find(thing => thing.id === 'errorChannelID').value as Snowflake) as TextChannel
+		const errorChannel = this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
 
 		const errorCode = utils.getRandomInt(69696969696969)
 
@@ -112,14 +113,7 @@ export class BotClient extends AkairoClient {
 	}
 
 	public async start(): Promise<string> {
-		let token
-		config.forEach(thing => {
-			if (thing.id == 'token') {
-				token = thing.value
-			}
-		})
-		
 		await this._init()
-		return this.login(token)
+		return this.login(config.tokens[config.misc.tokenToUse])
 	}
 }

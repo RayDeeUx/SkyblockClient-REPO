@@ -8,7 +8,7 @@ const sh = promisify(exec)
 export default class pullAutoresponse extends BotCommand {
     constructor() {
         super("pullAutoresponse", {
-            aliases: ["pullAutoresponse"],
+            aliases: ["pullAutoresponse", 'pullRepo'],
 
         });
     }
