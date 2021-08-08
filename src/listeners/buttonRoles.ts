@@ -10,6 +10,8 @@ export default class buttonRoles extends BotListener {
 
     async exec(interaction) {
         if(interaction.componentType != 'BUTTON') {return}
+        const reactionRoleIDRegex = /[0-9]{18}\|[0-9]{18}/
+        if (!reactionRoleIDRegex.test(interaction.customId)) {return}
         
         const IDs = interaction.customId.split('|')
 
