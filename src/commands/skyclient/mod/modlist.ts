@@ -15,6 +15,7 @@ export default class modList extends BotCommand {
         super('modList', {
             aliases: ['modlist', 'mods'],
 
+            slashOptions:[],
             slash: true,
             slashGuilds: utils.slashGuilds,
             description: 'Shows a list of all the mods in SkyClient',
