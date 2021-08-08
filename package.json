@@ -1,7 +1,7 @@
 {
-	"name": "skyclientbot",
-	"version": "0.0.0",
-	"description": "",
+	"name": "skyclientbot-temp",
+	"version": "0.0.1",
+	"description": "d i s c o r d b o t",
 	"main": "dist/index.js",
 	"scripts": {
 		"test": "yarn run lint && yarn run build",
