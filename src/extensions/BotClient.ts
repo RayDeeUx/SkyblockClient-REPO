@@ -46,8 +46,8 @@ export class BotClient extends AkairoClient {
 	public config = config
 	public utils = utils
 	
-	public error = (error: Error, type?: string, message?: Message) => {
-		const errorChannel = this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
+	public error = async (error: Error, type?: string, message?: Message) => {
+		const errorChannel = await this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
 
 		const errorCode = utils.getRandomInt(69696969696969)
 
@@ -76,7 +76,7 @@ export class BotClient extends AkairoClient {
 			`)
 		}
 
-		errorChannel.send({ /*content: `\`\`\`js\n${errorStack}\`\`\``,*/ embeds: [errorEmbed] })
+		await errorChannel.send({ /*content: `\`\`\`js\n${errorStack}\`\`\``,*/ embeds: [errorEmbed] })
 
 		const returnErrorEmbed = new MessageEmbed()
 			.setTitle('An error occured!')
