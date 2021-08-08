@@ -8,6 +8,7 @@ export default class rules extends BotCommand {
         super('rules', {
             aliases: ['rules'],
 
+            slashOptions:[],
             slash: true,
             slashGuilds: utils.slashGuilds,
             description: 'Shows the rules.',

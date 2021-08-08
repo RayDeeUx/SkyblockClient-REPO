@@ -11,6 +11,7 @@ export default class partners extends BotCommand {
             aliases: ['partners'],
             userPermissions: ['ADMINISTRATOR'],
 
+            slashOptions:[],
             slash: true,
             slashGuilds: utils.slashGuilds,
             description: 'Sends a list of all the partnered discords, with each one in its own embed (1 embed per message).'
