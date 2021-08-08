@@ -1729,9 +1729,9 @@ discord.js@NotEnoughUpdates/discord.js:
   languageName: node
   linkType: hard
 
-"skyclientbot@workspace:.":
+"skyclientbot-temp@workspace:.":
   version: 0.0.0-use.local
-  resolution: "skyclientbot@workspace:."
+  resolution: "skyclientbot-temp@workspace:."
   dependencies:
     "@types/module-alias": ^2
     "@types/node": ^14.14.31
