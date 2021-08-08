@@ -6,7 +6,7 @@ export default class bestbot extends BotCommand {
     constructor() {
         super('bestbot', {
             aliases: ['bestbot'],
-
+            slashOptions:[], 
             slash: true,
             description: 'bestbot',
             slashGuilds: utils.slashGuilds,
