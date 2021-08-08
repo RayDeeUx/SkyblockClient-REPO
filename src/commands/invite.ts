@@ -7,6 +7,7 @@ export default class invite extends BotCommand {
         super('invite', {
             aliases: ['invite'],
 
+            slashOptions:[],
             slash: true,
             description: '"Invite the bot"',
             slashGuilds: utils.slashGuilds,
