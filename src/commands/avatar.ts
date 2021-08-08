@@ -9,7 +9,7 @@ export default class avatar extends BotCommand {
             args: [
                 { id: "person", type: "member" }
             ],
-            slashOptions:[],
+            
             slash: true,
             slashGuilds: utils.slashGuilds,
             slashOptions: [
