@@ -8,6 +8,8 @@ import { BotCommand } from '../../extensions/BotCommand'
 import importUtils from '../../functions/utils'
 const utils = importUtils
 
+import importScutils from '../../functions/skyclientutils'
+const scutils = importScutils
 
 const sh = promisify(exec);
 
