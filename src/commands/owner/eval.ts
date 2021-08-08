@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import chalk from 'chalk'
 import { exec } from 'child_process'
-import { Guild, Message, MessageEmbed } from 'discord.js'
+import { Guild, Message, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { promisify, inspect } from 'util'
 import { BotCommand } from '../../extensions/BotCommand'
 
@@ -39,7 +39,7 @@ export default class evaluate extends BotCommand {
         const user = message.author
         const member = message.member
         const botUser = this.client.user
-        //const botMember = (message.guild as FancyGuild).me
+        const botMember = guild.me
 
         let output
 
