@@ -15,6 +15,7 @@ export default class packList extends BotCommand {
         super('packList', {
             aliases: ['packlist', 'packs'],
 
+            slashOptions:[],
             slash: true,
             slashGuilds: utils.slashGuilds,
             description: 'Shows a list of all the packs in SkyClient',
