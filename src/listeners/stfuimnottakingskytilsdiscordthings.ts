@@ -17,7 +17,6 @@ class notStolenFromSkytilsDiscord extends BotListener {
         if (message.content.startsWith('```md')) { return }
         if (message.content.startsWith('.')) { return }
         if (message.content.startsWith('-') && message.channel.id != '780181693553704973') { return }
-        if (!message.content.startsWith('-') && message.channel.id == '780181693553704973') { return }
 
         if (message.content.startsWith('$')) { return }
         if (message.author.bot != false) { return }
