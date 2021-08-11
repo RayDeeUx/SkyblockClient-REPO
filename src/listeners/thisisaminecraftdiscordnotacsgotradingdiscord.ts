@@ -14,6 +14,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
     }
 
     async exec(message) {
+        if (message.author.id === this.client.user.id)
         try {
             //const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
             let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = await skyclientutils.getRepo('scamlinks.json', true)
@@ -32,7 +33,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                         })
                         if (hasRole) {
                             message.delete()
-                            message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link`)
+                            message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
                             return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
                         }
 
