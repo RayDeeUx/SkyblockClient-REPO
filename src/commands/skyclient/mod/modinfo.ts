@@ -16,7 +16,7 @@ export default class modInfo extends BotCommand {
 
             slash: true,
             slashOptions: [
-                { name: 'mod', description: 'The mod ID that you want to get info on', type: 'STRING' },
+                { name: 'mod', description: 'The mod ID that you want to get info on', type: 'STRING', required:true },
             ],
             slashGuilds: utils.slashGuilds,
             description: 'Shows information on a specific mod from SkyClient'

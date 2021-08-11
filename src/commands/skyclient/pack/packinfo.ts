@@ -19,8 +19,7 @@ export default class packName extends BotCommand {
             slash: true,
             slashGuilds: utils.slashGuilds,
             slashOptions: [
-                { name: 'pack', description: 'The ID of the pack you want to get info on', type: 'STRING' },
-                { name: 'ephemeral', description: 'Whether or not you want the output to be ephemeral', type: 'BOOLEAN', required: false }
+                { name: 'pack', description: 'The ID of the pack you want to get info on', type: 'STRING', required:true },
             ],
             description: 'Shows a list of all the packs in SkyClient'
         })

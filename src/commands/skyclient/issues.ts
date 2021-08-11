@@ -36,6 +36,7 @@ export default class issue extends BotCommand {
 
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
+            if (!args.issue) {return await msgutils.reply(message, {content:'<#785809068610682900>'})}
             const embed = new MessageEmbed()
             if (args.issue.toLowerCase() == `windowsbad`) {
                     embed.setTitle(`THIS IS NOT A PROBLEM`)
@@ -47,7 +48,6 @@ export default class issue extends BotCommand {
                 embed.setDescription('LabyMod is terribly designed. If you want to get other mods that do what it does but better, check out https://proudmuslim.tech/bad-mod-alternatives/labymod.html, or https://5zigreborn.eu/downloads/')
             }
             
-
             await msgutils.reply(message, { embeds: [embed] })
         }
     }

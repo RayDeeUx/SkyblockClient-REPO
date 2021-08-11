@@ -14,7 +14,7 @@ export default class partners extends BotCommand {
             slashOptions:[],
             slash: true,
             slashGuilds: utils.slashGuilds,
-            description: 'Sends a list of all the partnered discords, with each one in its own embed (1 embed per message).'
+            description: 'Sends a list of all the partnered discords, with each one in its own embed.'
         });
     }
 
@@ -23,7 +23,6 @@ export default class partners extends BotCommand {
             if (!message.member.permissions.has('ADMINISTRATOR')) { return message.reply('hey you need admin for that') }
 
             const servers = await skyclientutils.getRepo('discords.json')
-
             
             let embedArray = []
 
@@ -45,7 +44,7 @@ export default class partners extends BotCommand {
             })
 
             if (message.interaction) {
-                message.interaction.reply({ content: 'Sent partner embeds', ephemeral: true })
+                message.reply({ content: 'Sent partner embeds', ephemeral: true })
             }
         }
     }
