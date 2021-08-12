@@ -24,6 +24,7 @@ export default class removerole extends BotCommand {
     }
 
     async exec(message, args) {
+        if (!args.role) return await message.reply('I couldn\'t find that role. Try using an ID instead.')
         try {
             if (message.member.roles.highest.rawPosition < args.role.rawPosition) {
                 await message.channel.send(`Your highest role is lower than or equal to ${args.role.name}, so you cannot remove it from anyone!`)

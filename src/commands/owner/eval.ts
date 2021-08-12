@@ -11,6 +11,9 @@ const utils = importUtils
 import importScutils from '../../functions/skyclientutils'
 const scutils = importScutils
 
+import importAxios from 'axios'
+const axios = importAxios
+
 const sh = promisify(exec);
 
 export default class evaluate extends BotCommand {

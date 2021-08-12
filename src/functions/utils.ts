@@ -24,6 +24,7 @@ const SkyClientGuilds = [
 //and it works fine without it as far as i can tell
 async function haste(content: string) {
     const urls = [
+        'https://h.inv.wtf',
         'https://hst.sh',
         'https://hasteb.in',
         'https://hastebin.com',
@@ -34,7 +35,7 @@ async function haste(content: string) {
     ];
     for (const url of urls) {
         try {
-            const res: hastebinRes = await got.post(`${url}/documents`, { body: content }).json();
+            const res: hastebinRes = await got.post(`${url}/documents`, { body: content, headers:{'user-agent': `${client.package.name}/${client.package.version} haste function, commonly used for when eval output is too big`} }).json();
             return `${url}/${res.key}`;
         } catch (e) {
             continue;

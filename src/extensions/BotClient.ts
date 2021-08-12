@@ -4,6 +4,7 @@ import { Intents, Message, MessageEmbed, Snowflake, TextChannel } from "discord.
 import { join } from "path";
 import utils from '../functions/utils';
 import config from './config/config'
+import fs from 'fs'
 
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {
@@ -45,6 +46,7 @@ export class BotClient extends AkairoClient {
 
 	public config = config
 	public utils = utils
+	public package = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
 	
 	public error = async (error: Error, type?: string, message?: Message) => {
 		const errorChannel = await this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
