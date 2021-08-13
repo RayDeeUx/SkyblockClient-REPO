@@ -14,9 +14,9 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
     }
 
     async exec(message) {
-        if (message.author.id === this.client.user.id)
-        try {
-            //const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
+        if (message.author.id != this.client.user.id)
+
+            {//const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
             let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = await skyclientutils.getRepo('scamlinks.json', true)
 
             // console.log(message.content.replace('<', '').replace('>', ''))
@@ -48,7 +48,6 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
                 }
             })
         }
-        catch (err) { return }
     }
 }
 
