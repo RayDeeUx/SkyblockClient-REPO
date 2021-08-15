@@ -14,17 +14,14 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
     }
 
     async exec(message) {
-        if (message.author.id != this.client.user.id)
+        if (!message.member) return
         if (message.member.roles.cache.has('780182606628782100')) return
 
-            {//const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
+        if (message.author.id != this.client.user.id){
             let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = await skyclientutils.getRepo('scamlinks.json', true)
 
-            // console.log(message.content.replace('<', '').replace('>', ''))
-            // console.log(message.content.match(/\/trade\/new\/\?partner=\d*&token=[a-z0-9]+/gi))
-
             ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind.forEach(async fakeSteamLink => {
-                if ( /*new RegExp(/\/trade\/\?partner=\d*&token=[a-z0-9]+|\/tradeoffer\/new\/\?partner=\d/, "gi").test(message.content) && */ message.content.includes(fakeSteamLink)) {
+                if ( message.content.includes(fakeSteamLink)) {
                     if (message.member) {
                         let hasRole = false
                         message.member.roles.cache.forEach(role => {
