@@ -15,6 +15,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
     async exec(message) {
         if (message.author.id != this.client.user.id)
+        if (message.member.roles.cache.includes('780182606628782100')) return
 
             {//const fsJson = fs.readFileSync('src/listeners/fakeSteamcommunityLinks.json', 'utf8')
             let ohMyFuckingGodThisIsADiscordForMinecraftNotForCSGOTradingOrScammingOfAnyKind = await skyclientutils.getRepo('scamlinks.json', true)
