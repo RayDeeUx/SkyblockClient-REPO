@@ -9,7 +9,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
         super('notStolenFromSkytilsDiscord', {
             emitter: 'client',
             event: 'messageCreate'
-        });
+        })
     }
 
     async exec(message) {
@@ -42,27 +42,16 @@ class notStolenFromSkytilsDiscord extends BotListener {
             let contains = recursiveSearch(content, triggers, 0)
             if (contains && noAutorespond == false) {
 
-                response = (trigger.response)
+            response = (trigger.response)
 
-                const sent = await message.reply({ content: response, components: [row] })
+            const row = new MessageActionRow().addComponents(
+                new MessageButton()
+                    .setLabel('Delete')
+                    .setStyle('DANGER')
+                    .setCustomId(`arDelMsg|${message.author.id}`)
+            )
 
-                const filter = i => i.customId === 'autoresponseDeleteMessage' && i.user.id == message.author.id || i.customId === 'autoresponseDeleteMessage' && i.member.roles.cache.has('780182606628782100')
-                message.channel.awaitMessageComponent({ filter, time: 15000 })
-                    .then(i => {
-                        if (i.customId == 'autoresponseDeleteMessage') {
-                            sent.delete()
-                        }
-                    })
-                    .catch(err => {
-                        if (err == 'Error [INTERACTION_COLLECTOR_ERROR]: Collector received no interactions before ending with reason: time') {
-                            if (!sent) {return}
-                            sent.edit({ content: sent.content, components: [] })
-                        }
-                        else if (err == 'DiscordAPIError: Unknown Message') {return}
-                        else {
-                            this.handler.emit('error', err)
-                        }
-                    })
+            const sent = await message.reply({ content: response, components:[row]})
             }
         })
     }

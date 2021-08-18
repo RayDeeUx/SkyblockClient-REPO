@@ -8,7 +8,7 @@ export default class commandErrorListener extends BotListener {
         })
     }
     async exec(error, message) {
-        if (this.client.ownerID.includes(message.author.id)) { message.reply(`An error occured!\n\`\`\`js\n${error.stack}\`\`\``) }
+        if (this.client.ownerID.includes(message.author.id) || this.client.ownerID.includes(message.user.id)) { message.reply({content:`An error occured!\n\`\`\`js\n${error.stack}\`\`\``, ephemeral: true}) }
         else { message.reply({ embeds: [this.client.error(error, ' command', message)] }) }
     }
 }
