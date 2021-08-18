@@ -21,7 +21,7 @@ export default class networth extends BotCommand {
                     required:true
                 }
             ],
-            prefix: '.',
+            prefix: ['.', '!'],
             description: 'Gets a players overall networth'
         });
     }
