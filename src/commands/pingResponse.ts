@@ -11,6 +11,8 @@ export default class extends BotCommand {
         })
     }
     async exec(message) {
-        await message.reply('hi my prefix is `-` or you can ping me but also most commands have slashcommands so use those please')
+        this.aliases.forEach(async alias => {
+            if (message.content == alias) return await message.reply('hi my prefix is `-` or you can ping me but also most commands have slashcommands so use those please')
+        })
     }
 }
