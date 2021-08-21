@@ -16,6 +16,9 @@ const axios = importAxios
 
 const sh = promisify(exec);
 
+import importMs from 'ms'
+const ms = 'ms'
+
 export default class evaluate extends BotCommand {
     constructor() {
         super('eval', {
