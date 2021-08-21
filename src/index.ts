@@ -25,8 +25,8 @@ sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
             console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red found, so it wasn't cloned.}`)
         }
         console.log(chalk.red('Pulling repo'))
-        if (process.platform == 'win32') { sh('pull.bat') }
-        else { sh('cd SkyblockClient-REPO ; git pull') }
+        
+        sh('cd SkyblockClient-REPO ; git pull --force')
 
         //start the bot if the repo is there
         client.start();
