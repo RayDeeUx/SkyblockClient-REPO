@@ -26,7 +26,7 @@ sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
         }
         console.log(chalk.red('Pulling repo'))
         
-        sh('cd SkyblockClient-REPO ; git pull --force')
+        sh('cd SkyblockClient-REPO && git pull --force')
 
         //start the bot if the repo is there
         client.start();
