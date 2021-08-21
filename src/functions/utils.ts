@@ -44,24 +44,6 @@ async function haste(content: string) {
     return 'Unable to post';
 }
 
-async function errorhandling(err: string, message: Message) {
-    const errorEmbed = new MessageEmbed()
-        .setTitle(`Something went wrong!`)
-        .setDescription(`\`\`\`\n${err}\`\`\``)
-        .setColor('#ff0000')
-
-    await message.channel.send({ embeds: [errorEmbed] })
-}
-
-async function errorchannelsend(err: string) {
-    const errorChannel = this.client.channels.cache.get('824680761470746646') as TextChannel
-    const errorEmbed = new MessageEmbed()
-        .setTitle(`Something went really wrong!`)
-        .setDescription(`\`\`\`js\n${err}\`\`\``)
-
-    errorChannel.send({ embeds: [errorEmbed] })
-}
-
 async function resetToken(message: Message) {
     const tokenresetchannel = message.client.channels.cache.get('834470179332816958') as TextChannel
     const errorChannel = message.client.channels.cache.get('824680761470746646') as TextChannel
@@ -289,10 +271,22 @@ function censorString(string:string){
 	return string
 }
 
+async function fetchUser(user: string) {
+	try {
+		const akairoResolve = await client.util.resolveUser(user, client.users.cache)
+
+		if (akairoResolve) {
+			return akairoResolve
+		} else {
+			return (await client.users.fetch(user))
+		}
+	} catch (err) {
+		return undefined
+	}
+}
+
 export = {
     haste,
-    errorhandling,
-    errorchannelsend,
     resetToken,
     sleep,
     dConsole,
@@ -307,5 +301,6 @@ export = {
     resolveCommand,
     resolveListener,
     funnyNumber,
-    censorString
+    censorString,
+    fetchUser
 }
