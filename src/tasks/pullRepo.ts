@@ -7,7 +7,7 @@ const sh = promisify(exec)
 
 export default class extends BotTasks {
     constructor() {
-        super("hello", {
+        super("pullRepo", {
             delay: 60000,
             runOnStart: true
         });
