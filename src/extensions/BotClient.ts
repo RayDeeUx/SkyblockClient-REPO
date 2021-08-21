@@ -49,7 +49,8 @@ export class BotClient extends AkairoClient {
 	public package = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
 	
 	public error = async (error: Error, type?: string, message?: Message) => {
-		const errorChannel = await this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
+		try {
+			const errorChannel = await this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
 
 		const errorCode = utils.getRandomInt(69696969696969)
 
@@ -86,6 +87,10 @@ export class BotClient extends AkairoClient {
 			.setColor('DARK_RED')
 
 		return returnErrorEmbed
+	}
+	catch(err) {
+		console.log(chalk.red(`An error occured within the error handler.\n${err.stack}`))
+	}
 	}
 
 	private async _init(): Promise<void> {
