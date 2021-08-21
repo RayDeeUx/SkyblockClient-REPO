@@ -13,23 +13,23 @@ export default class extends BotTasks {
         });
     }
     async exec() {
-        // if (process.platform == 'win32') {
-        //     sh('pull.bat')
-        //         .then(() => {
-        //             //console.log('pulled nacrt/skyblockclient-repo')
-        //         })
-        //         .catch(err => {
-        //             console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
-        //         })
-        // }
-        //else {
+        if (process.platform == 'win32') {
             sh('cd SkyblockClient-REPO && git pull --force')
                 .then(() => {
                     //console.log('pulled nacrt/skyblockclient-repo')
                 })
-                .catch(err => {
-                    console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
+                // .catch(err => {
+                //     console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
+                // })
+        }
+        else {
+            sh('cd SkyblockClient-REPO && git pull --force')
+                .then(() => {
+                    //console.log('pulled nacrt/skyblockclient-repo')
                 })
-        //}
+                // .catch(err => {
+                //     console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
+                // })
+        }
     }
 }
