@@ -63,3 +63,4 @@ config
 repo
 SkyblockClient-REPO
 test.ts
+zordScRepo
