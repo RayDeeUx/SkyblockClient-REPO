@@ -6,7 +6,7 @@ export default class pronouns extends BotCommand {
     constructor() {
         super('pronouns', {
             aliases: ['pronouns'],
-            args: [{ id: 'user', type: 'string', match: 'rest' }],
+            args: [{ id: 'person', type: 'string', match: 'rest' }],
 
             description: 'Shows the pronouns of a user, if they have them set on https://pronoundb.org',
     
@@ -16,7 +16,7 @@ export default class pronouns extends BotCommand {
         })
     }
     async exec(message, args) {
-        const person = await utils.fetchUser(args.user ?? args.person ?? message.author.id)
+        const person = await utils.fetchUser(args.person ?? message.author.id)
 
         const pronouns = await utils.getPronouns(person, 'details')
         const pronounsEmbed = new MessageEmbed()
