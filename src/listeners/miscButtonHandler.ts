@@ -14,7 +14,7 @@ export default class extends BotListener {
             const ids = interaction.customId.split('|')
 
             if (interaction.user.id === ids[1]) {return await interaction.message.delete()}
-            else if (interaction.member.roles.cache.has('830240970931044383')) {return await interaction.message.delete()}
+            else if (interaction.member.roles.cache.has('780182606628782100')) {return await interaction.message.delete()}
         }
 
         if (interaction.customId.startsWith('buttonroles')) {
