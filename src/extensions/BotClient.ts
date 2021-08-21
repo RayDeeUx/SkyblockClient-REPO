@@ -50,7 +50,7 @@ export class BotClient extends AkairoClient {
 	
 	public error = async (error: Error, type?: string, message?: Message) => {
 		try {
-			const errorChannel = await this.channels.cache.get(config.misc.errorChannelID as Snowflake) as TextChannel
+			const errorChannel = await this.channels.fetch(config.misc.errorChannelID as Snowflake) as TextChannel
 
 		const errorCode = utils.getRandomInt(69696969696969)
 
