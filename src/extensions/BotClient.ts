@@ -90,6 +90,8 @@ export class BotClient extends AkairoClient {
 	}
 	catch(err) {
 		console.log(chalk.red(`An error occured within the error handler.\n${err.stack}`))
+		console.log(chalk.magenta(error.stack))
+		process.exit()
 	}
 	}
 
