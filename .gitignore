@@ -60,7 +60,6 @@ src/config/options_pi.ts
 .env
 testing
 config
-repo
 SkyblockClient-REPO
 test.ts
 zordScRepo
