@@ -13,11 +13,6 @@ export default class extends BotTasks {
         });
     }
     async exec() {
-        if (process.platform == 'win32') {
-            sh('cd SkyblockClient-REPO && git reset --hard && git pull')
-        }
-        else {
-            sh('cd SkyblockClient-REPO && git reset --hard && git pull')
-        }
+        sh('cd SkyblockClient-REPO && git reset --hard && git pull')
     }
 }
