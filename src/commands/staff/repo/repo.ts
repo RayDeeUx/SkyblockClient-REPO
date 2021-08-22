@@ -47,9 +47,9 @@ export default class repo extends BotCommand {
             try {
                 await message.channel.awaitMessageComponent({ filter, time: 60000 }).then(async interaction => {
                     if (interaction.customId == 'repoEditor|editMods') {
-                        sh('cd zordScRepo && git pull')
-                        const modJson = JSON.parse(await fs.readFileSync('zordScRepo/files/mods.json', 'utf-8'))
-                        const modJson2 = JSON.parse(await fs.readFileSync('zordScRepo/files/mods.json', 'utf-8'))
+                        sh('cd SkyblockClient-REPO && git pull')
+                        const modJson = JSON.parse(await fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf-8'))
+                        const modJson2 = JSON.parse(await fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf-8'))
                         //const oldMod = modJson
                         let modString = ''
                         modJson.forEach(mod => {
@@ -111,9 +111,9 @@ export default class repo extends BotCommand {
                                             
                                                 const newJson = JSON.stringify(allThings, null, 4)
 
-                                                await fs.writeFileSync('zordScRepo/files/mods.json', newJson)
+                                                await fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
 
-                                                sh(`cd zordScRepo && git commit -am "Update ${mod2.display}" && git push`)
+                                                sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
 
                                                 await msg.reply('The repo has been updated succesfully.')
                                             }
@@ -140,9 +140,9 @@ export default class repo extends BotCommand {
                                             
                                                 const newJson = JSON.stringify(allThings, null, 4)
 
-                                                await fs.writeFileSync('zordScRepo/files/mods.json', newJson)
+                                                await fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
 
-                                                sh(`cd zordScRepo && git commit -am "Update ${mod2.display}" && git push`)
+                                                sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
 
                                                 await msg.reply('The repo has been updated succesfully.')
                                             }
@@ -161,9 +161,9 @@ export default class repo extends BotCommand {
                                             
                                         // const newJson = JSON.stringify(allThings, null, 4)
 
-                                        // await fs.writeFileSync('zordScRepo/files/mods.json', newJson)
+                                        // await fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
 
-                                        // sh(`cd zordScRepo && git commit -am "Update ${mod2.display}" && git push`)
+                                        // sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
 
                                         // await notmsg.reply('The repo has been updated succesfully.')
                                     })
@@ -218,8 +218,8 @@ export default class repo extends BotCommand {
                                                             if (mod2[key] === allThings.find(m => m.id === modID)[key]) return interaction.editReply("I can't change something to be itself. The command has been exited.")
 
                                                             try{
-                                                                await fs.writeFileSync('zordScRepo/files/mods.json', newJsonString)
-                                                                sh(`cd zordScRepo && git commit -am "Edit ${mod2.display}.${key}" && git push`)
+                                                                await fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJsonString)
+                                                                sh(`cd SkyblockClient-REPO && git commit -am "Edit ${mod2.display}.${key}" && git push`)
                                                                 await interaction.editReply('The repo has been updated!')
                                                             }
                                                             catch(err){return interaction.editReply(`Failed to edit ${mod2.display}.${key}`)}
