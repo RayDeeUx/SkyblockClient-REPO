@@ -39,11 +39,11 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 							if (message.member.bannable && !hasRole) {
 								try {
-									await message.author.send("Hey, did you know that we ban for scamming?");
+									await message.author.send("Hey, did you know that we ban for scam/malicious links?");
 								} catch (err) {}
 								message.member.ban({ reason: "Sending a scam link" });
 								message.delete();
-								message.guild.channels.cache.get("796895966414110751").send(`${message.author.tag} has been banned for sending a scam link`);
+								message.guild.channels.cache.get("796895966414110751").send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``);
 							}
 						}
                         else if (message.guild.id == '762808525679755274') {
@@ -59,7 +59,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 								} catch (err) {}
 								message.member.ban({ reason: "Sending a scam link" });
 								message.delete();
-								message.guild.channels.cache.get("879037311235526666").send(`${message.author.tag} has been banned for sending a scam link`);
+								message.guild.channels.cache.get("879037311235526666").send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``);
 							}
                         }
 					}
