@@ -14,22 +14,10 @@ export default class extends BotTasks {
     }
     async exec() {
         if (process.platform == 'win32') {
-            sh('cd SkyblockClient-REPO && git pull --force')
-                .then(() => {
-                    //console.log('pulled nacrt/skyblockclient-repo')
-                })
-                // .catch(err => {
-                //     console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
-                // })
+            sh('cd SkyblockClient-REPO && git reset --hard && git pull')
         }
         else {
-            sh('cd SkyblockClient-REPO && git pull --force')
-                .then(() => {
-                    //console.log('pulled nacrt/skyblockclient-repo')
-                })
-                // .catch(err => {
-                //     console.log(`failed to pull nacrt/skyblockclient-repo, because ${err}`)
-                // })
+            sh('cd SkyblockClient-REPO && git reset --hard && git pull')
         }
     }
 }

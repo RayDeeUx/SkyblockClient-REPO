@@ -20,7 +20,7 @@ export default class pullAutoresponse extends BotCommand {
             '378587857796726785', //koxx12
         ]
         if (coolPeople.includes(message.author.id)) {
-            sh('cd SkyblockClient-REPO && git pull --force')
+            sh('cd SkyblockClient-REPO && git reset --hard && git pull')
             .then(() => {
                 message.channel.send('pulled (probably)')
             })

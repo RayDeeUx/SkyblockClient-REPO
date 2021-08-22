@@ -47,7 +47,7 @@ export default class repo extends BotCommand {
             try {
                 await message.channel.awaitMessageComponent({ filter, time: 60000 }).then(async interaction => {
                     if (interaction.customId == 'repoEditor|editMods') {
-                        sh('cd SkyblockClient-REPO && git pull')
+                        sh('cd SkyblockClient-REPO && git reset --hard && git pull')
                         const modJson = JSON.parse(await fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf-8'))
                         const modJson2 = JSON.parse(await fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf-8'))
                         //const oldMod = modJson
