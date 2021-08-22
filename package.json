@@ -43,8 +43,7 @@
 		"bracketSpacing": true,
 		"arrowParens": "always",
 		"printWidth": 200,
-		"useTabs": true,
-		"endOfLine": "lf"
+		"useTabs": true
 	},
 	"_moduleAliases": {
 		"@functions": "dist/functions",
