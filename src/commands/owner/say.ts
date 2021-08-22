@@ -11,7 +11,6 @@ export default class say extends BotCommand {
             args: [{ id: 'thingtosay', type: 'string', match: 'restContent' }],
             slash: true,
             description: 'Sends a message of your choice!',
-            slashGuilds: utils.slashGuilds,
             slashOptions: [
                 { name: 'thingtosay', description: 'What you want the bot to say!', type: 'STRING' }
             ],

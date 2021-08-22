@@ -10,7 +10,6 @@ export default class invite extends BotCommand {
 
             slash: true,
             description: '"Invite the bot"',
-            slashGuilds: utils.slashGuilds,
             slashOptions:[
                 {
                     name:'ephemeral',

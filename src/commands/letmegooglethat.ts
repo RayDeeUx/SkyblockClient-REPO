@@ -9,7 +9,6 @@ export default class letmegooglethat extends BotCommand {
 
             slash: true,
             description: 'https://letmegooglethat.com',
-            slashGuilds: utils.slashGuilds,
             slashOptions: [
                 {
                     name: 'thingtogoogle',

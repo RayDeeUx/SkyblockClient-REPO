@@ -9,7 +9,6 @@ export default class bestbot extends BotCommand {
             slashOptions:[], 
             slash: true,
             description: 'bestbot',
-            slashGuilds: utils.slashGuilds,
         })
     }
 

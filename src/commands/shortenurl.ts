@@ -10,7 +10,6 @@ export default class shortenurl extends BotCommand {
 
             slash: true,
             description: 'Shortens a URL',
-            slashGuilds: utils.slashGuilds,
             slashOptions: [
                 {
                     name: 'url',

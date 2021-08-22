@@ -12,7 +12,6 @@ export default class pronouns extends BotCommand {
     
             slashOptions:[{name:'person',type:'USER',description:'the person you want to know the pronouns of'}],
             slash: true,
-            slashGuilds: utils.slashGuilds
         })
     }
     async exec(message, args) {

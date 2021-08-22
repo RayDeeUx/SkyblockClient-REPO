@@ -9,7 +9,6 @@ export default class httpcat extends BotCommand {
 
             slash: true,
             description: 'https://http.cat',
-            slashGuilds: utils.slashGuilds,
             slashOptions: [
                 {
                     name: 'caterror',
