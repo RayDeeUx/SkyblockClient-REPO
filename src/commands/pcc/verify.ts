@@ -18,12 +18,13 @@ export default class pccVerify extends BotCommand {
     }
     async exec(message, args) {
         const person = this.client.util.resolveMember(args.person, message.guild.members.cache)
+        console.log(person)
         if (!message.member.permissions.toArray().includes('MANAGE_ROLES')) {return await message.reply({content:"You can't do that!",ephemeral:true})}
         if (!message.guild.me.permissions.toArray().includes('MANAGE_ROLES')) return await message.reply({content: "I can't verify people if I can't give them the role.", ephemeral:true})
 
         if (!person) return await message.reply({content:"I can't verify nobody!", ephemeral:true})
 
-        await args.person.roles.add('879040337983705128')
-        await message.reply({content: `Succesfully verified ${args.person.user.tag}.`})
+        await person.roles.add('879040337983705128')
+        await message.reply({content: `Succesfully verified ${person.user.tag}.`})
     }
 }
