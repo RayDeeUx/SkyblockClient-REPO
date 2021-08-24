@@ -6,7 +6,7 @@ export default class pccVerify extends BotCommand {
     constructor() {
         super('pccVerify', {
             aliases: ['verify'],
-            args: [{ id: 'person', type: 'member', match: 'rest' }],
+            args: [{ id: 'person', type: 'string', match: 'rest' }],
 
             description: 'gives someone the member role because our role list is annoying',
     
@@ -17,10 +17,11 @@ export default class pccVerify extends BotCommand {
         })
     }
     async exec(message, args) {
+        const person = message.guild.members.fetch(args.person)
         if (!message.member.permissions.toArray().includes('MANAGE_ROLES')) {return await message.reply({content:"You can't do that!",ephemeral:true})}
         if (!message.guild.me.permissions.toArray().includes('MANAGE_ROLES')) return await message.reply({content: "I can't verify people if I can't give them the role.", ephemeral:true})
 
-        if (!args.person) return await message.reply({content:"I can't verify nobody!", ephemeral:true})
+        if (!person) return await message.reply({content:"I can't verify nobody!", ephemeral:true})
 
         await args.person.roles.add('879040337983705128')
         await message.reply({content: `Succesfully verified ${args.person.user.tag}.`})
