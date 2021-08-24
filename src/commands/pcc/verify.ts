@@ -17,6 +17,7 @@ export default class pccVerify extends BotCommand {
         })
     }
     async exec(message, args) {
+        if (message.guild.id != '762808525679755274') return
         const person = this.client.util.resolveMember(args.person, message.guild.members.cache)
         if (!message.member.permissions.toArray().includes('MANAGE_ROLES')) {return await message.reply({content:"You can't do that!",ephemeral:true})}
         if (!message.guild.me.permissions.toArray().includes('MANAGE_ROLES')) return await message.reply({content: "I can't verify people if I can't give them the role.", ephemeral:true})
