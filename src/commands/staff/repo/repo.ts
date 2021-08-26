@@ -96,7 +96,6 @@ export default class repo extends BotCommand {
                                         dotThen.once('collect', async msg => {
                                             if (msg.content.toLowerCase() === 'done') {
 
-                                                console.log(`${newFileName}\n${mod2.file}\n\n${newUrl}\n${mod2.url}`)
                                                 if (newFileName === mod2.file && newUrl === mod2.url) {return await msg.reply('You have changed nothing, so the command has been exited.')}
 
                                                 let allThings = []
