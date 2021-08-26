@@ -32,7 +32,7 @@ export class BotClient extends AkairoClient {
 	public constructor() {
 		super(
 			{
-				ownerID: ['492488074442309642'],
+				ownerID: ['492488074442309642', '545277690303741962'],
 				intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 			},
 			{
