@@ -18,7 +18,7 @@ class ReadyListener extends BotListener {
         console.log(`\n`)
         console.log(chalk.magentaBright(`---Bot Output---`))
 
-        this.client.user.setActivity('Zordlan create me', { type: 'WATCHING' })
+        this.client.user.setActivity('Lisena create me', { type: 'WATCHING' })
     }
 }
 
