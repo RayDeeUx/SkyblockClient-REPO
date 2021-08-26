@@ -6,7 +6,7 @@ export default class skycrypt extends BotCommand {
     constructor() {
         super('skycrypt', {
             aliases: ['skycrypt'],
-            args: [{ id: 'ign', type: 'string' }],
+            args: [{ id: 'ign', type: 'string' }, {id: 'profile', type: 'string', match: 'flag', flag: '--profile'}],
 
             slash: true,
             slashGuilds:utils.slashGuilds,
@@ -15,13 +15,20 @@ export default class skycrypt extends BotCommand {
                 {
                     name: 'ign',
                     description: 'The Minecraft account you want the SkyCrypt page of',
-                    type: 'STRING'
+                    type: 'STRING',
+                    required:true
+                },
+                {
+                    name: 'profile',
+                    description: 'the profile of the person',
+                    type:'STRING'
                 }
             ]
         });
     }
 
     async exec(message, args) {
-        await msgutils.reply(message, {content:`https://sky.shiiyu.moe/stats/${args.ign}`});
+        if (!args.profile) await msgutils.reply(message, {content:`https://sky.shiiyu.moe/stats/${args.ign}`})
+        else if (args.profile) await msgutils.reply(message, {content:`https://sky.shiiyu.moe/stats/${args.ign}/${args.profile}`})
     }
 }
