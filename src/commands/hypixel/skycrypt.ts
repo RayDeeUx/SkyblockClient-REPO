@@ -1,3 +1,4 @@
+import msgutils from '@functions/msgutils';
 import { BotCommand } from '../../extensions/BotCommand';
 import utils from '../../functions/utils';
 
@@ -21,6 +22,6 @@ export default class skycrypt extends BotCommand {
     }
 
     async exec(message, args) {
-        message.reply(`https://sky.shiiyu.moe/stats/${args.ign}`);
+        await msgutils.reply(message, {content:`https://sky.shiiyu.moe/stats/${args.ign}`});
     }
 }
