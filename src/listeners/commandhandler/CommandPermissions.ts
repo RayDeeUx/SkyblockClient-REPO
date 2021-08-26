@@ -1,6 +1,6 @@
 import { Listener } from "discord-akairo";
 import { MessageEmbed } from "discord.js";
-import { BotClient } from "../../extensions/BotClient";
+import { BotClient } from "../../extensions/SkyClient";
 import { BotListener } from "../../extensions/BotListener";
 
 export default class missingPermissions extends BotListener {

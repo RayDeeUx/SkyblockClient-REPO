@@ -2,7 +2,7 @@ require('dotenv').config()
 
 //starting the bot
 
-import { BotClient } from "./extensions/BotClient";
+import { BotClient } from "./extensions/SkyClient";
 
 //cloning repo
 import { exec } from "child_process";
