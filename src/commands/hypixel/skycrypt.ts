@@ -6,7 +6,7 @@ export default class skycrypt extends BotCommand {
     constructor() {
         super('skycrypt', {
             aliases: ['skycrypt'],
-            args: [{ id: 'ign', type: 'string' }, {id: 'profile', type: 'string', match: 'flag', flag: '--profile'}],
+            args: [{ id: 'ign', type: 'string' }, {id: 'profile', type: 'string', flag: '--profile'}],
 
             slash: true,
             slashGuilds:utils.slashGuilds,
