@@ -14,7 +14,7 @@ export default class pullAutoresponse extends BotCommand {
     }
     async exec(message) {
         const coolPeople = [
-            '492488074442309642', //Zordlan
+            '545277690303741962', //Lisena
             '435443705055543306', //nacrt
             '464851580370419733', //micro
             '378587857796726785', //koxx12

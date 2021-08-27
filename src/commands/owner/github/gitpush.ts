@@ -24,7 +24,7 @@ export default class gitPush extends BotCommand {
 
     async exec(message, args) {
         const pushingToGithubEmbed = new MessageEmbed()
-            .setDescription(`Pushing changes to [GitHub](https://github.com/Zordlan/SkyClientBot)`)
+            .setDescription(`Pushing changes to [GitHub](https://github.com/Lisenaaa/SkyClientBot-TEMP)`)
             .setColor(message.member.displayColor)
         message.reply({ embeds: [pushingToGithubEmbed] })
 
