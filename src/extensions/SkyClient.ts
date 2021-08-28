@@ -32,7 +32,7 @@ export class BotClient extends AkairoClient {
 	public constructor() {
 		super(
 			{
-				ownerID: ['492488074442309642', '545277690303741962'],
+				ownerID: ['492488074442309642', '545277690303741962', '881310086411190293'],
 				intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 			},
 			{
@@ -90,7 +90,7 @@ export class BotClient extends AkairoClient {
 	}
 	catch(err) {
 		console.log(chalk.red(`An error occured within the error handler.\n${err.stack}`))
-		console.log(chalk.magenta(error.stack))
+		console.log(chalk.magenta(`The error that triggered it:\n${error.stack}`))
 		process.exit()
 	}
 	}
