@@ -17,6 +17,7 @@ export default class modInfo extends BotCommand {
             slash: true,
             slashOptions: [
                 { name: 'mod', description: 'The mod ID that you want to get info on', type: 'STRING', required:true },
+                { name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false}
             ],
             slashGuilds: utils.slashGuilds,
             description: 'Shows information on a specific mod from SkyClient'
@@ -51,6 +52,6 @@ export default class modInfo extends BotCommand {
 
         if (mod.creator) modEmbed.setFooter(`Created by ${mod.creator}`)
 
-        msgutils.reply(message, { embeds: [modEmbed] })
+        await msgutils.reply(message, { embeds: [modEmbed] }, args.ephemeral)
     }
 }

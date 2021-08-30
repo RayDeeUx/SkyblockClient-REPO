@@ -53,6 +53,8 @@ export default class faq extends BotCommand {
     async exec(message, args) {
         if (utils.SkyClientGuilds.includes(message.guild.id)) {
             const embed = new MessageEmbed()
+                .setTitle('That\'s not a valid FAQ question!')
+                .setDescription('Use the slashcommand version of this, or [check out the code.](https://github.com/Lisenaaaa/SkyClientBot-TEMP/blob/master/src/commands/skyclient/faq.ts)')
 
             if (!args.question) { return message.reply('<#780185114352549919>') }
 

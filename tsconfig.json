@@ -12,12 +12,7 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-		"baseUrl": ".",
-		"paths": {
-			"@functions/*": ["src/functions/*"],
-			"@extensions/*": ["src/extensions/*"],
-			"@src/*": ["src/*"]
-		}
+		"baseUrl": "."
 	},
 	"include": ["src/**/*", "src/*"],
 	"exclude": ["node_modules"]

@@ -1,3 +1,5 @@
+import msgutils from "../functions/msgutils";
+import skyclientutils from "../functions/skyclientutils";
 import axios from "axios";
 import { BotCommand } from '../extensions/BotCommand';
 import utils from "../functions/utils";
@@ -22,16 +24,10 @@ export default class shortenurl extends BotCommand {
     }
 
     async exec(message, args) {
+        const scams = await skyclientutils.getRepo('scamlinks.json')
+        if (scams.includes(args.url)) return await msgutils.reply(message, {content:"I won't shorten scam links."}, true)
         const shortenedurl = (await axios.get(`https://api.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com/a?url=${args.url}`)).data
 
-        if (message.type == 'REPLY') {
-            if (message.channel.type == 'GUILD_TEXT') {
-                const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
-                repliedMessage.reply(shortenedurl)
-            }
-        }
-        else {
-            message.reply(shortenedurl)
-        }
+        await msgutils.reply(message, {content:shortenedurl})
     }
 }

@@ -3,7 +3,15 @@ import commandManager from "./commandManager";
 
 
 
-async function reply(message: Message, content: ReplyMessageOptions) {
+async function reply(message: Message, content: ReplyMessageOptions, forceEphemeral?:boolean) {
+    if (forceEphemeral && message.interaction && commandManager.userCanUseCommand(message)) {
+        let ephemeralReplyContent = {
+            ...content,
+            ephemeral: true
+        }
+        return message.reply(ephemeralReplyContent)
+    }
+
     if (commandManager.userCanUseCommand(message)) {
         if (message.type == 'REPLY') {
             if (message.channel.type == 'GUILD_TEXT') {
@@ -11,21 +19,22 @@ async function reply(message: Message, content: ReplyMessageOptions) {
 
                 let coolReplyContent = {
                     ...content,
-                    ...{ allowedMentions: { repliedUser: true } }
+                    allowedMentions: { repliedUser: true }
                 }
-                repliedMessage.reply(coolReplyContent)
+                return repliedMessage.reply(coolReplyContent)
             }
         }
-        else { message.reply(content) }
+        else { return message.reply(content) }
     }
     if (!commandManager.userCanUseCommand(message) && message.interaction) {
         let ephemeralReplyContent = {
             ...content,
-            ...{ ephemeral: true }
+            ephemeral: true
         }
-        message.reply(ephemeralReplyContent)
+        return message.reply(ephemeralReplyContent)
     }
-    if (!commandManager.userCanUseCommand(message) && !message.interaction) message.reply('<#796546551878516766> or use as a slashcommand')
+
+    if (!commandManager.userCanUseCommand(message) && !message.interaction) return message.reply('<#796546551878516766> or use as a slashcommand')
 }
 
 // async function prompt(message:Message, content: ReplyMessageOptions, argTime?: Number) {

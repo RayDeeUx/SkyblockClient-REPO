@@ -45,11 +45,6 @@
 		"printWidth": 200,
 		"useTabs": true
 	},
-	"_moduleAliases": {
-		"@functions": "dist/functions",
-		"@extensions": "dist/extensions",
-		"@src": "dist"
-	},
 	"eslintConfig": {
 		"env": {
 			"es2021": true,

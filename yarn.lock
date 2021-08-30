@@ -32,16 +32,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discordjs/builders@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@discordjs/builders@npm:0.4.0"
+"@discordjs/builders@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@discordjs/builders@npm:0.5.0"
   dependencies:
     "@sindresorhus/is": ^4.0.1
     discord-api-types: ^0.22.0
     ow: ^0.27.0
     ts-mixer: ^6.0.0
     tslib: ^2.3.0
-  checksum: 7dd5fb4864f43786eaff77faa81422a2bc8ea3925a87f89312fee35b27f1f33b3d393fbeec4e28a398e4c65bed64a2654ea15bacc295e595770df276f8e87b72
+  checksum: 064bd547b63a8cc593b3f8b0e290cb1c27cf335a89addd77aeb078055a92201a6905d0a67919004da0c915d01c0104383c5c06a07df751e4a4e921d7a000f6e3
   languageName: node
   linkType: hard
 
@@ -715,10 +715,10 @@ discord-akairo@SkyBlockDev/discord-akairo:
   linkType: hard
 
 discord.js@NotEnoughUpdates/discord.js:
-  version: 13.1.0-dev
-  resolution: "discord.js@https://github.com/NotEnoughUpdates/discord.js.git#commit=88e867ae35e93223fbca098b5c2c79fc6dcce1e2"
+  version: 13.2.0-dev
+  resolution: "discord.js@https://github.com/NotEnoughUpdates/discord.js.git#commit=adfd990b6de491c01adb414b231a7a5f3c62042e"
   dependencies:
-    "@discordjs/builders": ^0.4.0
+    "@discordjs/builders": ^0.5.0
     "@discordjs/collection": ^0.2.1
     "@discordjs/form-data": ^3.0.1
     "@sapphire/async-queue": ^1.1.4
@@ -726,7 +726,7 @@ discord.js@NotEnoughUpdates/discord.js:
     discord-api-types: ^0.22.0
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 759af4abedc825d759520f48a4211fccfe29eb1c7d965373c561cc9599e048ea2e73d040c8ca69034148e1224fa5c40e79ffa140c669fa4afc153115d8f0ffe4
+  checksum: 5bb831df1083ed06ce59fd1500158981f6697d15194b46840d133e1ee32659291c497bb7bddcdabe1f0ce9cf5129febd07f2956039f842e21efa7a8c7bba25e4
   languageName: node
   linkType: hard
 
