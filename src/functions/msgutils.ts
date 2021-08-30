@@ -9,7 +9,7 @@ async function reply(message: Message, content: ReplyMessageOptions, forceEpheme
             ...content,
             ephemeral: true
         }
-        return message.reply(ephemeralReplyContent)
+        return await message.reply(ephemeralReplyContent)
     }
 
     if (commandManager.userCanUseCommand(message)) {
@@ -21,20 +21,20 @@ async function reply(message: Message, content: ReplyMessageOptions, forceEpheme
                     ...content,
                     allowedMentions: { repliedUser: true }
                 }
-                return repliedMessage.reply(coolReplyContent)
+                return await repliedMessage.reply(coolReplyContent)
             }
         }
-        else { return message.reply(content) }
+        else { return await message.reply(content) }
     }
     if (!commandManager.userCanUseCommand(message) && message.interaction) {
         let ephemeralReplyContent = {
             ...content,
             ephemeral: true
         }
-        return message.reply(ephemeralReplyContent)
+        return await message.reply(ephemeralReplyContent)
     }
 
-    if (!commandManager.userCanUseCommand(message) && !message.interaction) return message.reply('<#796546551878516766> or use as a slashcommand')
+    if (!commandManager.userCanUseCommand(message) && !message.interaction) return await message.reply('<#796546551878516766> or use as a slashcommand')
 }
 
 // async function prompt(message:Message, content: ReplyMessageOptions, argTime?: Number) {
