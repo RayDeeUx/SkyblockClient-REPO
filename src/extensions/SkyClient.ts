@@ -9,7 +9,10 @@ import fs from 'fs'
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {
 		autoRegisterSlashCommands: true,
-		prefix: ["-"],
+		prefix: message => {
+			if (message.guild.id === '880637463838724166' && this.user.id === '881446517729296414') return '+'
+			else return '-'
+		},
 		commandUtil: true,
 		handleEdits: true,
 		directory: join(__dirname, "..", "commands"),
