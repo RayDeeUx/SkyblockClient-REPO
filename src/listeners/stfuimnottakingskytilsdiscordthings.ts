@@ -13,7 +13,7 @@ class notStolenFromSkytilsDiscord extends BotListener {
     }
 
     async exec(message) {
-        if (!utils.SkyClientGuilds.includes(message.guild.id)) return
+        if (message.guild.id != '780181693100982273') return
         if (message.channel.type != 'GUILD_TEXT' && message.channel.type != 'GUILD_PUBLIC_THREAD') { return }
         if (message.content.startsWith('```md')) { return }
         if (message.content.startsWith('.')) { return }
