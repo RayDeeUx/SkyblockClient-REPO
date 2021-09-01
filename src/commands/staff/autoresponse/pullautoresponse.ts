@@ -14,7 +14,7 @@ export default class pullAutoresponse extends BotCommand {
     }
     async exec(message) {
         const coolPeople = [
-            '545277690303741962', //Lisena
+            '881310086411190293', //Lisena
             '435443705055543306', //nacrt
             '464851580370419733', //micro
             '378587857796726785', //koxx12
@@ -26,7 +26,7 @@ export default class pullAutoresponse extends BotCommand {
             })
         }
         else {
-            message.channel.send('hey so you dont have the perms to run this command, if you think you deserve them ping zord or make a pr')
+            message.channel.send('hey so you dont have the perms to run this command, if you think you deserve them ping lis or make a pr')
         }
     }
 }
