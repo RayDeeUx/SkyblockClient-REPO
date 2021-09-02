@@ -72,7 +72,7 @@ export default class faq extends BotCommand {
 
 			if (args.question.toLowerCase() == "howupdate") {
 				embed.setTitle("How do I update a mod?")
-				embed.setDescription("Go to your mods folder ([instructions on how to get to it here](https://youtu.be/Y7AyoDMsFdY)), delete the old version of the mod, and put the new version in.")
+				embed.setDescription("Go to your mods folder ([instructions on how to get to it here](https://youtu.be/E6lwqIo0-Ms)), delete the old version of the mod, and put the new version in.")
 			}
 
 			if (args.question.toLowerCase() == "crash") {
@@ -92,13 +92,13 @@ export default class faq extends BotCommand {
 			}
 
 			if (args.question.toLowerCase() == "modfolder") {
-				return message.reply("https://youtu.be/Y7AyoDMsFdY")
+				return message.reply("https://youtu.be/E6lwqIo0-Ms")
 			}
 
 			if (args.question.toLowerCase() == "addmod") {
 				embed.setTitle("Can I add my own mods?")
 				embed.setDescription(
-					"Yes. Download the mod you want from wherever you get it normally, and put it in [.minecraft/skyclient/mods](https://youtu.be/Y7AyoDMsFdY)\n\n[We have special instructions for SBE, as it doesn't work normally with SkyClient.](https://github.com/MicrocontrollersDev/Alternatives/blob/1e409e056e3e14ca874a2368c045de96787e8cbd/SkyblockExtras.md#reasons-not-to-buy-or-use-sbe)"
+					"Yes. Download the mod you want from wherever you get it normally, and put it in [.minecraft/skyclient/mods](https://youtu.be/E6lwqIo0-Ms)\n\n[We have special instructions for SBE, as it doesn't work normally with SkyClient.](https://github.com/MicrocontrollersDev/Alternatives/blob/1e409e056e3e14ca874a2368c045de96787e8cbd/SkyblockExtras.md#reasons-not-to-buy-or-use-sbe)"
 				)
 			}
 
