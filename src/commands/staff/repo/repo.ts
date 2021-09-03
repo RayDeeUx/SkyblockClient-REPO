@@ -16,7 +16,7 @@ export default class repo extends BotCommand {
     }
     async exec(message) {
         const coolPeople = [
-            '545277690303741962', //Lisena
+            '881310086411190293', //Lisena
             '435443705055543306', //nacrt
             '464851580370419733', //micro
             '378587857796726785', //koxx12
