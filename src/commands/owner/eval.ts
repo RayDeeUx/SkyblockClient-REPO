@@ -72,7 +72,7 @@ export default class evaluate extends BotCommand {
 
         if (evalEmbedDisabledGuilds.includes(message.guild!.id) && !evalDisabledGuildChannelBypass.includes(message.channel.id)) {
             if (args.codetoeval.includes('message.delete')) { return }
-            else { return message.react('<:success:838816341007269908>') }
+            else { return message.react('<a:successAnimated:881336936533483520>') }
         }
 
 
@@ -98,7 +98,7 @@ export default class evaluate extends BotCommand {
         }
         if (args.silent && !message.interaction) {
             if (args.codetoeval.includes('message.delete')) { return }
-            message.react('<:success:838816341007269908>')
+            message.react('<a:successAnimated:881336936533483520>')
         }
         else if (args.silent && message.interaction) {
             //@ts-ignore fuck strict mode lol
