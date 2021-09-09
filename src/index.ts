@@ -1,35 +1,29 @@
-require('dotenv').config()
+import { BotClient } from "./extensions/SkyClient"
+import { exec } from "child_process"
+import { promisify } from "util"
+import chalk from "chalk"
 
-//starting the bot
+const client = new BotClient()
 
-import { BotClient } from "./extensions/SkyClient";
+const sh = promisify(exec)
 
-//cloning repo
-import { exec } from "child_process";
-import { promisify } from "util";
-import chalk from "chalk";
+sh("git clone https://github.com/nacrt/SkyblockClient-REPO")
+	.then(() => {
+		console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red successfully cloned!}`)
 
-const client = new BotClient();
+		//start the bot if the repo isnt there
+		client.start()
+	})
+	.catch((err) => {
+		if (err.stderr == `fatal: destination path 'SkyblockClient-REPO' already exists and is not an empty directory.\n`) {
+			console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red found, so it wasn't cloned.}`)
+		}
+		console.log(chalk.red("Pulling repo"))
 
-const sh = promisify(exec);
+		sh("cd SkyblockClient-REPO && git reset --hard && git pull")
 
-sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
-    .then(() => {
-        console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red successfully cloned!}`)
-
-        //start the bot if the repo isnt there
-        client.start();
-    })
-    .catch(err => {
-        if (err.stderr == `fatal: destination path 'SkyblockClient-REPO' already exists and is not an empty directory.\n`) {
-            console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red found, so it wasn't cloned.}`)
-        }
-        console.log(chalk.red('Pulling repo'))
-        
-        sh('cd SkyblockClient-REPO && git reset --hard && git pull')
-
-        //start the bot if the repo is there
-        client.start();
-    })
+		//start the bot if the repo is there
+		client.start()
+	})
 
 export default client

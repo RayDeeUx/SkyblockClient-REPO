@@ -18,7 +18,7 @@ export default class repo extends BotCommand {
         const coolPeople = [
             '881310086411190293', //Lisena
             '435443705055543306', //nacrt
-            '464851580370419733', //micro
+            '501459973612765205', //motor
             '378587857796726785', //koxx12
         ]
 

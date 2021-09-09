@@ -12,19 +12,19 @@ export default class say extends BotCommand {
             slash: true,
             description: 'Sends a message of your choice!',
             slashOptions: [
-                { name: 'thingtosay', description: 'What you want the bot to say!', type: 'STRING' }
+                { name: 'thingtosay', description: 'What you want the bot to say!', type: 'STRING', required:true }
             ],
             ownerOnly: true
         })
     }
     async exec(message, slashOptions) {
+        if (!message.interaction) return await message.reply('I shall not do your bidding, evil mistress!')
         message.channel.send(slashOptions.thingtosay).then(msg => {
             const sentEmbed = new MessageEmbed()
                 .setTitle('Message sent!')
                 .addField('Content', msg.content)
                 .setColor(message.member.displayColor)
-            if (message.interaction) { message.interaction.reply({ embeds: [sentEmbed], ephemeral: true }) }
-            else { message.delete() }
+            message.reply({ embeds: [sentEmbed], ephemeral: true }) 
         })
     }
 }

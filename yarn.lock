@@ -693,10 +693,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-discord-akairo@SkyBlockDev/discord-akairo:
+discord-akairo-message-util@NotEnoughUpdates/discord-akairo-message-util:
+  version: 1.0.0
+  resolution: "discord-akairo-message-util@https://github.com/NotEnoughUpdates/discord-akairo-message-util.git#commit=9831d4f340bc8c3452d3dfef0497f7844dee0f29"
+  checksum: 037722daf405eb7afebc47423e29a54816f5ab245e4aa0b0f99ad4ed32980839e1d1a399c12310acb1cabd6890d929d870223bddba4b6c2d107b5a79c4a37108
+  languageName: node
+  linkType: hard
+
+discord-akairo@NotEnoughUpdates/discord-akairo:
   version: 8.2.2
-  resolution: "discord-akairo@https://github.com/SkyBlockDev/discord-akairo.git#commit=d7dca4c17b54fef14dd62ca8f61861622da4cc06"
-  checksum: 2c33882a5536d980411c5c776f18fe0a99f30b94c6f1883a81f687afdef3fe71b7c69b1b5ff79ad61ce113c066a785df02282fd6f7f998565374b1d4dba12522
+  resolution: "discord-akairo@https://github.com/NotEnoughUpdates/discord-akairo.git#commit=def85d0de392ef3cb0e0ebec5aa9e06ddb77744e"
+  dependencies:
+    discord-akairo-message-util: NotEnoughUpdates/discord-akairo-message-util
+    lodash: ^4.17.21
+    source-map-support: ^0.5.19
+  checksum: 00178c3bd043e4b472ec39252210efc3ac1373a19905828a69bf15a38a2d29bddf910e01197fd18ffd224c959c9fb6570feda6bf060e32c2435514ae479114a3
   languageName: node
   linkType: hard
 
@@ -716,7 +727,7 @@ discord-akairo@SkyBlockDev/discord-akairo:
 
 discord.js@NotEnoughUpdates/discord.js:
   version: 13.2.0-dev
-  resolution: "discord.js@https://github.com/NotEnoughUpdates/discord.js.git#commit=adfd990b6de491c01adb414b231a7a5f3c62042e"
+  resolution: "discord.js@https://github.com/NotEnoughUpdates/discord.js.git#commit=b3c676e3286dd3ce39f63231216d2e480e28b567"
   dependencies:
     "@discordjs/builders": ^0.5.0
     "@discordjs/collection": ^0.2.1
@@ -726,7 +737,7 @@ discord.js@NotEnoughUpdates/discord.js:
     discord-api-types: ^0.22.0
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 5bb831df1083ed06ce59fd1500158981f6697d15194b46840d133e1ee32659291c497bb7bddcdabe1f0ce9cf5129febd07f2956039f842e21efa7a8c7bba25e4
+  checksum: 730499fb8c30f648343abdda44d12767819da80a55deb9358942ef9a63280fe354c2b2a638cef9bd5ac946e5efc2f87f29b3a03e6f43d150a3618b252aef445e
   languageName: node
   linkType: hard
 
@@ -1348,7 +1359,7 @@ discord.js@NotEnoughUpdates/discord.js:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.7.0":
+"lodash@npm:^4.17.21, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -1747,7 +1758,7 @@ discord.js@NotEnoughUpdates/discord.js:
     "@typescript-eslint/parser": ^4.15.2
     axios: ^0.21.1
     chalk: ^4.1.1
-    discord-akairo: SkyBlockDev/discord-akairo
+    discord-akairo: NotEnoughUpdates/discord-akairo
     discord-api-types: ^0.20.2
     discord.js: NotEnoughUpdates/discord.js
     dotenv: ^10.0.0
