@@ -38,7 +38,7 @@
 	},
 	"prettier": {
 		"tabWidth": 4,
-		"singleQuote": false,
+		"singleQuote": true,
 		"semi": false,
 		"bracketSpacing": true,
 		"arrowParens": "always",

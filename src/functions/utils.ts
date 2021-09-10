@@ -15,6 +15,7 @@ interface hastebinRes {
 }
 
 const slashGuilds = ['824680357936103497', '780181693100982273', '794610828317032458', '880637463838724166']
+
 const SkyClientGuilds = [
     `780181693100982273`, //main server
     `880637463838724166` //testing server
