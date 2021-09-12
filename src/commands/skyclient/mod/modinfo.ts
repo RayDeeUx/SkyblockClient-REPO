@@ -25,9 +25,9 @@ export default class modInfo extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (!utils.SkyClientGuilds.includes(message.guild.id)) return
+
 		let modJson
-		// if (msgutils.useLocalRepo) { modJson = JSON.parse(fs.readFileSync('SkyblockClient-REPO/files/mods.json', 'utf-8')) }
-		// else { modJson = await (await axios.get("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json")).data }
 
 		modJson = await skyclientutils.getRepo('mods.json')
 

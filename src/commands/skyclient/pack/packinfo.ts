@@ -26,6 +26,8 @@ export default class packName extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (!utils.SkyClientGuilds.includes(message.guild.id)) return
+		
 		let packJson
 		packJson = await skyclientutils.getRepo('packs.json')
 
