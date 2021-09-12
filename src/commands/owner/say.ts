@@ -19,12 +19,12 @@ export default class say extends BotCommand {
     }
     async exec(message, slashOptions) {
         if (!message.interaction) return await message.reply('I shall not do your bidding, evil mistress!')
-        message.channel.send(slashOptions.thingtosay).then(msg => {
+        await message.channel.send(slashOptions.thingtosay).then(async msg => {
             const sentEmbed = new MessageEmbed()
                 .setTitle('Message sent!')
                 .addField('Content', msg.content)
                 .setColor(message.member.displayColor)
-            message.reply({ embeds: [sentEmbed], ephemeral: true }) 
+            await message.reply({ embeds: [sentEmbed], ephemeral: true }) 
         })
     }
 }

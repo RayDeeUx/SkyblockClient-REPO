@@ -1,23 +1,23 @@
-import { MessageEmbed } from "discord.js"
-import axios from "axios"
-import { BotCommand } from "../../extensions/BotCommand"
-import utils from "../../functions/utils"
-import fs from "fs"
-import skyclientutils from "../../functions/skyclientutils"
+import { MessageEmbed } from 'discord.js'
+import axios from 'axios'
+import { BotCommand } from '../../extensions/BotCommand'
+import utils from '../../functions/utils'
+import fs from 'fs'
+import skyclientutils from '../../functions/skyclientutils'
 
 export default class discord extends BotCommand {
 	constructor() {
-		super("discord", {
-			aliases: ["discord"],
-			args: [{ id: "discord", type: "string" }],
+		super('discord', {
+			aliases: ['discord'],
+			args: [{ id: 'discord', type: 'string' }],
 
 			slash: true,
 			slashGuilds: utils.slashGuilds,
 			slashOptions: [
-				{ name: "discord", description: "The ID (neu, sba, things like that) of the discord server you want to get info on", type: "STRING", required: true },
-				{ name: "ephemeral", description: "Toggle the embed showing for other people", type: "BOOLEAN", required: false },
+				{ name: 'discord', description: 'The ID (neu, sba, things like that) of the discord server you want to get info on', type: 'STRING', required: true },
+				{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false },
 			],
-			description: "Shows info about a specific discord server in SkyClient",
+			description: 'Shows info about a specific discord server in SkyClient',
 		})
 	}
 
@@ -27,7 +27,7 @@ export default class discord extends BotCommand {
 				return message.reply("lemme just telepathically get the discord you want from you... oh wait i can't")
 			}
 
-			let discords = await skyclientutils.getRepo("discords.json")
+			let discords = await skyclientutils.getRepo('discords.json')
 
 			let found = false
 
@@ -43,8 +43,8 @@ export default class discord extends BotCommand {
 							.setDescription(`${discord.description}\n\nDiscord Invite: \`https://discord.gg/${discord.code}\``)
 							.setThumbnail(`https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords/${discord.icon}`)
 
-						if (message.type == "REPLY") {
-							if (message.channel.type == "GUILD_TEXT") {
+						if (message.type == 'REPLY') {
+							if (message.channel.type == 'GUILD_TEXT') {
 								const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
 								repliedMessage.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed], allowedMentions: { repliedUser: true } })
 							}
@@ -52,8 +52,8 @@ export default class discord extends BotCommand {
 							message.reply({ content: `discord.gg/${discord.code}`, embeds: [partnerEmbed] })
 						}
 					} else {
-						if (message.type == "REPLY") {
-							if (message.channel.type == "GUILD_TEXT") {
+						if (message.type == 'REPLY') {
+							if (message.channel.type == 'GUILD_TEXT') {
 								const repliedMessage = await message.channel.messages.fetch(message.reference.messageId)
 								repliedMessage.reply({ content: `discord.gg/${discord.code}`, allowedMentions: { repliedUser: true } })
 							}

@@ -1,42 +1,42 @@
-import { MessageEmbed } from "discord.js"
-import { BotCommand } from "../../extensions/BotCommand"
-import msgutils from "../../functions/msgutils"
-import utils from "../../functions/utils"
+import { MessageEmbed } from 'discord.js'
+import { BotCommand } from '../../extensions/BotCommand'
+import msgutils from '../../functions/msgutils'
+import utils from '../../functions/utils'
 
 export default class issue extends BotCommand {
 	constructor() {
-		super("issue", {
-			aliases: ["issue"],
-			args: [{ id: "issue", type: "string" }],
+		super('issue', {
+			aliases: ['issue'],
+			args: [{ id: 'issue', type: 'string' }],
 
 			slash: true,
 			slashGuilds: utils.slashGuilds,
 			slashOptions: [
 				{
-					name: "issue",
-					description: "ID of the issue you want to see",
-					type: "STRING",
+					name: 'issue',
+					description: 'ID of the issue you want to see',
+					type: 'STRING',
 					choices: [
 						{
 							name: 'Windows says "Windows protected your PC" every time I try to launch it.',
-							value: "windowsbad",
+							value: 'windowsbad',
 						},
 						{
-							name: "It breaks when I add LabyMod.",
-							value: "labybad",
+							name: 'It breaks when I add LabyMod.',
+							value: 'labybad',
 						},
 					],
 				},
-				{ name: "ephemeral", description: "Toggle the embed showing for other people", type: "BOOLEAN", required: false },
+				{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false },
 			],
-			description: "Describes how to fix a specific issue",
+			description: 'Describes how to fix a specific issue',
 		})
 	}
 
 	async exec(message, args) {
 		if (utils.SkyClientGuilds.includes(message.guild.id)) {
 			if (!args.issue) {
-				return await msgutils.reply(message, { content: "<#785809068610682900>" })
+				return await msgutils.reply(message, { content: '<#785809068610682900>' })
 			}
 			const embed = new MessageEmbed()
 			if (args.issue.toLowerCase() == `windowsbad`) {
@@ -46,10 +46,10 @@ export default class issue extends BotCommand {
 				)
 				embed.setImage(`https://cdn.discordapp.com/attachments/780181693553704973/796869759190827108/unknown.png`)
 			}
-			if (args.issue.toLowerCase() == "labybad") {
-				embed.setTitle("LabyMod is bad")
+			if (args.issue.toLowerCase() == 'labybad') {
+				embed.setTitle('LabyMod is bad')
 				embed.setDescription(
-					"LabyMod is terribly designed. If you want to get other mods that do what it does but better, check out https://proudmuslim.tech/bad-mod-alternatives/labymod.html, or https://5zigreborn.eu/downloads/"
+					'LabyMod is terribly designed. If you want to get other mods that do what it does but better, check out https://proudmuslim.tech/bad-mod-alternatives/labymod.html, or https://5zigreborn.eu/downloads/'
 				)
 			}
 

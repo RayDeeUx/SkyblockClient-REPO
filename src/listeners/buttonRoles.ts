@@ -12,7 +12,7 @@
 //         if(interaction.componentType != 'BUTTON') {return}
 //         const reactionRoleIDRegex = /[0-9]{18}\|[0-9]{18}/
 //         if (!interaction.customId.match(reactionRoleIDRegex)) return console.log('not a role')
-        
+
 //         const IDs = interaction.customId.split('|')
 
 //         const guild = await this.client.guilds.cache.get(IDs[0])
@@ -22,7 +22,6 @@
 //         interaction.member.roles.cache.forEach(role => {
 //             roleArray.push(role.id)
 //         })
-        
 
 //         if (roleArray.includes(buttonRole.id)) {
 //             await interaction.reply({content:`You have **${buttonRole.name}** already, so I'm removing it from you.`, ephemeral:true})
@@ -34,4 +33,3 @@
 //         }
 //     }
 // }
-

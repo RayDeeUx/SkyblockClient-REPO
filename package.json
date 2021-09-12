@@ -1,5 +1,5 @@
 {
-	"name": "skyclientbot-temp",
+	"name": "rain-temp",
 	"version": "0.0.1",
 	"description": "d i s c o r d b o t",
 	"main": "dist/index.js",
@@ -37,13 +37,16 @@
 		"ms": "^2.1.3"
 	},
 	"prettier": {
+		"printWidth": 200,
 		"tabWidth": 4,
-		"singleQuote": true,
+		"useTabs": true,
 		"semi": false,
+		"singleQuote": true,
+		"quoteProps": "as-needed",
+		"trailingComma": "es5",
 		"bracketSpacing": true,
 		"arrowParens": "always",
-		"printWidth": 200,
-		"useTabs": true
+		"embeddedLanguageFormatting": "auto"
 	},
 	"eslintConfig": {
 		"env": {

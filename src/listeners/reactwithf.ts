@@ -1,28 +1,27 @@
-import { BotListener } from '../extensions/BotListener';
+import { BotListener } from '../extensions/BotListener'
 
 class f extends BotListener {
-    constructor() {
-        super('f', {
-            emitter: 'client',
-            event: 'messageCreate'
-        });
-    }
+	constructor() {
+		super('f', {
+			emitter: 'client',
+			event: 'messageCreate',
+		})
+	}
 
-    async exec(message) {
-        //yes i stole the idea from optibot
-        //no, i have no idea what optibot is coded in, i didnt steal the code
-        try {
-            if (message.content.toLowerCase() == `f`) {
-                message.react(`🇫`)
-            }
-            if (message.content.toLowerCase() == 'l') {
-                message.react(`🇱`)
-            }
-        }
-        catch (err) {
-            return
-        }
-    }
+	async exec(message) {
+		//yes i stole the idea from optibot
+		//no, i have no idea what optibot is coded in, i didnt steal the code
+		try {
+			if (message.content.toLowerCase() == `f`) {
+				message.react(`🇫`)
+			}
+			if (message.content.toLowerCase() == 'l') {
+				message.react(`🇱`)
+			}
+		} catch (err) {
+			return
+		}
+	}
 }
 
-module.exports = f;
+module.exports = f

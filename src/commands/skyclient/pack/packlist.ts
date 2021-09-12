@@ -1,45 +1,45 @@
-import { MessageEmbed } from "discord.js"
-import axios from "axios"
-import { BotCommand } from "../../../extensions/BotCommand"
-import commandManager from "../../../functions/commandManager"
-import fs from "fs"
+import { MessageEmbed } from 'discord.js'
+import axios from 'axios'
+import { BotCommand } from '../../../extensions/BotCommand'
+import commandManager from '../../../functions/commandManager'
+import fs from 'fs'
 
-import importUtils from "../../../functions/utils"
-import skyclientutils from "../../../functions/skyclientutils"
-import msgutils from "../../../functions/msgutils"
+import importUtils from '../../../functions/utils'
+import skyclientutils from '../../../functions/skyclientutils'
+import msgutils from '../../../functions/msgutils'
 const utils = importUtils
 
 export default class packList extends BotCommand {
 	constructor() {
-		super("packList", {
-			aliases: ["packlist", "packs"],
+		super('packList', {
+			aliases: ['packlist', 'packs'],
 
-			slashOptions: [{ name: "ephemeral", description: "Toggle the embed showing for other people", type: "BOOLEAN", required: false }],
+			slashOptions: [{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false }],
 			slash: true,
 			slashGuilds: utils.slashGuilds,
-			description: "Shows a list of all the packs in SkyClient",
+			description: 'Shows a list of all the packs in SkyClient',
 		})
 	}
 
 	async exec(message, args) {
 		if (utils.SkyClientGuilds.includes(message.guild.id)) {
-			let packJson = await skyclientutils.getRepo("packs.json")
+			let packJson = await skyclientutils.getRepo('packs.json')
 
 			const packsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't packs List")
 
 			packJson.forEach((pack) => {
-				if (pack.display && pack.display != "no" && pack.hidden != true) {
-					let packs = ""
+				if (pack.display && pack.display != 'no' && pack.hidden != true) {
+					let packs = ''
 
-					if (pack.display.includes("Bundle")) {
+					if (pack.display.includes('Bundle')) {
 						pack.actions.forEach((bundle) => {
-							if (bundle.text && bundle.text != "Guide") {
-								packs = packs + bundle.text + ", "
+							if (bundle.text && bundle.text != 'Guide') {
+								packs = packs + bundle.text + ', '
 							}
 						})
 						packs = packs.substring(0, packs.length - 2)
 					} else {
-						if (pack.display && pack.creator && pack.display != "no" && pack.discordcode) {
+						if (pack.display && pack.creator && pack.display != 'no' && pack.discordcode) {
 							packs = `Creator: [${pack.creator}](https://discord.gg/${pack.discordcode})\npack ID: \`${pack.id}\``
 						} else {
 							packs = `Creator: ${pack.creator}\npack ID: \`${pack.id}\``
