@@ -9,7 +9,7 @@ class autoUpdateListener extends BotListener {
     }
 
     async exec(message) {
-        if (message.channel.id == '848931262248517732') {
+        if (message.channel.id == '882430915035418675') {
             const gitPullCommand = this.client.commandHandler.modules.find(cmd => (cmd.id == 'gitPull'))
             const reloadCommand = this.client.commandHandler.modules.find(cmd => (cmd.id == 'reload'))
 
