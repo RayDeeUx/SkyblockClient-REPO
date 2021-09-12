@@ -1,9 +1,9 @@
 import axios from "axios"
-import { BotCommand } from '../extensions/BotCommand';
-import utils from "../functions/utils";
+import { BotCommand } from '../../extensions/BotCommand';
+import utils from "../../functions/utils";
 import fs from 'fs'
-import skyclientutils from "../functions/skyclientutils";
-import msgutils from "../functions/msgutils";
+import skyclientutils from "../../functions/skyclientutils";
+import msgutils from "../../functions/msgutils";
 
 
 export default class json extends BotCommand {
