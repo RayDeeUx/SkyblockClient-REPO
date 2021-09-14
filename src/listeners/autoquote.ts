@@ -79,7 +79,7 @@ module.exports = class autoquote extends BotListener {
 								files: msg.attachments.toJSON(),
 								embeds: msg.embeds,
 								username: `${author}`,
-								allowedMentions: [],
+								allowedMentions: { parse: [] },
 								avatarURL: msg.author.displayAvatarURL(),
 							})
 					} else if (message.channel.type === 'GUILD_PUBLIC_THREAD' || message.channel.type === 'GUILD_PRIVATE_THREAD') {
@@ -109,7 +109,7 @@ module.exports = class autoquote extends BotListener {
 								embeds: msg.embeds,
 								username: `${author}`,
 								avatarURL: msg.author.displayAvatarURL(),
-								allowedMentions: [],
+								allowedMentions: { parse: [] },
 								threadId: message.channelId,
 							})
 						else
@@ -118,7 +118,7 @@ module.exports = class autoquote extends BotListener {
 								embeds: msg.embeds,
 								username: `${author}`,
 								avatarURL: msg.author.displayAvatarURL(),
-								allowedMentions: [],
+								allowedMentions: { parse: [] },
 								threadId: message.channelId,
 							})
 					}
