@@ -1,6 +1,7 @@
 import { Message, Snowflake } from 'discord.js'
 
 const bypassRoles = [
+	//skyclient
 	'780182606628782100',
 	'780183853628260352',
 	'832754819588292679',
@@ -11,41 +12,70 @@ const bypassRoles = [
 	'844275169010647050',
 	'799020944487612428',
 	'780202942321655858',
+
+	//lis' boat
+	'880717671967105044',
+	'880705826627649566',
 ] as unknown as Snowflake
 
 function userCanUseCommand(message: Message) {
-	if (message.guild.id != '780181693100982273') {
-		return true
-	}
+	// if (message.guild.id != '780181693100982273') {
+	// 	return true
+	// }
+	if (message.guildId === '780181693100982273') {
+		let userHasBypassRole = false
 
-	let userHasBypassRole = false
+		const allowedChannels = [
+			'796546551878516766', //bot commands
+		]
+		let channelIsAllowed = false
 
-	const allowedChannels = [
-		'796546551878516766', //bot commands
-	]
-	let channelIsAllowed = false
+		const guildID = '780181693100982273'
 
-	const guildID = '780181693100982273'
-
-	message.member.roles.cache.forEach((role) => {
-		if (bypassRoles.includes(role.id)) {
-			return (userHasBypassRole = true)
+		message.member.roles.cache.forEach((role) => {
+			if (bypassRoles.includes(role.id)) {
+				return (userHasBypassRole = true)
+			}
+		})
+		allowedChannels.forEach((channel) => {
+			if (message.channel.id === channel) {
+				return (channelIsAllowed = true)
+			}
+		})
+		if (userHasBypassRole) {
+			return true
 		}
-	})
-	allowedChannels.forEach((channel) => {
-		if (message.channel.id == channel) {
-			return (channelIsAllowed = true)
+		if (channelIsAllowed) {
+			return true
 		}
-	})
-	//@ts-ignore
-	if (userHasBypassRole == true) {
-		return true
-	}
-	//@ts-ignore
-	if (channelIsAllowed == true) {
-		return true
-	}
-	return false
+		return false
+	} else if (message.guildId === '880637463838724166') {
+		let userHasBypassRole = false
+
+		const allowedChannels = [
+			'880721465530544149', //bot commands,
+		]
+		let channelIsAllowed = false
+
+		const guildID = '780181693100982273'
+
+		message.member.roles.cache.forEach((role) => {
+			if (bypassRoles.includes(role.id)) {
+				return (userHasBypassRole = true)
+			}
+		})
+		allowedChannels.forEach((channel) => {
+			if (message.channel.id === channel) {
+				return (channelIsAllowed = true)
+			}
+		})
+		if (userHasBypassRole) return true
+
+		if (channelIsAllowed) return true
+
+		if (message.guild.ownerId === message.author.id) return true
+		return false
+	} else return true
 }
 
 export = {
