@@ -1,7 +1,11 @@
 import { ReplyMessageOptions, Message } from 'discord.js'
 import commandManager from './commandManager'
 
-async function reply(message: Message, content: ReplyMessageOptions, forceEphemeral?: boolean) {
+async function reply(message: Message, data: ReplyMessageOptions, forceEphemeral?: boolean) {
+	let content
+	if (!data.content && !message.interaction) content = { content: 'Please use my slashcommands! Message commands will stop working when the bot fully releases.', ...data }
+	else content = data
+
 	if (forceEphemeral && message.interaction && commandManager.userCanUseCommand(message)) {
 		let ephemeralReplyContent = {
 			...content,
