@@ -1,4 +1,5 @@
 import { MessageEmbed } from 'discord.js'
+import msgutils from 'src/functions/msgutils'
 import { BotCommand } from '../extensions/BotCommand'
 import utils from '../functions/utils'
 
@@ -29,6 +30,6 @@ export default class pronouns extends BotCommand {
 		pronounsEmbed.setDescription(pronouns)
 		pronounsEmbed.setFooter('Data from https://pronoundb.org')
 
-		message.reply({ embeds: [pronounsEmbed] })
+		msgutils.reply(message, { embeds: [pronounsEmbed] })
 	}
 }
