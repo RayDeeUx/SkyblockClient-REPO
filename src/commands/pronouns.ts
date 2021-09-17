@@ -1,5 +1,5 @@
 import { MessageEmbed } from 'discord.js'
-import msgutils from 'src/functions/msgutils'
+import msgutils from '../functions/msgutils'
 import { BotCommand } from '../extensions/BotCommand'
 import utils from '../functions/utils'
 
