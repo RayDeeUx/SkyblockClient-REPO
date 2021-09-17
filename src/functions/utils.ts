@@ -299,6 +299,15 @@ async function fetchUser(user: string) {
 	}
 }
 
+function getLinksFromString(string:string){
+	const linkRegex = /(https?):\/\/[^\s$.?#].[^\s]*/gmi
+	const matches = [...string.matchAll(linkRegex)]
+	const matchesSet = new Set()
+	
+	matches.forEach((m) => matchesSet.add(m[0]))
+	return matchesSet
+}
+
 export = {
 	haste,
 	resetToken,
@@ -317,4 +326,5 @@ export = {
 	funnyNumber,
 	censorString,
 	fetchUser,
+	getLinksFromString
 }
