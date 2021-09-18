@@ -18,9 +18,9 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 	async exec(message) {
 		if (!message.member) return
 		if (message.author.id === this.client.user.id) return
-		// if (message.member.roles.cache.has('780182606628782100')) return
-		// if (message.member.roles.cache.has('885960137544695819')) return
-		// if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
+		if (message.member.roles.cache.has('780182606628782100')) return
+		if (message.member.roles.cache.has('885960137544695819')) return
+		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
 
 		//all of these are probably mostly used for scams, gotten from some people on discord.gg/skyclient (specifically 304054669372817419 and 208338448677994496)
 		const IPs = [
