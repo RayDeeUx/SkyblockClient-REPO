@@ -96,7 +96,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 					return (ban = true)
 			})
 
-			//if (!ban) return await message.reply('not a scamlink')
+			if (!ban) return //await message.reply('not a scamlink')
 			if (message.guild.id == '780181693100982273') {
 				let hasRole = false
 				message.member.roles.cache.forEach((role) => {
