@@ -17,6 +17,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 	async exec(message) {
 		if (!message.member) return
+		if (message.author.id === this.client.user.id) return
 		// if (message.member.roles.cache.has('780182606628782100')) return
 		// if (message.member.roles.cache.has('885960137544695819')) return
 		// if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
@@ -63,7 +64,11 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 			'194.226.139.123',
 		]
 
+		const scamLinks = await skyclientutils.getRepo('scamlinks.json', true)
+
 		const links = utils.getLinksFromString(message.content)
+
+		let ban = false
 
 		links.forEach(async (l) => {
 			let link = l as string
@@ -74,8 +79,24 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 			const linkData = JSON.parse((await got.get(`http://ip-api.com/json/${link.replace('https://', '')}`)).body)
 
-			if (!IPs.includes(linkData.query)) return
+			if (IPs.includes(linkData.query)) {
+				//console.log(`ip: ${true}`)
+				return (ban = true)
+			}
+			//if (scamLinks.includes(link)) return ban = true
 
+			const splitLink = link.split('/')
+			//console.log(splitLink)
+
+			splitLink.forEach(async (l) => {
+				//console.log(l)
+				if (scamLinks.includes(l))
+					//console.log(`repo: ${true}`)
+					//console.log(scamLinks.includes(l))
+					return (ban = true)
+			})
+
+			//if (!ban) return await message.reply('not a scamlink')
 			if (message.guild.id == '780181693100982273') {
 				let hasRole = false
 				message.member.roles.cache.forEach((role) => {
@@ -84,8 +105,8 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 					}
 				})
 				if (hasRole) {
-					message.delete()
-					message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+					await message.delete()
+					await message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
 					return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
 				}
 
@@ -93,16 +114,16 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 					try {
 						await message.author.send('Hey, did you know that we ban for scam/malicious links?')
 					} catch (err) {}
-					message.member.ban({ reason: 'Sending a scam link' })
-					message.delete()
-					message.guild.channels.cache
+					await message.member.ban({ reason: 'Sending a scam link' })
+					await message.delete()
+					await message.guild.channels.cache
 						.get('796895966414110751')
 						.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
 				}
 			} else if (message.guild.id == '762808525679755274') {
 				if (message.member.permissions.toArray().includes('ADMINISTRATOR')) {
-					message.delete()
-					message.guild.channels.cache.get('879037311235526666').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+					await message.delete()
+					await message.guild.channels.cache.get('879037311235526666').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
 					return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
 				}
 
@@ -110,16 +131,18 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 					try {
 						await message.author.send('Hey, did you know that we ban for scam/malicious links?')
 					} catch (err) {}
-					message.member.ban({ reason: 'Sending a scam link' })
-					message.delete()
-					message.guild.channels.cache
+					await message.member.ban({ reason: 'Sending a scam link' })
+					await message.delete()
+					await message.guild.channels.cache
 						.get('879037311235526666')
 						.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
 				}
 			} else {
-				message.reply('hey fuck you thats a scam link')
+				await message.reply('hey fuck you thats a scam link')
 			}
 		})
+
+		//console.log(ban)
 	}
 }
 
