@@ -13,6 +13,6 @@ export default class bestbot extends BotCommand {
 	}
 
 	async exec(message: Message) {
-		await message.reply('fire ofc')
+		await message.reply('me ofc')
 	}
 }
