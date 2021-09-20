@@ -10,7 +10,7 @@ export default class faq extends BotCommand {
 			args: [{ id: 'question', type: 'string' }],
 
 			slash: true,
-			slashGuilds: utils.slashGuilds,
+			slashGuilds: utils.SkyClientGuilds,
 			slashOptions: [
 				{
 					name: 'question',
