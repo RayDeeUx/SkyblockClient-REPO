@@ -17,7 +17,6 @@ const slashGuilds = ['780181693100982273', '794610828317032458', '88063746383872
 
 const SkyClientGuilds = [
 	`780181693100982273`, //main server
-	`880637463838724166`, //testing server
 ]
 
 //this next function is taken from bush bot (https://github.com/NotEnoughUpdates/bush-bot), the repo is private so if you get a 404 then deal with it, removed a thing from the line under these comments because it didn't seem to be doing anything

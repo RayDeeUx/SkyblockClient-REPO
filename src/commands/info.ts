@@ -1,4 +1,5 @@
 import { MessageEmbed } from 'discord.js'
+import msgutils from 'src/functions/msgutils'
 import { BotCommand } from '../extensions/BotCommand'
 import utils from '../functions/utils'
 
@@ -21,6 +22,6 @@ export default class info extends BotCommand {
 	}
 
 	async exec(message, args) {
-		//e
+		await msgutils.reply(message, {content: 'hi this command isn\'t done yet\n\nfor now join https://inv.wtf/lisena'}, args.ephemeral)
 	}
 }
