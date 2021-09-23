@@ -26,7 +26,7 @@ export default class networth extends BotCommand {
 
 	async exec(message, args) {
 		if (!message.interaction) return await message.reply('Maro has fully switched to slash commands. Please use those instead.')
-		const fuckMaro = new MessageEmbed().setTitle('Error').setDescription(`The player ${args.player} could not be found.`).setColor('RED').setFooter('Created by Nariah')
+		const fuckMaro = new MessageEmbed().setTitle('Error').setDescription(`The player ${args.player} could not be found, the most often this is caused by a profile wipe or deletion..`).setColor('RED').setFooter('Created by Nariah')
 
 		await message.reply({ embeds: [fuckMaro] })
 	}
