@@ -6,6 +6,7 @@ import commandManager from '../functions/commandManager'
 import skyclientutils from '../functions/skyclientutils'
 import utils from '../functions/utils'
 import got from 'got/dist/source'
+import { Message, TextChannel } from 'discord.js'
 
 class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 	constructor() {
@@ -20,7 +21,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 		if (message.author.id === this.client.user.id) return
 		if (message.member.roles.cache.has('780182606628782100')) return
 		if (message.member.roles.cache.has('885960137544695819')) return
-		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
+		//if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
 
 		//all of these are probably mostly used for scams, gotten from some people on discord.gg/skyclient (specifically 304054669372817419 and 208338448677994496)
 		const IPs = [
@@ -62,13 +63,13 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 			'194.226.139.120',
 			'194.226.139.121',
 			'194.226.139.123',
+			'141.95.23.53'
 		]
 
 		const scamLinks = await skyclientutils.getRepo('scamlinks.json', true)
 
 		const links = utils.getLinksFromString(message.content)
 
-		let ban = false
 
 		links.forEach(async (l) => {
 			let link = l as string
@@ -81,7 +82,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 			if (IPs.includes(linkData.query)) {
 				//console.log(`ip: ${true}`)
-				return (ban = true)
+				return await ban(message)
 			}
 			//if (scamLinks.includes(link)) return ban = true
 
@@ -93,53 +94,8 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 				if (scamLinks.includes(l))
 					//console.log(`repo: ${true}`)
 					//console.log(scamLinks.includes(l))
-					return (ban = true)
+					return await ban(message)
 			})
-
-			if (!ban) return //await message.reply('not a scamlink')
-			if (message.guild.id == '780181693100982273') {
-				let hasRole = false
-				message.member.roles.cache.forEach((role) => {
-					if (commandManager.bypassRoles.includes(role.id) || message.author.id == message.guild.ownerID) {
-						return (hasRole = true)
-					}
-				})
-				if (hasRole) {
-					await message.delete()
-					await message.guild.channels.cache.get('796895966414110751').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
-					return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
-				}
-
-				if (message.member.bannable && !hasRole) {
-					try {
-						await message.author.send('Hey, did you know that we ban for scam/malicious links?')
-					} catch (err) {}
-					await message.member.ban({ reason: 'Sending a scam link' })
-					await message.delete()
-					await message.guild.channels.cache
-						.get('796895966414110751')
-						.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
-				}
-			} else if (message.guild.id == '762808525679755274') {
-				if (message.member.permissions.toArray().includes('ADMINISTRATOR')) {
-					await message.delete()
-					await message.guild.channels.cache.get('879037311235526666').send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
-					return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
-				}
-
-				if (message.member.bannable && !message.member.permissions.toArray().includes('ADMINISTRATOR')) {
-					try {
-						await message.author.send('Hey, did you know that we ban for scam/malicious links?')
-					} catch (err) {}
-					await message.member.ban({ reason: 'Sending a scam link' })
-					await message.delete()
-					await message.guild.channels.cache
-						.get('879037311235526666')
-						.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
-				}
-			} else {
-				await message.reply('hey fuck you thats a scam link')
-			}
 		})
 
 		//console.log(ban)
@@ -147,3 +103,53 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 }
 
 module.exports = thisIsAMinecraftModDiscordNotACSGOTradingDiscord
+
+// async function ban(message: Message, reason:string) {
+// 	await message.reply(`banned ${reason}`)
+// }
+
+async function ban(message: Message) {
+	if (message.guild.id == '780181693100982273') {
+		let hasRole = false
+		message.member.roles.cache.forEach((role) => {
+			if (commandManager.bypassRoles.includes(role.id) || message.author.id == message.guild.ownerId) {
+				return (hasRole = true)
+			}
+		})
+		if (hasRole) {
+			await message.delete()
+			await (message.guild.channels.cache.get('796895966414110751') as TextChannel).send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+			return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
+		}
+
+		if (message.member.bannable && !hasRole) {
+			try {
+				await message.author.send('Hey, did you know that we ban for scam/malicious links?')
+			} catch (err) {}
+			await message.member.ban({ reason: 'Sending a scam link' })
+			await message.delete()
+			await (message.guild.channels.cache
+				.get('796895966414110751') as TextChannel)
+				.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+		}
+	} else if (message.guild.id == '762808525679755274') {
+		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) {
+			await message.delete()
+			await (message.guild.channels.cache.get('879037311235526666') as TextChannel).send(`${message.author.tag} sent a scam link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+			return message.channel.send(`hey yeah you shouldn't send those ${message.author}`)
+		}
+
+		if (message.member.bannable && !message.member.permissions.toArray().includes('ADMINISTRATOR')) {
+			try {
+				await message.author.send('Hey, did you know that we ban for scam/malicious links?')
+			} catch (err) {}
+			await message.member.ban({ reason: 'Sending a scam link' })
+			await message.delete()
+			await (message.guild.channels.cache
+				.get('879037311235526666') as TextChannel)
+				.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+		}
+	} else {
+		await message.reply('hey fuck you thats a scam link')
+	}
+}
