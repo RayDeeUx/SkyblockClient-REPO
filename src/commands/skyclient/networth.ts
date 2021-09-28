@@ -10,7 +10,7 @@ export default class networth extends BotCommand {
 			args: [{ id: 'player', type: 'string' }],
 
 			slash: true,
-			slashGuilds: utils.slashGuilds,
+			slashGuilds: ['780181693100982273'],
 			slashOptions: [
 				{
 					name: 'player',
@@ -25,6 +25,7 @@ export default class networth extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (message.guild.id != '780181693100982273') return
 		if (!message.interaction) return await message.reply('Maro has fully switched to slash commands. Please use those instead.')
 		const fuckMaro = new MessageEmbed().setTitle('Error').setDescription(`The player ${args.player} does not appear to have a Skyblock profile. This is commonly caused by a profile deletion.`).setColor('RED').setFooter('Created by Nariah')
 
