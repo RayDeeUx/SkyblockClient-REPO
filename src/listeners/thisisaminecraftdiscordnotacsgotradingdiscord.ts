@@ -25,6 +25,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 		//all of these are probably mostly used for scams, gotten from some people on discord.gg/skyclient (specifically 304054669372817419 and 208338448677994496)
 		const IPs = [
+			'45.133.1.45',
 			'45.138.72.93',
 			'45.138.72.103',
 			'45.138.72.104',
