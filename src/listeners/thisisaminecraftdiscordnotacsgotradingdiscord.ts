@@ -23,7 +23,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 		if (message.member.roles.cache.has('885960137544695819')) return
 		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
 
-		//all of these are probably mostly used for scams, gotten from some people on discord.gg/skyclient (specifically 304054669372817419 and 208338448677994496)
+		//all of these are mostly used for scams, gotten from some people on discord.gg/skyclient (specifically 304054669372817419 and 208338448677994496)
 		const IPs = [
 			'45.138.72.93',
 			'45.138.72.103',
@@ -73,6 +73,8 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 		links.forEach(async (l) => {
 			let link = l as string
+
+			if (link.includes('steamcommunity.com')) return await message.reply('This is an actual steam link. It isn\'t one of the older CS:GO scam links.')
 
 			if (link.startsWith('https://')) link = link.replace('https://', '')
 			if (link.startsWith('http://')) link = link.replace('http://', '')
