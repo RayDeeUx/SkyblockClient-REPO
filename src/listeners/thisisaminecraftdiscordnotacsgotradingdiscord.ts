@@ -93,7 +93,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 			if (link.startsWith('http://')) link = link.replace('http://', '')
 			if (link.endsWith('/')) link = link.substring(0, link.length - 1)
 
-			const linkData = JSON.parse((await got.get(`http://ip-api.com/json/${link.replace('https://', '')}`)).body)
+			const linkData = JSON.parse((await got.get(`http://ip-api.com/json/${link.replace('https://', '').replace('http://', '')}`)).body)
 
 			if (IPs.includes(linkData.query)) {
 				//console.log(`ip: ${true}`)
