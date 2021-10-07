@@ -15,6 +15,7 @@ class ReadyListener extends BotListener {
 
 	async exec() {
 		console.log(chalk`{magenta Succesfully logged in as }{magentaBright.bold ${this.client.user.tag}}`)
+		console.log(await this.client.loadIPs() ? chalk`{magentaBright Succesfully loaded scamlink IPs}` : chalk`{red Failed to load scam IPs. The scamlink detector will only use SkyClient's repo.}`)
 		console.log(`\n`)
 		console.log(chalk.magentaBright(`---Bot Output---`))
 

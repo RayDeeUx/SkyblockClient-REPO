@@ -23,62 +23,6 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 		if (message.member.roles.cache.has('885960137544695819')) return
 		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
 
-		//all of these are mostly used for scams, gotten from some people on discord.gg/skyclient (specifically 304054669372817419 and 208338448677994496)
-		const IPs = [
-			'45.133.1.45',
-			'45.138.72.93',
-			'45.138.72.103',
-			'45.138.72.104',
-			'45.138.72.107',
-			'45.138.72.110',
-			'45.138.72.207',
-			'46.17.96.21',
-			'95.181.152.14',
-			'95.181.152.37',
-			'95.181.152.47',
-			'95.181.152.88',
-			'95.181.152.232',
-			'95.181.155.77',
-			'95.181.155.109',
-			'95.181.155.143',
-			'95.181.155.250',
-			'95.181.157.27',
-			'95.181.157.34',
-			'95.181.157.36',
-			'95.181.157.84',
-			'95.181.157.237',
-			'95.181.163.44',
-			'95.181.163.46',
-			'95.181.163.57',
-			'95.181.163.72',
-			'95.181.163.79',
-			'95.181.172.204',
-			'95.181.172.205',
-			'95.181.172.206',
-			'95.181.172.207',
-			'95.181.172.208',
-			'95.181.172.209',
-			'95.181.172.238',
-			'139.28.223.33',
-			'141.95.23.50',
-			'141.95.23.52',
-			'141.95.23.53',
-			'141.95.23.54',
-			'141.95.23.55',
-			'141.95.23.56',
-			'141.95.23.57',
-			'176.96.238.58',
-			'190.115.18.178',
-			'194.147.142.94',
-			'194.226.139.7',
-			'194.226.139.9',
-			'194.226.139.11',
-			'194.226.139.115',
-			'194.226.139.120',
-			'194.226.139.121',
-			'194.226.139.123'
-		]
-
 		const scamLinks = await skyclientutils.getRepo('scamlinks.json', true)
 
 		const links = utils.getLinksFromString(message.content)
@@ -95,7 +39,7 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 			const linkData = JSON.parse((await got.get(`http://ip-api.com/json/${link.replace('https://', '').replace('http://', '')}`)).body)
 
-			if (IPs.includes(linkData.query)) {
+			if (this.client.scamIPs.includes(linkData.query)) {
 				//console.log(`ip: ${true}`)
 				return await ban(message)
 			}
