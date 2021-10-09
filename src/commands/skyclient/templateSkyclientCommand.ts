@@ -6,15 +6,12 @@ export default class templateSkyclientCommand extends BotCommand {
 	constructor() {
 		super('templateSkyclientCommand', {
 			aliases: ['templateSkyclientCommand'],
-			channel: 'guild',
+			SkyClientOnly: true,
+			ownerOnly: true
 		})
 	}
 
 	async exec(message) {
-		if (utils.SkyClientGuilds.includes(message.guild.id)) {
-			message.util.reply(`This is a SkyClient server!`)
-		} else {
-			message.util.send(`e`)
-		}
+		await message.reply('this is a skyclient server')
 	}
 }

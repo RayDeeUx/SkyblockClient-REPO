@@ -21,11 +21,11 @@ export default class modInfo extends BotCommand {
 			],
 			slashGuilds: utils.slashGuilds,
 			description: 'Shows information on a specific mod from SkyClient',
+			SkyClientOnly: true
 		})
 	}
 
 	async exec(message, args) {
-		if (!utils.SkyClientGuilds.includes(message.guild.id)) return
 
 		let modJson
 

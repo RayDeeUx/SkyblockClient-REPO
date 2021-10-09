@@ -16,18 +16,17 @@ export default class packName extends BotCommand {
 			args: [{ id: 'pack', type: 'string' }],
 
 			slash: true,
-			slashGuilds: utils.slashGuilds,
+			slashGuilds: utils.SkyClientGuilds,
 			slashOptions: [
 				{ name: 'pack', description: 'The ID of the pack you want to get info on', type: 'STRING', required: true },
 				{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false },
 			],
 			description: 'Shows a list of all the packs in SkyClient',
+			SkyClientOnly: true,
 		})
 	}
 
 	async exec(message, args) {
-		if (!utils.SkyClientGuilds.includes(message.guild.id)) return
-		
 		let packJson
 		packJson = await skyclientutils.getRepo('packs.json')
 

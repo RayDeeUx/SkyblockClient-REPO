@@ -1,17 +1,19 @@
+import { AkairoMessage } from 'discord-akairo'
+import { Message } from 'discord.js'
+import { BotCommand } from 'src/extensions/BotCommand'
+import utils from '../functions/utils'
 import { BotInhibitor } from '../extensions/BotInhibitor'
 
-class BlacklistInhibitor extends BotInhibitor {
+export default class SkyClientInhibitor extends BotInhibitor {
 	constructor() {
-		super('blacklist', {
-			reason: 'blacklist',
+		super('SkyClientInhibitor', {
+			reason: 'notSkyClient',
 		})
 	}
 
-	exec(message) {
-		// He's a meanie!
-		const blacklist = ['600875620808785941']
-		return blacklist.includes(message.author.id)
+	exec(message: Message | AkairoMessage, command: BotCommand): boolean {
+		if (command.SkyClientOnly) {
+			return utils.SkyClientGuilds.includes(message.guild.id) ? false : true
+		} else return false
 	}
 }
-
-module.exports = BlacklistInhibitor

@@ -12,6 +12,7 @@ export default class repo extends BotCommand {
 	constructor() {
 		super('repo', {
 			aliases: ['repo'],
+			SkyClientOnly: true
 		})
 	}
 	async exec(message) {

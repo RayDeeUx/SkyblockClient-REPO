@@ -9,6 +9,7 @@ export default class pullAutoresponse extends BotCommand {
 	constructor() {
 		super('pullAutoresponse', {
 			aliases: ['pullAutoresponse', 'pullRepo'],
+			SkyClientOnly: true
 		})
 	}
 	async exec(message) {

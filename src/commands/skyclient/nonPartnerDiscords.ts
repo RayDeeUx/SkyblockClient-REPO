@@ -11,9 +11,10 @@ export default class nonpartnereddiscords extends BotCommand {
 		super('nonpartnereddiscords', {
 			aliases: ['nonpartnereddiscords'],
 			args: [{ id: 'type', type: 'string' }],
+			SkyClientOnly: true,
 
 			slash: true,
-			slashGuilds: utils.slashGuilds,
+			slashGuilds: utils.SkyClientGuilds,
 			slashOptions: [
 				{
 					name: 'type',
@@ -32,33 +33,31 @@ export default class nonpartnereddiscords extends BotCommand {
 	}
 
 	async exec(message, args) {
-		if (utils.SkyClientGuilds.includes(message.guild.id)) {
-			const discords = await skyclientutils.getRepo('discords.json')
+		const discords = await skyclientutils.getRepo('discords.json')
 
-			const discordsEmbed = new MessageEmbed().setTitle('Non-partnered discord servers')
+		const discordsEmbed = new MessageEmbed().setTitle('Non-partnered discord servers')
 
-			let discordString = ''
+		let discordString = ''
 
-			discords.forEach((discord) => {
-				if (!discord.partner) {
-					discordsEmbed.setColor(message.member.displayColor)
-					discordsEmbed.addField(discord.fancyname, `[discord.gg/${discord.code}](https://discord.gg/${discord.code})`)
-					discordString = discordString + `discord.gg/${discord.code}\n`
-				}
-			})
+		discords.forEach((discord) => {
+			if (!discord.partner) {
+				discordsEmbed.setColor(message.member.displayColor)
+				discordsEmbed.addField(discord.fancyname, `[discord.gg/${discord.code}](https://discord.gg/${discord.code})`)
+				discordString = discordString + `discord.gg/${discord.code}\n`
+			}
+		})
 
-			if (!args.type) {
-				await msgutils.reply(message, { embeds: [discordsEmbed] }, args.ephemeral)
-			}
-			if (args.type && args.type.toLowerCase() == 'string') {
-				await msgutils.reply(message, { content: discordString }, args.ephemeral)
-			}
-			if (args.type && args.type.toLowerCase() == 'embed') {
-				await msgutils.reply(message, { embeds: [discordsEmbed] }, args.ephemeral)
-			}
-			if (args.type && args.type.toLowerCase() != 'string' && args.type.toLowerCase() != 'embed') {
-				await msgutils.reply(message, { content: "That isn't a valid type!\nValid types: `embed`, `string`" }, args.ephemeral)
-			}
+		if (!args.type) {
+			await msgutils.reply(message, { embeds: [discordsEmbed] }, args.ephemeral)
+		}
+		if (args.type && args.type.toLowerCase() == 'string') {
+			await msgutils.reply(message, { content: discordString }, args.ephemeral)
+		}
+		if (args.type && args.type.toLowerCase() == 'embed') {
+			await msgutils.reply(message, { embeds: [discordsEmbed] }, args.ephemeral)
+		}
+		if (args.type && args.type.toLowerCase() != 'string' && args.type.toLowerCase() != 'embed') {
+			await msgutils.reply(message, { content: "That isn't a valid type!\nValid types: `embed`, `string`" }, args.ephemeral)
 		}
 	}
 }

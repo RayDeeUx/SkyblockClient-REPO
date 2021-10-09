@@ -16,13 +16,13 @@ export default class modList extends BotCommand {
 
 			slashOptions: [{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false }],
 			slash: true,
-			slashGuilds: utils.slashGuilds,
+			slashGuilds: utils.SkyClientGuilds,
 			description: 'Shows a list of all the mods in SkyClient',
+			SkyClientOnly: true
 		})
 	}
 
 	async exec(message, args) {
-		if (utils.SkyClientGuilds.includes(message.guild.id)) {
 			let mods = await skyclientutils.getRepo('mods.json')
 
 			const modsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't Mods List")
@@ -52,8 +52,5 @@ export default class modList extends BotCommand {
 
 			const embed = modsEmbed
 			await msgutils.reply(message, { embeds: [embed] }, args.ephemeral)
-		} else {
-			return
-		}
 	}
 }
