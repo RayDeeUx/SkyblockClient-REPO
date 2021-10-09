@@ -77,7 +77,7 @@ export default class repo extends BotCommand {
 
 									dotThen.once('collect', async (msg) => {
 										const newUrl = msg.content
-										let newFileName = newUrl.split('/')[newUrl.split('/').length - 1]
+										let newFileName = decodeURIComponent(newUrl.split('/')[newUrl.split('/').length - 1])
 
 										const notmsg = await msg.reply(
 											`Alright! ${mod.display}'s new URL will be ${newUrl}. I believe the new file name is ${newFileName}.\nIf this is not correct, please say the new file name.\nIf it is, just send \`done\`.`
@@ -85,7 +85,7 @@ export default class repo extends BotCommand {
 
 										dotThen.once('collect', async (msg) => {
 											if (msg.content.toLowerCase() === 'done') {
-												if (newFileName === mod2.file && newUrl === mod2.url) {
+												if (newFileName === decodeURIComponent(mod2.file) && newUrl === mod2.url) {
 													return await msg.reply('You have changed nothing, so the command has been exited.')
 												}
 
