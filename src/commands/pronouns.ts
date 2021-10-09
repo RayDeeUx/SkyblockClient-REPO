@@ -7,29 +7,22 @@ export default class pronouns extends BotCommand {
 	constructor() {
 		super('pronouns', {
 			aliases: ['pronouns'],
-			args: [{ id: 'person', type: 'string', match: 'rest' }],
-
 			description: 'Shows the pronouns of a user, if they have them set on https://pronoundb.org',
 
 			slashOptions: [{ name: 'person', type: 'USER', description: 'the person you want to know the pronouns of' }],
 			slash: true,
 		})
 	}
-	async exec(message, args) {
-		const person = await utils.fetchUser(args.person ?? message.author.id)
+	async execSlash(message, args) {
+		const pronouns = await utils.getPronouns(args.person ? args.person.user : message.author, 'details')
 
-		const pronouns = await utils.getPronouns(person, 'details')
-		const pronounsEmbed = new MessageEmbed()
-
-		if (person.id == message.author.id) {
-			pronounsEmbed.setTitle('Your pronouns')
-		} else {
-			pronounsEmbed.setTitle(`${person.username}'s pronouns`)
-		}
-
-		pronounsEmbed.setDescription(pronouns)
-		pronounsEmbed.setFooter('Data from https://pronoundb.org')
-
-		msgutils.reply(message, { embeds: [pronounsEmbed] })
+		await message.reply({embeds: [
+			{
+				title: args.person ? `${args.person.user.tag}'s pronouns` : 'Your pronouns',
+				description: pronouns,
+				color: message.member.displayColor,
+				footer: {text: 'All data from https://pronoundb.org'}
+			}
+		]})
 	}
 }

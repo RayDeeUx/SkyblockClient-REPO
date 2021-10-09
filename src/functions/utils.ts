@@ -171,8 +171,8 @@ async function getPronouns(user: User, context: string) {
 	]
 
 	try {
-		const pronoundb = await axios(`https://pronoundb.org/api/v1/lookup?platform=discord&id=${user.id}`, { method: 'get' })
-		const pronouns = pronoundb.data.pronouns
+		const pronoundb = await got.get(`https://pronoundb.org/api/v1/lookup?platform=discord&id=${user.id}`)
+		const pronouns = (JSON.parse(pronoundb.body)).pronouns
 
 		//what to return, based on what's getting someone's pronouns
 		if (context == `details`) {
@@ -298,11 +298,11 @@ async function fetchUser(user: string) {
 	}
 }
 
-function getLinksFromString(string:string){
-	const linkRegex = /(https?):\/\/[^\s$.?#].[^\s]*/gmi
+function getLinksFromString(string: string) {
+	const linkRegex = /(https?):\/\/[^\s$.?#].[^\s]*/gim
 	const matches = [...string.matchAll(linkRegex)]
 	const matchesSet = new Set()
-	
+
 	matches.forEach((m) => matchesSet.add(m[0]))
 	return matchesSet
 }
@@ -325,5 +325,5 @@ export = {
 	funnyNumber,
 	censorString,
 	fetchUser,
-	getLinksFromString
+	getLinksFromString,
 }
