@@ -1,25 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import chalk from 'chalk'
-import { exec } from 'child_process'
-import { Guild, Message, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
-import { promisify, inspect } from 'util'
-import { BotCommand } from '../../extensions/BotCommand'
-
 import importUtils from '../../functions/utils'
-const utils = importUtils
+import { exec } from 'child_process'
+import { AkairoMessage } from 'discord-akairo'
+import { MessageEmbed } from 'discord.js'
+import { inspect, promisify } from 'util'
 
-import importScutils from '../../functions/skyclientutils'
-const scutils = importScutils
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import djsImport from 'discord.js'
+const djs = djsImport
 
-import importAxios from 'axios'
-const axios = importAxios
+import { BotCommand } from 'src/extensions/BotCommand'
 
-const sh = promisify(exec)
-
-import importMs from 'ms'
-const ms = importMs
-
-export default class evaluate extends BotCommand {
+export default class Evaluate extends BotCommand {
 	constructor() {
 		super('eval', {
 			aliases: ['eval', 'ev', 'exec'],
@@ -30,39 +21,49 @@ export default class evaluate extends BotCommand {
 			],
 			ownerOnly: true,
 			description: 'run code',
+			slash: false,
+			slashOptions: [
+				{ name: 'codetoeval', description: 'code', type: 'STRING', required: true },
+				{ name: 'silent', description: 'no embed', type: 'BOOLEAN' },
+				{ name: 'sudo', description: 'bypass a few things', type: 'BOOLEAN' },
+			],
+			slashGuilds: ['880637463838724166'],
 		})
 	}
 
-	async exec(message: Message, args: any) {
-		//if (message.author.id != '492488074442309642') {return message.reply('no u')}
-
+	async exec(message, args) {
 		if (args.codetoeval.includes('channel.delete')) {
 			return message.reply('Are you IRONM00N?')
 		}
-		if (args.codetoeval.includes('message.guild.delete')) {
+		if (args.codetoeval.includes('guild.delete')) {
 			return message.reply("You're like IRONM00N but infinitely more stupid!")
 		}
 		if (args.codetoeval.includes('delete') && !args.sudo) {
 			return message.reply('This would be blocked by smooth brain protection, but BushBot has a license')
 		}
 
-		const guild = message.guild
-		const client = this.client
-		const channel = message.channel
-		const embed = new MessageEmbed()
-		const user = message.author
-		const member = message.member
-		const botUser = this.client.user
-		const botMember = guild.me
+		const guild = message.guild,
+			client = this.client,
+			channel = message.channel,
+			embed = new MessageEmbed(),
+			user = message.author,
+			member = message.member,
+			botUser = this.client.user,
+			botMember = message.guild?.me,
+			utils = importUtils,
+			sh = promisify(exec)
 
 		let output
 
 		try {
-			output = await eval(`(async () => {${args.codetoeval}})()`)
+			let codeToEval = `(async () => {${args.codetoeval}})()`
+			if (!args.codetoeval.includes('await') && !args.codetoeval.includes('return')) codeToEval = args.codetoeval
+			if (args.codetoeval.includes('await') && !args.codetoeval.includes('return')) codeToEval = `(async () => { return ${args.codetoeval}})()`
+			output = await eval(codeToEval)
 			output = inspect(output, { depth: 0 })
+			output = utils.censorString(output)
 		} catch (err) {
-			const errorStack = err.stack.substring(0, 1000)
-
+			const errorStack = (err?.stack ?? err).substring(0, 1000)
 			output = utils.censorString(errorStack)
 		}
 
@@ -71,44 +72,41 @@ export default class evaluate extends BotCommand {
 		const evalEmbedDisabledGuilds = ['794610828317032458']
 		const evalDisabledGuildChannelBypass = ['834878498941829181']
 
-		if (evalEmbedDisabledGuilds.includes(message.guild!.id) && !evalDisabledGuildChannelBypass.includes(message.channel.id)) {
+		if (evalEmbedDisabledGuilds.includes(message.guild?.id as string) && !evalDisabledGuildChannelBypass.includes(message.channel.id)) {
 			if (args.codetoeval.includes('message.delete')) {
 				return
 			} else {
-				return message.react('<a:successAnimated:881336936533483520>')
+				return await message.react('<a:successAnimated:881336936533483520>')
 			}
 		}
 
 		if (!args.silent && !args.codetoeval.includes('message.channel.delete()')) {
 			const evalOutputEmbed = new MessageEmbed().setTitle('Evaluated Code').addField(':inbox_tray: **Input**', `\`\`\`js\n${args.codetoeval}\`\`\``)
-			//.setColor(message.member!.displayColor)
+			if (message.member) evalOutputEmbed.setColor(message.member.displayColor)
 
-			output = `\`\`\`js\n${output}\`\`\``
+			let newOutput = `\`\`\`js\n${output}\`\`\``
 
-			if (output.length > 900) {
+			if (newOutput.length > 900) {
 				const haste = await utils.haste(utils.censorString(output))
-				output = output.substring(0, 900)
-				output = output + `\`\`\`\nThe output was too large to display, so it was uploaded to [hastebin](${haste})`
+				newOutput = `\`\`\`js\n${output.substring(0, 900)}\`\`\``
+				newOutput += `The output was too large to display, so it was uploaded to [hastebin](${haste})`
 			}
 
-			evalOutputEmbed.addField(':outbox_tray: **Output**', utils.censorString(output))
+			evalOutputEmbed.addField(':outbox_tray: **Output**', newOutput)
 
-			//@ts-ignore strict mode bad this will exist
-			if (!message.interaction) {
-				await message.util.reply({ embeds: [evalOutputEmbed] })
-			}
-			if (message.interaction) {
-				await message.reply({ embeds: [evalOutputEmbed] })
-			}
+			//@ts-ignore stfu typescript
+			await message.util.reply({ embeds: [evalOutputEmbed] })
 		}
 		if (args.silent && !message.interaction) {
 			if (args.codetoeval.includes('message.delete')) {
 				return
 			}
-			message.react('<a:successAnimated:881336936533483520>')
-		} else if (args.silent && message.interaction) {
-			//@ts-ignore fuck strict mode lol
-			return message.reply({ content: "i can't really send nothing", ephemeral: true })
+			await message.react('<a:successAnimated:881336936533483520>')
+		} else if (args.silent && message instanceof AkairoMessage) {
+			return await message.util.reply({
+				content: "i can't really send nothing",
+				ephemeral: true,
+			})
 		}
 	}
 }
