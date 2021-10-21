@@ -32,7 +32,7 @@ export default class skycrypt extends BotCommand {
 	}
 
 	async exec(message, args) {
-		if (!args.profile) await msgutils.reply(message, { content: `https://sky.shiiyu.moe/stats/${args.ign}` })
-		else if (args.profile) await msgutils.reply(message, { content: `https://sky.shiiyu.moe/stats/${args.ign}/${args.profile}` })
+		if (!args.profile) await msgutils.reply(message, { content: `https://sky.shiiyu.moe/stats/${args.ign}`, allowedMentions: {parse:[]} })
+		else if (args.profile) await msgutils.reply(message, { content: `https://sky.shiiyu.moe/stats/${args.ign}/${args.profile}`, allowedMentions: {parse:[]} })
 	}
 }
