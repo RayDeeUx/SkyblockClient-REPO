@@ -27,6 +27,7 @@ export default class skycrypt extends BotCommand {
 					type: 'STRING',
 				},
 			],
+			SkyClientOnly: true
 		})
 	}
 
