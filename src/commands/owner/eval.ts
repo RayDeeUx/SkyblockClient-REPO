@@ -8,7 +8,7 @@ import { inspect, promisify } from 'util'
 import djsImport from 'discord.js'
 const djs = djsImport
 
-import { BotCommand } from 'src/extensions/BotCommand'
+import { BotCommand } from '../../extensions/BotCommand'
 
 export default class Evaluate extends BotCommand {
 	constructor() {
