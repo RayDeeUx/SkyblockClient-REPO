@@ -13,6 +13,7 @@ export class BotClient extends AkairoClient {
 		autoRegisterSlashCommands: true,
 		prefix: (message) => {
 			if (message.guild.id === '880637463838724166' && this.user.id === '881446517729296414') return '+'
+			if (message.guild.id === '900435143167188992' && this.user.id === '881446517729296414') return '+'
 			else return '-'
 		},
 		commandUtil: true,
