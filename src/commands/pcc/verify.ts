@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { MessageEmbed, User } from 'discord.js'
 import { BotCommand } from '../../extensions/BotCommand'
 import utils from '../../functions/utils'
 
@@ -16,17 +16,17 @@ export default class pccVerify extends BotCommand {
 			slashGuilds: ['762808525679755274'],
 		})
 	}
-	async exec(message, args) {
+	async exec(message, args: {person: User}) {
 		if (message.guild.id != '762808525679755274') return
-		const person = this.client.util.resolveMember(args.person, message.guild.members.cache)
 		if (!message.member.permissions.toArray().includes('MANAGE_ROLES')) {
 			return await message.reply({ content: "You can't do that!", ephemeral: true })
 		}
 		if (!message.guild.me.permissions.toArray().includes('MANAGE_ROLES')) return await message.reply({ content: "I can't verify people if I can't give them the role.", ephemeral: true })
 
-		if (!person) return await message.reply({ content: "I can't verify nobody!", ephemeral: true })
+		if (!args.person) return await message.reply({ content: "I can't verify nobody!", ephemeral: true })
+		const member = await message.guild.members.fetch(args.person)
 
-		await person.roles.add('879040337983705128')
-		await message.reply({ content: `Succesfully verified ${person.user.tag}.` })
+		await member.roles.add('879040337983705128')
+		await message.reply({ content: `Succesfully verified ${args.person.tag}.` })
 	}
 }
