@@ -32,7 +32,7 @@ export default class discord extends BotCommand {
 		let found = false
 
 		for (const discord of discords) {
-			if ((discord.nicknames.includes(args.discord.toLowerCase()) && found == false) || (discord.id.toLowerCase() == args.discord.toLowerCase() && found == false)) {
+			if ((discord.nicknames && discord.nicknames.includes(args.discord.toLowerCase()) && found == false) || (discord.id.toLowerCase() == args.discord.toLowerCase() && found == false)) {
 				found = true
 
 				if (discord.partner == true) {

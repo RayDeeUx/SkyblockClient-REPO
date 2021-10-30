@@ -6,9 +6,9 @@ import { inspect, promisify } from 'util'
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import djsImport from 'discord.js'
-const djs = djsImport
 
 import { BotCommand } from '../../extensions/BotCommand'
+import skyclientutils from '../../functions/skyclientutils'
 
 export default class Evaluate extends BotCommand {
 	constructor() {
@@ -51,7 +51,9 @@ export default class Evaluate extends BotCommand {
 			botUser = this.client.user,
 			botMember = message.guild?.me,
 			utils = importUtils,
-			sh = promisify(exec)
+			sh = promisify(exec),
+			djs = djsImport,
+			scutils = skyclientutils
 
 		let output
 

@@ -21,7 +21,7 @@ export default class json extends BotCommand {
 			slashOptions: [
 				{
 					name: 'type',
-					description: 'Mod or pack?',
+					description: 'The type of thing to get the raw data of.',
 					type: 'STRING',
 					choices: [
 						{
@@ -40,12 +40,18 @@ export default class json extends BotCommand {
 							name: 'channel',
 							value: 'channel',
 						},
+						{
+							name: 'repo discord server',
+							value: 'discord'
+						}
 					],
+					required: true
 				},
 				{
-					name: 'thingtofind',
+					name: 'query',
 					description: 'option',
 					type: 'STRING',
+					required: true
 				},
 			],
 		})
@@ -56,7 +62,7 @@ export default class json extends BotCommand {
 			let modJson = await skyclientutils.getRepo('mods.json')
 
 			for (let mod of modJson) {
-				if (mod.id == args.thingtofind) {
+				if (mod.id == args.query) {
 					mod = JSON.stringify(mod, null, '  ')
 					await msgutils.reply(message, { content: await utils.haste(mod) })
 				}
@@ -65,21 +71,31 @@ export default class json extends BotCommand {
 			let packJson = await skyclientutils.getRepo('packs.json')
 
 			for (let pack of packJson) {
-				if (pack.id == args.thingtofind) {
+				if (pack.id == args.query) {
 					pack = JSON.stringify(pack, null, '  ')
 					await msgutils.reply(message, { content: await utils.haste(pack) })
 				}
 			}
 		} else if (args.type == 'user') {
-			const user = await this.client.util.resolveUser(args.thingtofind, this.client.users.cache)
+			const user = await this.client.util.resolveUser(args.query, this.client.users.cache)
 
 			const stringUser = JSON.stringify(user, null, '  ')
 			await msgutils.reply(message, { content: await utils.haste(stringUser) })
 		} else if (args.type == 'channel') {
-			const channel = await this.client.util.resolveChannel(args.thingtofind, message.guild.channels.cache)
+			const channel = await this.client.util.resolveChannel(args.query, message.guild.channels.cache)
 
 			const stringChannel = JSON.stringify(channel, null, '  ')
 			await msgutils.reply(message, { content: await utils.haste(stringChannel) })
+		}
+		else if (args.type === 'discord') {
+			let discords = await skyclientutils.getRepo('discords.json')
+
+			for (let discord of discords) {
+				if (discord.id == args.query) {
+					discord = JSON.stringify(discord, null, '  ')
+					await msgutils.reply(message, { content: await utils.haste(discord) })
+				}
+			}
 		}
 	}
 }
