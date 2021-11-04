@@ -23,7 +23,7 @@ export default class repo extends BotCommand {
 			'378587857796726785', //koxx12
 		]
 
-		if (coolPeople.includes(message.author.id)) {
+		if (coolPeople.includes(message.author.id) || message.member.roles.cache.has('799020944487612428')) {
 			const filter = (i) => i.user.id == message.author.id
 			const filterMsg = (m) => m.author.id == message.author.id
 
