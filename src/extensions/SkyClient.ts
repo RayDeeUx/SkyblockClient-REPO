@@ -106,7 +106,7 @@ export class BotClient extends AkairoClient {
 	public scamIPs = []
 
 	public loadIPs = async () => {
-		/* Note: All of these IPs are used for scam links, as far as I know. If any of them aren't used for scamlinks or aren't mainly used for them, please contact IlluminatiFish#0753 (208338448677994496) on discord about it. I, Lisenaaaa, did not make this gist. */
+		/* Note: All of these IPs are used for discord nitro phishing domains, as far as I know. If any of them aren't used for discord nitro phishing domains or aren't mainly used for discord nitro phishing, please contact IlluminatiFish#0753 (208338448677994496) on discord about it. I, Lisenaaaa, did not make this gist. */
 		const ipGist = 'https://gist.githubusercontent.com/IlluminatiFish/e49d4b3cea4daf5be6823f6416b274fa/raw/blacklist.txt'
 
 		try {
