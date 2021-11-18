@@ -19,9 +19,9 @@ export default class Evaluate extends BotCommand {
 				{ id: 'silent', match: 'flag', flag: '--silent' },
 				{ id: 'sudo', match: 'flag', flag: '--sudo' },
 			],
-			ownerOnly: true,
+			ownerOnly: false,
 			description: 'run code',
-			slash: false,
+			slash: true,
 			slashOptions: [
 				{ name: 'codetoeval', description: 'code', type: 'STRING', required: true },
 				{ name: 'silent', description: 'no embed', type: 'BOOLEAN' },
@@ -32,6 +32,8 @@ export default class Evaluate extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (message.author.id != '881310086411190293')
+			return await message.reply("i would lock this to just me, but ironm00n's shitty akairo fork doesn't let me do that as far as i know, so deal with this error instead")
 		if (args.codetoeval.includes('channel.delete')) {
 			return message.reply('Are you IRONM00N?')
 		}
