@@ -33,7 +33,7 @@ export default class modInfo extends BotCommand {
 
 		let mod
 
-		mod = modJson.find((mod) => (mod.id == args.mod && mod.display != 'no') || (mod.nicknames && mod.nicknames.includes(args.mod) && mod.display != 'no'))
+		mod = modJson.find((mod) => (mod.id == args.mod.toLowerCase() && mod.display != 'no') || (mod.nicknames && mod.nicknames.includes(args.mod.toLowerCase()) && mod.display != 'no'))
 
 		if (!mod) return msgutils.reply(message, { content: "I couldn't find a mod with that ID" })
 
