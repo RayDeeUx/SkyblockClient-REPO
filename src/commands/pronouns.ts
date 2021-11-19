@@ -16,13 +16,15 @@ export default class pronouns extends BotCommand {
 	async execSlash(message, args) {
 		const pronouns = await utils.getPronouns(args.person ? args.person : message.author, 'details')
 
-		await message.reply({embeds: [
-			{
-				title: args.person ? `${args.person.user.tag}'s pronouns` : 'Your pronouns',
-				description: pronouns,
-				color: message.member.displayColor,
-				footer: {text: 'All data from https://pronoundb.org'}
-			}
-		]})
+		await message.reply({
+			embeds: [
+				{
+					title: args.person ? `${args.person.tag}'s pronouns` : 'Your pronouns',
+					description: pronouns,
+					color: message.member.displayColor,
+					footer: { text: 'All data from https://pronoundb.org' },
+				},
+			],
+		})
 	}
 }
