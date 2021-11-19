@@ -14,7 +14,7 @@ export default class pronouns extends BotCommand {
 		})
 	}
 	async execSlash(message, args) {
-		const pronouns = await utils.getPronouns(args.person ? args.person.user : message.author, 'details')
+		const pronouns = await utils.getPronouns(args.person ? args.person : message.author, 'details')
 
 		await message.reply({embeds: [
 			{
