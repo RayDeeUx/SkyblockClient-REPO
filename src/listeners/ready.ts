@@ -10,6 +10,7 @@ class ReadyListener extends BotListener {
 		super('ready', {
 			emitter: 'client',
 			event: 'ready',
+			once: true
 		})
 	}
 
@@ -19,7 +20,7 @@ class ReadyListener extends BotListener {
 		console.log(`\n`)
 		console.log(chalk.magentaBright(`---Bot Output---`))
 
-		this.client.user.setActivity('Raine create me', { type: 'WATCHING' })
+		this.client.user.setActivity('Katy create me', { type: 'WATCHING' })
 
 		//const statusJson = JSON.parse(fs.readFileSync("status.json", "ascii"))
 
