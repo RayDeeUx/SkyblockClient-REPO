@@ -10,6 +10,7 @@ class ReadyListener extends BotListener {
 		super('ready', {
 			emitter: 'client',
 			event: 'ready',
+			type: 'once'
 		})
 	}
 
