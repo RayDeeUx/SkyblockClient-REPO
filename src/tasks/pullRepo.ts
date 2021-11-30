@@ -13,6 +13,7 @@ export default class extends BotTasks {
         });
     }
     async exec() {
-        sh('cd SkyblockClient-REPO && git reset --hard && git pull')
+        await sh('cd SkyblockClient-REPO && git reset --hard && git pull')
+        await this.client.loadQalcyoAutoresponse()
     }
 }
