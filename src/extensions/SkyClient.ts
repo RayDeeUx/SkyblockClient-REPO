@@ -5,7 +5,6 @@ import { join } from 'path'
 import utils from '../functions/utils'
 import config from './config/config'
 import fs from 'fs'
-import axios from 'axios'
 import got from 'got/dist/source'
 
 export class BotClient extends AkairoClient {
@@ -104,17 +103,29 @@ export class BotClient extends AkairoClient {
 	}
 
 	public scamIPs = []
-
 	public loadIPs = async () => {
 		/* Note: All of these IPs are used for discord nitro phishing domains, as far as I know. If any of them aren't used for discord nitro phishing or aren't mainly used for this purpose, please contact IlluminatiFish#0753 (208338448677994496) on discord about it. I, Lisenaaaa, did not make this gist. */
 		const ipGist = 'https://gist.githubusercontent.com/IlluminatiFish/e49d4b3cea4daf5be6823f6416b274fa/raw/blacklist.txt'
 
 		try {
-			const ipJson = await JSON.parse(await (await got.get(ipGist)).body)
+			const ipJson = await JSON.parse((await got.get(ipGist)).body)
 			this.scamIPs = ipJson
 			return true
 		} catch (err) {
 			await this.error(err)
+			return false
+		}
+	}
+
+	public QalcyoAutoresponse = []
+	public async loadQalcyoAutoresponse() {
+		const autoresponseJson = 'https://raw.githubusercontent.com/Qalcyo/DataStorage/main/rain/autoresponse.json'
+
+		try {
+			const responses = await JSON.parse((await got.get(autoresponseJson)).body)
+			this.QalcyoAutoresponse = responses
+		} catch (err) {
+			await this.error(err, 'autoresponse loading')
 			return false
 		}
 	}
