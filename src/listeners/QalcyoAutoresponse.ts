@@ -1,10 +1,9 @@
 import { BotListener } from '../extensions/BotListener'
-import fs from 'fs'
-import { Message, MessageActionRow, MessageButton } from 'discord.js'
+import { MessageActionRow, MessageButton } from 'discord.js'
 
-export default class notStolenFromSkytilsDiscord extends BotListener {
+export default class QalcyoAutoresponse extends BotListener {
 	constructor() {
-		super('notStolenFromSkytilsDiscord', {
+		super('QalcyoAutoresponse', {
 			emitter: 'client',
 			event: 'messageCreate',
 		})
