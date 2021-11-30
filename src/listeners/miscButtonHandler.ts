@@ -18,6 +18,9 @@ export default class extends BotListener {
 			} else if (interaction.member.permissions.has('MANAGE_MESSAGES')) {
 				return await interaction.message.delete()
 			}
+			else {
+				return await interaction.deferUpdate()
+			}
 		}
 
 		if (interaction.customId.startsWith('buttonroles')) {
