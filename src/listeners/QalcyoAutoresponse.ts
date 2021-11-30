@@ -10,8 +10,9 @@ export default class QalcyoAutoresponse extends BotListener {
 	}
 
 	async exec(message) {
-        if (message.guild && message.guild.id != '884212442664697937') return
-		if (message.channel.parent.id != '901802497398693918') return
+		if (!message.guild) return
+		if (message.guild.id != '884212442664697937' || message.guild.id != '914828318409388102') return
+		if (message.channel.parent.id != '901802497398693918' || message.channel.parent.id != '914830235382480936') return
 		if (message.channel.type != 'GUILD_TEXT' && message.channel.type != 'GUILD_PUBLIC_THREAD') {
 			return
 		}
