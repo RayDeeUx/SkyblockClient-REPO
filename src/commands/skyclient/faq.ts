@@ -44,6 +44,7 @@ export default class faq extends BotCommand {
 							value: 'addmod',
 						},
 					],
+					required: true,
 				},
 				{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false },
 			],

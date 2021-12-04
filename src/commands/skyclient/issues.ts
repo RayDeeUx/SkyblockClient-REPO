@@ -27,6 +27,7 @@ export default class issue extends BotCommand {
 							value: 'labybad',
 						},
 					],
+					required: true,
 				},
 				{ name: 'ephemeral', description: 'Toggle the embed showing for other people', type: 'BOOLEAN', required: false },
 			],
