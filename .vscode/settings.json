@@ -15,6 +15,6 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
-    "src/extensions/config/config.ts": true
+    "src/extensions/config/config.ts": false
   }
 }
