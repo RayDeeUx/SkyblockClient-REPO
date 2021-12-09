@@ -1,6 +1,5 @@
 import { BotListener } from '../extensions/BotListener'
-import { Guild, Message, TextChannel } from 'discord.js'
-import commandManager from '../functions/commandManager'
+import { Guild, Message, TextChannel, Webhook } from 'discord.js'
 
 module.exports = class autoquote extends BotListener {
 	constructor() {
@@ -29,9 +28,9 @@ module.exports = class autoquote extends BotListener {
 				const channelID = mArray[mArray.length - 2]
 				const messageID = mArray[mArray.length - 1]
 
-				const guild = (await this.client.guilds.cache.get(guildID)) as Guild
+				const guild = (this.client.guilds.cache.get(guildID)) as Guild
 				if (guild === undefined) return
-				const channel = await guild.channels.cache.get(channelID)
+				const channel = guild.channels.cache.get(channelID)
 				if (channel === undefined) return
 				if (!channel?.isText()) return
 
@@ -49,13 +48,13 @@ module.exports = class autoquote extends BotListener {
 
 				if (msg.type === 'DEFAULT') {
 					if (message.channel.type === 'GUILD_TEXT') {
-						let author
+						let author: string
 						if (msg.webhookId) author = msg.author.tag.substring(0, msg.author.tag.length - 5)
 						else author = msg.author.tag
 
 						const webhooks = await (message.channel as TextChannel).fetchWebhooks()
 						const foundWebhook = webhooks.find((w) => w.name == `Rain Quoting - ${(message.channel as TextChannel).name}` && w.owner?.id === this.client.user?.id)
-						let webhook
+						let webhook: Webhook
 						if (foundWebhook === undefined) {
 							webhook = await (message.channel as TextChannel).createWebhook(`Rain Quoting - ${(message.channel as TextChannel).name}`, { avatar: this.client.user?.displayAvatarURL() })
 						} else if (foundWebhook.owner?.id != this.client.user?.id) {
@@ -69,7 +68,7 @@ module.exports = class autoquote extends BotListener {
 								content: msg.content,
 								files: msg.attachments.toJSON(),
 								embeds: msg.embeds,
-								username: `${author}`,
+								username: author,
 								allowedMentions: { parse: [] },
 								avatarURL: msg.author.displayAvatarURL(),
 							})
@@ -77,18 +76,18 @@ module.exports = class autoquote extends BotListener {
 							await webhook.send({
 								files: msg.attachments.toJSON(),
 								embeds: msg.embeds,
-								username: `${author}`,
+								username: author,
 								allowedMentions: { parse: [] },
 								avatarURL: msg.author.displayAvatarURL(),
 							})
 					} else if (message.channel.type === 'GUILD_PUBLIC_THREAD' || message.channel.type === 'GUILD_PRIVATE_THREAD') {
-						let author
+						let author: string
 						if (msg.webhookId) author = msg.author.tag.substring(0, msg.author.tag.length - 5)
 						else author = msg.author.tag
 
 						const webhooks = await (message.channel.parent as TextChannel).fetchWebhooks()
 						const foundWebhook = webhooks.find((w) => w.name == `Rain Quoting - ${(message.channel as TextChannel).name}` && w.owner?.id === this.client.user?.id)
-						let webhook
+						let webhook: Webhook
 						if (foundWebhook === undefined) {
 							webhook = await (message.channel.parent as TextChannel).createWebhook(`Rain Quoting - ${(message.channel.parent as TextChannel).name}`, {
 								avatar: this.client.user?.displayAvatarURL(),
@@ -106,7 +105,7 @@ module.exports = class autoquote extends BotListener {
 								content: msg.content,
 								files: msg.attachments.toJSON(),
 								embeds: msg.embeds,
-								username: `${author}`,
+								username: author,
 								avatarURL: msg.author.displayAvatarURL(),
 								allowedMentions: { parse: [] },
 								threadId: message.channelId,
@@ -115,7 +114,7 @@ module.exports = class autoquote extends BotListener {
 							await webhook.send({
 								files: msg.attachments.toJSON(),
 								embeds: msg.embeds,
-								username: `${author}`,
+								username: author,
 								avatarURL: msg.author.displayAvatarURL(),
 								allowedMentions: { parse: [] },
 								threadId: message.channelId,
@@ -124,7 +123,7 @@ module.exports = class autoquote extends BotListener {
 				}
 			})
 		} catch (err) {
-			console.error(err)
+			await this.client.error(err)
 		}
 	}
 }
