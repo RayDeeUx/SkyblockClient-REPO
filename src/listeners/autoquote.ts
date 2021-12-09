@@ -13,7 +13,6 @@ module.exports = class autoquote extends BotListener {
 	async exec(message: Message) {
 		try {
 			if (message.author.bot) return
-			if (!commandManager.userCanUseCommand(message)) return
 
 			const urlRegex = /https:\/\/(?:\w+\.)?discord(app)?\.com\/channels\/(\d{18})\/(\d{18})\/(\d{18})/g
 			const matches = [...message.content.matchAll(urlRegex)]
