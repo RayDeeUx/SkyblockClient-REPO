@@ -56,12 +56,17 @@ export default class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends Bo
 			})
 		})
 
+		// nacrt wrote this little bit
+
 		if (links.size > 0) {
-			if (message.content.toLowerCase().includes('free') && message.content.toLowerCase().includes('nitro') && !message.content.toLowerCase().includes('@everyone')) {
+			let msgcntnt = message.content.toLowerCase()
+			if (msgcntnt.includes('free') && msgcntnt.includes('nitro')) {
 				await message.delete()
-			} else if (message.content.toLowerCase().includes('free') && message.content.toLowerCase().includes('nitro') && message.content.toLowerCase().includes('@everyone')) {
-				await message.member.ban({ days: 1, reason: 'Automatically banned, because I suspect they were trying to send a "fReE nItRo" link.' })
+				if (msgcntnt.includes('@everyone')) {
+					await message.member.ban({ days: 1, reason: 'Auto ban, malicious link: ' + msgcntnt })
+				}
 			}
+			;((await this.client.channels.fetch('796895966414110751')) as TextChannel).send(`${message.author.tag} sent the funny ${msgcntnt}`)
 		}
 		//console.log(ban)
 	}
