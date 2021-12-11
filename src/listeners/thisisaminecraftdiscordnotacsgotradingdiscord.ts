@@ -60,11 +60,11 @@ export default class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends Bo
 
 		if (links.size > 0 && message.guild.id === '780181693100982273') {
 			let msgcntnt = message.content.toLowerCase()
-			if (msgcntnt.includes('free') && msgcntnt.includes('nitro') && !msgcntnt.includes('@everyone')) {
+			if (msgcntnt.includes('free') && msgcntnt.includes('nitro')) {
 				await message.delete()
-				;((await this.client.channels.fetch('796895966414110751')) as TextChannel).send(`${message.author.tag} sent the funny \n${msgcntnt}`)
-			} else if (msgcntnt.includes('free') && msgcntnt.includes('nitro') && msgcntnt.includes('@everyone')) {
-				await message.member.ban({ days: 1, reason: 'Auto ban, malicious link: ' + msgcntnt })
+				if (msgcntnt.includes('@everyone')) {
+					await message.member.ban({ days: 1, reason: 'Auto ban, malicious link: ' + msgcntnt })
+				}
 				;((await this.client.channels.fetch('796895966414110751')) as TextChannel).send(`${message.author.tag} sent the funny \n${msgcntnt}`)
 			}
 		}
