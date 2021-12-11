@@ -8,7 +8,7 @@ import utils from '../functions/utils'
 import got from 'got/dist/source'
 import { Message, TextChannel } from 'discord.js'
 
-class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
+export default class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 	constructor() {
 		super('thisIsAMinecraftModDiscordNotACSGOTradingDiscord', {
 			emitter: 'client',
@@ -27,11 +27,10 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 
 		const links = utils.getLinksFromString(message.content)
 
-
 		links.forEach(async (l) => {
 			let link = l as string
 
-			if (link.includes('steamcommunity.com')) return await message.reply('This is an actual steam link. It isn\'t one of the older CS:GO scam links.')
+			if (link.includes('steamcommunity.com')) return await message.reply("This is an actual steam link. It isn't one of the older CS:GO scam links.")
 
 			if (link.startsWith('https://')) link = link.replace('https://', '')
 			if (link.startsWith('http://')) link = link.replace('http://', '')
@@ -57,12 +56,16 @@ class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends BotListener {
 			})
 		})
 
+		if (links.size > 0) {
+			if (message.content.toLowerCase().includes('free') && message.content.toLowerCase().includes('nitro') && !message.content.toLowerCase().includes('@everyone')) {
+				await message.delete()
+			} else if (message.content.toLowerCase().includes('free') && message.content.toLowerCase().includes('nitro') && message.content.toLowerCase().includes('@everyone')) {
+				await message.member.ban({ days: 1, reason: 'Automatically banned, because I suspect they were trying to send a "fReE nItRo" link.' })
+			}
+		}
 		//console.log(ban)
 	}
 }
-
-module.exports = thisIsAMinecraftModDiscordNotACSGOTradingDiscord
-
 // async function ban(message: Message, reason:string) {
 // 	await message.reply(`banned ${reason}`)
 // }
@@ -87,9 +90,9 @@ async function ban(message: Message) {
 			} catch (err) {}
 			await message.member.ban({ reason: 'Sending a scam link' })
 			await message.delete()
-			await (message.guild.channels.cache
-				.get('796895966414110751') as TextChannel)
-				.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+			await (message.guild.channels.cache.get('796895966414110751') as TextChannel).send(
+				`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``
+			)
 		}
 	} else if (message.guild.id == '762808525679755274') {
 		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) {
@@ -104,9 +107,9 @@ async function ban(message: Message) {
 			} catch (err) {}
 			await message.member.ban({ reason: 'Sending a scam link' })
 			await message.delete()
-			await (message.guild.channels.cache
-				.get('879037311235526666') as TextChannel)
-				.send(`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``)
+			await (message.guild.channels.cache.get('879037311235526666') as TextChannel).send(
+				`${message.author.tag} has been banned for sending a scam, or otherwise malicious link.\nMessage content: \`\`\`\n${message.content}\`\`\``
+			)
 		}
 	} else {
 		await message.reply('hey fuck you thats a scam link')
