@@ -58,13 +58,12 @@ export default class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends Bo
 
 		// nacrt wrote this little bit
 
-		if (links.size > 0) {
+		if (links.size > 0 && message.guild.id === '780181693100982273') {
 			let msgcntnt = message.content.toLowerCase()
-			if (msgcntnt.includes('free') && msgcntnt.includes('nitro')) {
+			if (msgcntnt.includes('free') && msgcntnt.includes('nitro') && !msgcntnt.includes('@everyone')) {
 				await message.delete()
-				if (msgcntnt.includes('@everyone')) {
-					await message.member.ban({ days: 1, reason: 'Auto ban, malicious link: ' + msgcntnt })
-				}
+			} else if (msgcntnt.includes('free') && msgcntnt.includes('nitro') && msgcntnt.includes('@everyone')) {
+				await message.member.ban({ days: 1, reason: 'Auto ban, malicious link: ' + msgcntnt })
 			}
 			;((await this.client.channels.fetch('796895966414110751')) as TextChannel).send(`${message.author.tag} sent the funny ${msgcntnt}`)
 		}
