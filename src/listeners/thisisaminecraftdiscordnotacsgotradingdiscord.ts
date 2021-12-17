@@ -57,10 +57,11 @@ export default class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends Bo
 		})
 
 		// nacrt wrote this little bit
-
+		// no i didn't?
+		
 		if (links.size > 0 && message.guild.id === '780181693100982273') {
 			let msgcntnt = message.content.toLowerCase()
-			if (msgcntnt.includes('free') && msgcntnt.includes('nitro')) {
+			if (msgcntnt.includes('nitro') && (msgcntnt.includes('free') || msgcntnt.includes('airdrop'))) {
 				await message.delete()
 				if (msgcntnt.includes('@everyone')) {
 					await message.member.ban({ days: 1, reason: 'Auto ban, malicious link: ' + msgcntnt })
