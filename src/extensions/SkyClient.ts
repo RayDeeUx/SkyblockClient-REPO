@@ -117,19 +117,6 @@ export class BotClient extends AkairoClient {
 		}
 	}
 
-	public QalcyoAutoresponse = []
-	public async loadQalcyoAutoresponse() {
-		const autoresponseJson = 'https://raw.githubusercontent.com/Qalcyo/DataStorage/main/rain/autoresponse.json'
-
-		try {
-			const responses = await JSON.parse((await got.get(autoresponseJson)).body)
-			this.QalcyoAutoresponse = responses
-		} catch (err) {
-			await this.error(err, 'autoresponse loading')
-			return false
-		}
-	}
-
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler)
 		this.commandHandler.useInhibitorHandler(this.inhibitorHandler)
