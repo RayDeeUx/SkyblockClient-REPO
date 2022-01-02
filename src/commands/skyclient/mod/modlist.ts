@@ -23,6 +23,9 @@ export default class modList extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (!args) {
+			args = { ephemeral: false }
+		}
 		let mods = await skyclientutils.getRepo('mods.json')
 
 		const modsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't Mods List")
