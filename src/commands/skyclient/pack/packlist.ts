@@ -50,6 +50,6 @@ export default class packList extends BotCommand {
 			}
 		})
 		const embed = packsEmbed
-		await msgutils.reply(message, { embeds: [embed] }, args.ephemeral)
+		await msgutils.reply(message, { embeds: [embed] }, (args.ephemeral ??= false))
 	}
 }

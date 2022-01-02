@@ -18,39 +18,39 @@ export default class modList extends BotCommand {
 			slash: true,
 			slashGuilds: utils.SkyClientGuilds,
 			description: 'Shows a list of all the mods in SkyClient',
-			SkyClientOnly: true
+			SkyClientOnly: true,
 		})
 	}
 
 	async exec(message, args) {
-			let mods = await skyclientutils.getRepo('mods.json')
+		let mods = await skyclientutils.getRepo('mods.json')
 
-			const modsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't Mods List")
+		const modsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't Mods List")
 
-			mods.forEach((mod) => {
-				if (mod.display && mod.display != 'no' && mod.hidden != true) {
-					let mods = ''
+		mods.forEach((mod) => {
+			if (mod.display && mod.display != 'no' && mod.hidden != true) {
+				let mods = ''
 
-					if (mod.display.includes('Bundle')) {
-						mod.actions.forEach((bundle) => {
-							if (bundle.text && bundle.text != 'Guide') {
-								mods = mods + bundle.text + ', '
-							}
-						})
-						mods = mods.substring(0, mods.length - 2)
-					} else {
-						if (mod.display && mod.creator && mod.display != 'no' && mod.discordcode) {
-							mods = `Creator: [${mod.creator}](https://discord.gg/${mod.discordcode})\nMod ID: \`${mod.id}\``
-						} else {
-							mods = `Creator: ${mod.creator}\nMod ID: \`${mod.id}\``
+				if (mod.display.includes('Bundle')) {
+					mod.actions.forEach((bundle) => {
+						if (bundle.text && bundle.text != 'Guide') {
+							mods = mods + bundle.text + ', '
 						}
+					})
+					mods = mods.substring(0, mods.length - 2)
+				} else {
+					if (mod.display && mod.creator && mod.display != 'no' && mod.discordcode) {
+						mods = `Creator: [${mod.creator}](https://discord.gg/${mod.discordcode})\nMod ID: \`${mod.id}\``
+					} else {
+						mods = `Creator: ${mod.creator}\nMod ID: \`${mod.id}\``
 					}
-
-					modsEmbed.addField(`${mod.display}`, mods, true)
 				}
-			})
 
-			const embed = modsEmbed
-			await msgutils.reply(message, { embeds: [embed] }, args.ephemeral)
+				modsEmbed.addField(`${mod.display}`, mods, true)
+			}
+		})
+
+		const embed = modsEmbed
+		await msgutils.reply(message, { embeds: [embed] }, (args.ephemeral ??= false))
 	}
 }
