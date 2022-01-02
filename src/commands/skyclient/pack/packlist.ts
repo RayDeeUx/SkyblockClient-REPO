@@ -23,6 +23,9 @@ export default class packList extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (!args) {
+			args = { ephemeral: false }
+		}
 		let packJson = await skyclientutils.getRepo('packs.json')
 
 		const packsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't packs List")

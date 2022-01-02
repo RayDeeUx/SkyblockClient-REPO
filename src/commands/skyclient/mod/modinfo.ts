@@ -26,6 +26,9 @@ export default class modInfo extends BotCommand {
 	}
 
 	async exec(message, args) {
+		if (!args) {
+			args = { ephemeral: false }
+		}
 
 		let modJson
 
