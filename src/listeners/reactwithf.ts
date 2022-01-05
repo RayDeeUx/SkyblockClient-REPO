@@ -1,6 +1,6 @@
 import { BotListener } from '../extensions/BotListener'
 
-class f extends BotListener {
+export default class f extends BotListener {
 	constructor() {
 		super('f', {
 			emitter: 'client',
@@ -23,5 +23,3 @@ class f extends BotListener {
 		}
 	}
 }
-
-module.exports = f

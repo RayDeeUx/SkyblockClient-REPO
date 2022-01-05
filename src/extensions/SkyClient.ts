@@ -55,7 +55,7 @@ export class BotClient extends AkairoClient {
 
 	public error = async (error: Error, type?: string, message?: Message) => {
 		try {
-			const errorChannel = (await this.channels.fetch('880655558728896562')) as TextChannel
+			const errorChannel = (await this.channels.fetch(this.config.misc.errorChannelID)) as TextChannel
 
 			const errorCode = utils.getRandomInt(69696969696969)
 
