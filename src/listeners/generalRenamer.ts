@@ -19,7 +19,7 @@ export default class GeneralRenamer extends BotListener {
 
 			await (message.channel as TextChannel).setName(message.content)
 			const webhook = new WebhookClient({ url: this.client.config.misc.skyclientGeneralLoggingURL })
-			await webhook.send(`Renaming SkyClient #general to ${message.content.replaceAll(' ', '-')}`)
+			await webhook.send(`Renaming SkyClient #general to ${message.content.replaceAll(' ', '-')} - ${message.url}`)
 
 			this.client.generalTimeout = 5
 			await utils.sleep(300000)
