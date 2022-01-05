@@ -32,5 +32,7 @@ export default client
 	const { WebhookClient } = require('discord.js')
 	const webhook = new WebhookClient({ url: config.misc.consoleWebhookURL })
 
-	await webhook.send('Process started.')
+	if (config.misc.tokenToUse === 'token') {
+		await webhook.send('Process started.')
+	}
 })()

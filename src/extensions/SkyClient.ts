@@ -52,6 +52,7 @@ export class BotClient extends AkairoClient {
 	public config = config
 	public utils = utils
 	public package = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
+	public generalTimeout = 0
 
 	public error = async (error: Error, type?: string, message?: Message) => {
 		try {
