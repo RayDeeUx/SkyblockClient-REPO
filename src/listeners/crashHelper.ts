@@ -33,7 +33,7 @@ export default class CrashHelper extends BotListener {
 				await message.delete()
 			}
 
-			await message.channel.send(`**${message.author.tag}** sent a log: ${logUrl}${message.content ? `${message.content}` : ''}`)
+			await message.channel.send(`**${message.author}** sent a log: ${logUrl}${message.content ? `\n\n${message.content}` : ''}`)
 		}
 	}
 
