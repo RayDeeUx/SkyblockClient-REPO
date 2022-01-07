@@ -22,25 +22,12 @@ class ReadyListener extends BotListener {
 
 		this.client.user.setActivity('Alyssa create me', { type: 'WATCHING' })
 
-		//const statusJson = JSON.parse(fs.readFileSync("status.json", "ascii"))
-
 		if (this.client.user.id === '881446517729296414') await ((await this.client.channels.fetch('880655568417751102')) as TextChannel).send('Logged in.')
 
-		// if (statusJson.gitRestart.status === true) {
-		//     const gitRestartChannel = await this.client.channels.fetch(statusJson.gitRestart.channelID) as TextChannel
-
-		//     if (statusJson.gitRestart.edit == true) {
-		// 		const msgToEdit = await gitRestartChannel.messages.fetch(statusJson.gitRestart.editMessageID)
-
-		// 		await msgToEdit.edit('I have been restarted.')
-		// 	}
-
-		// 	statusJson.gitRestart.channelID = ''
-		// 	statusJson.gitRestart.editMessageID = ''
-		//     statusJson.gitRestart.status = false
-		// 	statusJson.gitRestart.edit = false
-		//     fs.writeFileSync('status.json', JSON.stringify(statusJson))
-		// }
+		await this.client.fixes.fetch()
+		await this.client.mods.fetch()
+		await this.client.packs.fetch()
+		await this.client.discords.fetch()
 	}
 }
 

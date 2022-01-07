@@ -6,7 +6,6 @@ import fs from 'fs'
 
 import importUtils from '../../../functions/utils'
 import msgutils from '../../../functions/msgutils'
-import skyclientutils from '../../../functions/skyclientutils'
 const utils = importUtils
 
 export default class packName extends BotCommand {
@@ -27,17 +26,11 @@ export default class packName extends BotCommand {
 	}
 
 	async exec(message, args) {
-		let packJson
-		packJson = await skyclientutils.getRepo('packs.json')
-
-		let pack
-
-		pack = packJson.find((pack) => (pack.id == args.pack && pack.display != 'no') || (pack.nicknames && pack.nicknames.includes(args.pack) && pack.display != 'no'))
+		const pack = this.client.packs.get(args.pack)
 
 		if (!pack) return msgutils.reply(message, { content: "I couldn't find a pack with that ID" })
 
 		const packEmbed = new MessageEmbed().setTitle(pack.display).setDescription(pack.description)
-		if (pack.command) packEmbed.addField('Command', pack.command)
 		if (pack.url && pack.id != 'optifine') packEmbed.addField('Direct Download', `[${pack.file}](${pack.url})`)
 		else if (!pack.url && pack.id != 'optifine')
 			packEmbed.addField('Direct Download', `[${pack.file}](https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/packs/${encodeURIComponent(pack.file)}?raw=true)`)

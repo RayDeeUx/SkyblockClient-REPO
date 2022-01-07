@@ -3,7 +3,6 @@ import axios from 'axios'
 import utils from '../../functions/utils'
 import { BotCommand } from '../../extensions/BotCommand'
 import fs from 'fs'
-import skyclientutils from '../../functions/skyclientutils'
 
 export default class partners extends BotCommand {
 	constructor() {
@@ -24,7 +23,7 @@ export default class partners extends BotCommand {
 			return message.reply('hey you need admin for that')
 		}
 
-		const servers = await skyclientutils.getRepo('discords.json')
+		const servers = this.client.discords.discords
 
 		let embedArray = []
 

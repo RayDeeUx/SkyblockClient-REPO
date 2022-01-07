@@ -5,7 +5,6 @@ import commandManager from '../../../functions/commandManager'
 import fs from 'fs'
 
 import importUtils from '../../../functions/utils'
-import skyclientutils from '../../../functions/skyclientutils'
 import msgutils from '../../../functions/msgutils'
 const utils = importUtils
 
@@ -26,7 +25,7 @@ export default class modList extends BotCommand {
 		if (!args) {
 			args = { ephemeral: false }
 		}
-		let mods = await skyclientutils.getRepo('mods.json')
+		let mods = this.client.mods.mods
 
 		const modsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't Mods List")
 

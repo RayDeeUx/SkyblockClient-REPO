@@ -1,10 +1,8 @@
 import { BotCommand } from '../../../extensions/BotCommand'
-import utils from '../../../functions/utils'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 import { Message, MessageActionRow, MessageButton } from 'discord.js'
 import fs from 'fs'
-import msgutils from '../../../functions/msgutils'
 
 const sh = promisify(exec)
 
@@ -24,6 +22,8 @@ export default class repo extends BotCommand {
 		]
 
 		if (coolPeople.includes(message.author.id) || message.member.roles.cache.has('799020944487612428')) {
+			await sh('cd SkyblockClient-REPO && git reset --hard && git pull')
+
 			const filter = (i) => i.user.id == message.author.id
 			const filterMsg = (m) => m.author.id == message.author.id
 
@@ -102,9 +102,9 @@ export default class repo extends BotCommand {
 
 												const newJson = JSON.stringify(allThings, null, 4)
 
-												await fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
+												fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
 
-												sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
+												await sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
 
 												await msg.reply('The repo has been updated succesfully.')
 											} else {
@@ -131,9 +131,9 @@ export default class repo extends BotCommand {
 
 												const newJson = JSON.stringify(allThings, null, 4)
 
-												await fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
+												fs.writeFileSync('SkyblockClient-REPO/files/mods.json', newJson)
 
-												sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
+												await sh(`cd SkyblockClient-REPO && git commit -am "Update ${mod2.display}" && git push`)
 
 												await msg.reply('The repo has been updated succesfully.')
 											}

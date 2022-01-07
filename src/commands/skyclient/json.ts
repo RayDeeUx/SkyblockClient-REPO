@@ -2,7 +2,6 @@ import axios from 'axios'
 import { BotCommand } from '../../extensions/BotCommand'
 import utils from '../../functions/utils'
 import fs from 'fs'
-import skyclientutils from '../../functions/skyclientutils'
 import msgutils from '../../functions/msgutils'
 
 export default class json extends BotCommand {
@@ -59,23 +58,9 @@ export default class json extends BotCommand {
 
 	async exec(message, args) {
 		if (args.type == 'mod') {
-			let modJson = await skyclientutils.getRepo('mods.json')
-
-			for (let mod of modJson) {
-				if (mod.id == args.query) {
-					mod = JSON.stringify(mod, null, '  ')
-					await msgutils.reply(message, { content: await this.generateOutput(mod) })
-				}
-			}
+			await msgutils.reply(message, { content: await this.generateOutput(JSON.stringify(this.client.mods.get(args.query), null, '    ')) })
 		} else if (args.type == 'pack') {
-			let packJson = await skyclientutils.getRepo('packs.json')
-
-			for (let pack of packJson) {
-				if (pack.id == args.query) {
-					pack = JSON.stringify(pack, null, '  ')
-					await msgutils.reply(message, { content: await this.generateOutput(pack) })
-				}
-			}
+			await msgutils.reply(message, { content: await this.generateOutput(JSON.stringify(this.client.packs.get(args.query), null, '    ')) })
 		} else if (args.type == 'user') {
 			// return await message.reply({ content: "hey so this doesn't actually work rn", ephemeral: true })
 			let user = this.client.util.resolveUser(args.query, this.client.users.cache)
@@ -88,19 +73,12 @@ export default class json extends BotCommand {
 			const stringUser = JSON.stringify(user, null, '  ')
 			await msgutils.reply(message, { content: await this.generateOutput(stringUser) })
 		} else if (args.type == 'channel') {
-			const channel = await this.client.util.resolveChannel(args.query, message.guild.channels.cache)
+			const channel = this.client.util.resolveChannel(args.query, message.guild.channels.cache)
 
 			const stringChannel = JSON.stringify(channel, null, '  ')
 			await msgutils.reply(message, { content: await this.generateOutput(stringChannel) })
 		} else if (args.type === 'discord') {
-			let discords = await skyclientutils.getRepo('discords.json')
-
-			for (let discord of discords) {
-				if (discord.id == args.query) {
-					discord = JSON.stringify(discord, null, '  ')
-					await msgutils.reply(message, { content: await this.generateOutput(discord) })
-				}
-			}
+			await msgutils.reply(message, { content: await this.generateOutput(JSON.stringify(this.client.discords.get(args.query), null, '    ')) })
 		}
 	}
 

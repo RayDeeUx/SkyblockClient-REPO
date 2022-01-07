@@ -8,7 +8,6 @@ import { inspect, promisify } from 'util'
 import djsImport from 'discord.js'
 
 import { BotCommand } from '../../extensions/BotCommand'
-import skyclientutils from '../../functions/skyclientutils'
 
 export default class Evaluate extends BotCommand {
 	constructor() {
@@ -54,8 +53,7 @@ export default class Evaluate extends BotCommand {
 			botMember = message.guild?.me,
 			utils = importUtils,
 			sh = promisify(exec),
-			djs = djsImport,
-			scutils = skyclientutils
+			djs = djsImport
 
 		let output
 

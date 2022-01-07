@@ -8,6 +8,8 @@ const client = new BotClient()
 
 const sh = promisify(exec)
 
+console.log("hey! when you see this, make it use github's api for the repo command instead of cloning the whole repo")
+
 sh('git clone https://github.com/nacrt/SkyblockClient-REPO')
 	.then(() => {
 		console.log(chalk`{blue nacrt/SkyblockClient-REPO} {red successfully cloned!}`)

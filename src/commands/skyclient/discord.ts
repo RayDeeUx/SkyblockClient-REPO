@@ -3,7 +3,6 @@ import axios from 'axios'
 import { BotCommand } from '../../extensions/BotCommand'
 import utils from '../../functions/utils'
 import fs from 'fs'
-import skyclientutils from '../../functions/skyclientutils'
 
 export default class discord extends BotCommand {
 	constructor() {
@@ -27,7 +26,7 @@ export default class discord extends BotCommand {
 			return message.reply("lemme just telepathically get the discord you want from you... oh wait i can't")
 		}
 
-		let discords = await skyclientutils.getRepo('discords.json')
+		let discords = this.client.discords.discords
 
 		let found = false
 

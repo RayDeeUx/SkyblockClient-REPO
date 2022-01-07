@@ -3,10 +3,8 @@ import { MessageEmbed, TextChannel } from 'discord.js'
 import { BotCommand } from '../../../extensions/BotCommand'
 import commandManager from '../../../functions/commandManager'
 import fs from 'fs'
-
 import utils from '../../../functions/utils'
 import msgutils from '../../../functions/msgutils'
-import skyclientutils from '../../../functions/skyclientutils'
 
 export default class modInfo extends BotCommand {
 	constructor() {
@@ -21,19 +19,12 @@ export default class modInfo extends BotCommand {
 			],
 			slashGuilds: utils.slashGuilds,
 			description: 'Shows information on a specific mod from SkyClient',
-			SkyClientOnly: true
+			SkyClientOnly: true,
 		})
 	}
 
 	async exec(message, args) {
-
-		let modJson
-
-		modJson = await skyclientutils.getRepo('mods.json')
-
-		let mod
-
-		mod = modJson.find((mod) => (mod.id == args.mod.toLowerCase() && mod.display != 'no') || (mod.nicknames && mod.nicknames.includes(args.mod.toLowerCase()) && mod.display != 'no'))
+		const mod = await this.client.mods.get(args.mod)
 
 		if (!mod) return msgutils.reply(message, { content: "I couldn't find a mod with that ID" })
 

@@ -3,11 +3,8 @@ import axios from 'axios'
 import { BotCommand } from '../../../extensions/BotCommand'
 import commandManager from '../../../functions/commandManager'
 import fs from 'fs'
-
-import importUtils from '../../../functions/utils'
-import skyclientutils from '../../../functions/skyclientutils'
+import utils from '../../../functions/utils'
 import msgutils from '../../../functions/msgutils'
-const utils = importUtils
 
 export default class packList extends BotCommand {
 	constructor() {
@@ -26,7 +23,7 @@ export default class packList extends BotCommand {
 		if (!args) {
 			args = { ephemeral: false }
 		}
-		let packJson = await skyclientutils.getRepo('packs.json')
+		let packJson = this.client.packs.packs
 
 		const packsEmbed = new MessageEmbed().setColor(message.member.displayColor).setTitle("SkyClien't packs List")
 

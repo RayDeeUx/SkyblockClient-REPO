@@ -3,7 +3,6 @@ import { MessageEmbed } from 'discord.js'
 import { BotCommand } from '../../extensions/BotCommand'
 import utils from '../../functions/utils'
 import fs from 'fs'
-import skyclientutils from '../../functions/skyclientutils'
 import msgutils from '../../functions/msgutils'
 
 export default class nonpartnereddiscords extends BotCommand {
@@ -33,7 +32,7 @@ export default class nonpartnereddiscords extends BotCommand {
 	}
 
 	async exec(message, args) {
-		const discords = await skyclientutils.getRepo('discords.json')
+		const discords = this.client.discords.discords
 
 		const discordsEmbed = new MessageEmbed().setTitle('Non-partnered discord servers')
 

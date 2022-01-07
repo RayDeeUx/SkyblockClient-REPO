@@ -3,7 +3,6 @@ import { promisify } from 'util'
 import { BotListener } from '../extensions/BotListener'
 import fs from 'fs'
 import commandManager from '../functions/commandManager'
-import skyclientutils from '../functions/skyclientutils'
 import utils from '../functions/utils'
 import got from 'got/dist/source'
 import { Message, TextChannel } from 'discord.js'
@@ -23,41 +22,41 @@ export default class thisIsAMinecraftModDiscordNotACSGOTradingDiscord extends Bo
 		if (message.member.roles.cache.has('885960137544695819')) return
 		if (message.member.permissions.toArray().includes('ADMINISTRATOR')) return
 
-		const scamLinks = await skyclientutils.getRepo('scamlinks.json', true)
 
 		const links = utils.getLinksFromString(message.content)
 
-		links.forEach(async (l) => {
-			let link = l as string
+		// links.forEach(async (l) => {
+		// 	let link = l as string
 
-			if (link.includes('steamcommunity.com')) return await message.reply("This is an actual steam link. It isn't one of the older CS:GO scam links.")
+		// 	if (link.includes('steamcommunity.com')) return await message.reply("This is an actual steam link. It isn't one of the older CS:GO scam links.")
 
-			if (link.startsWith('https://')) link = link.replace('https://', '')
-			if (link.startsWith('http://')) link = link.replace('http://', '')
-			if (link.endsWith('/')) link = link.substring(0, link.length - 1)
+		// 	if (link.startsWith('https://')) link = link.replace('https://', '')
+		// 	if (link.startsWith('http://')) link = link.replace('http://', '')
+		// 	if (link.endsWith('/')) link = link.substring(0, link.length - 1)
 
-			const linkData = JSON.parse((await got.get(`http://ip-api.com/json/${link.replace('https://', '').replace('http://', '')}`)).body)
+		// 	const linkData = JSON.parse((await got.get(`http://ip-api.com/json/${link.replace('https://', '').replace('http://', '')}`)).body)
 
-			if (this.client.scamIPs.includes(linkData.query)) {
-				//console.log(`ip: ${true}`)
-				return await ban(message)
-			}
-			//if (scamLinks.includes(link)) return ban = true
+		// 	if (this.client.scamIPs.includes(linkData.query)) {
+		// 		//console.log(`ip: ${true}`)
+		// 		return await ban(message)
+		// 	}
+		// 	//if (scamLinks.includes(link)) return ban = true
 
-			const splitLink = link.split('/')
-			//console.log(splitLink)
+		// 	const splitLink = link.split('/')
+		// 	//console.log(splitLink)
 
-			splitLink.forEach(async (l) => {
-				//console.log(l)
-				if (scamLinks.includes(l))
-					//console.log(`repo: ${true}`)
-					//console.log(scamLinks.includes(l))
-					return await ban(message)
-			})
-		})
+		// 	splitLink.forEach(async (l) => {
+		// 		//console.log(l)
+		// 		if (scamLinks.includes(l))
+		// 			//console.log(`repo: ${true}`)
+		// 			//console.log(scamLinks.includes(l))
+		// 			return await ban(message)
+		// 	})
+		// })
 
 		// nacrt wrote this little bit
 		// no i didn't?
+		// yes you did dumbass
 		
 		if (links.size > 0 && message.guild.id === '780181693100982273') {
 			let msgcntnt = message.content.toLowerCase()
