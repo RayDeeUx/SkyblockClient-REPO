@@ -53,12 +53,12 @@ module.exports = class autoquote extends BotListener {
 						else author = msg.author.tag
 
 						const webhooks = await (message.channel as TextChannel).fetchWebhooks()
-						const foundWebhook = webhooks.find((w) => w.name == `Rain Quoting - ${(message.channel as TextChannel).name}` && w.owner?.id === this.client.user?.id)
+						const foundWebhook = webhooks.find((w) => w.name == `Rain Quoting` && w.owner?.id === this.client.user?.id)
 						let webhook: Webhook
 						if (foundWebhook === undefined) {
-							webhook = await (message.channel as TextChannel).createWebhook(`Rain Quoting - ${(message.channel as TextChannel).name}`, { avatar: this.client.user?.displayAvatarURL() })
+							webhook = await (message.channel as TextChannel).createWebhook(`Rain Quoting}`, { avatar: this.client.user?.displayAvatarURL() })
 						} else if (foundWebhook.owner?.id != this.client.user?.id) {
-							webhook = await (message.channel as TextChannel).createWebhook(`Rain Quoting - ${(message.channel as TextChannel).name}`, { avatar: this.client.user?.displayAvatarURL() })
+							webhook = await (message.channel as TextChannel).createWebhook(`Rain Quoting`, { avatar: this.client.user?.displayAvatarURL() })
 						} else {
 							webhook = foundWebhook
 						}
@@ -86,14 +86,14 @@ module.exports = class autoquote extends BotListener {
 						else author = msg.author.tag
 
 						const webhooks = await (message.channel.parent as TextChannel).fetchWebhooks()
-						const foundWebhook = webhooks.find((w) => w.name == `Rain Quoting - ${(message.channel as TextChannel).name}` && w.owner?.id === this.client.user?.id)
+						const foundWebhook = webhooks.find((w) => w.name == `Rain Quoting}` && w.owner?.id === this.client.user?.id)
 						let webhook: Webhook
 						if (foundWebhook === undefined) {
-							webhook = await (message.channel.parent as TextChannel).createWebhook(`Rain Quoting - ${(message.channel.parent as TextChannel).name}`, {
+							webhook = await (message.channel.parent as TextChannel).createWebhook(`Rain Quoting`, {
 								avatar: this.client.user?.displayAvatarURL(),
 							})
 						} else if (foundWebhook.owner?.id != this.client.user?.id) {
-							webhook = await (message.channel.parent as TextChannel).createWebhook(`Rain Quoting - ${(message.channel.parent as TextChannel).name}`, {
+							webhook = await (message.channel.parent as TextChannel).createWebhook(`Rain Quoting`, {
 								avatar: this.client.user?.displayAvatarURL(),
 							})
 						} else {
