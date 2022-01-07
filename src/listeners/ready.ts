@@ -24,8 +24,7 @@ class ReadyListener extends BotListener {
 
 		//const statusJson = JSON.parse(fs.readFileSync("status.json", "ascii"))
 
-		const logChannel = (await this.client.channels.fetch('880655568417751102')) as TextChannel
-		if (this.client.user.id == '881446517729296414') await logChannel.send('Logged in.')
+		if (this.client.user.id === '881446517729296414') await ((await this.client.channels.fetch('880655568417751102')) as TextChannel).send('Logged in.')
 
 		// if (statusJson.gitRestart.status === true) {
 		//     const gitRestartChannel = await this.client.channels.fetch(statusJson.gitRestart.channelID) as TextChannel
