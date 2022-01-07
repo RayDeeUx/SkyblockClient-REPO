@@ -16,16 +16,16 @@ export default class CrashHelper extends BotListener {
 		if (!allowedGuilds.includes(message.guild.id)) return
 
 		if (message.author.bot) return
-		if (message.attachments.size === 0) return await message.reply('no attachments')
+		if (message.attachments.size === 0) return// await message.reply('no attachments')
 		for (const [, { url }] of message.attachments) {
 			if (!url.endsWith('.txt') && !url.endsWith('.log')) {
-				return await message.reply(`${url} isn't, and can't be, a crash log.`)
+				return// await message.reply(`${url} isn't, and can't be, a crash log.`)
 			}
 
 			const log = (await got.get(url)).body
 			const isLog = this.checkPossibleLog(log)
 
-			if (isLog === false) return await message.reply('not a log')
+			if (isLog === false) return// await message.reply('not a log')
 
 			let logUrl = await utils.haste(log)
 
