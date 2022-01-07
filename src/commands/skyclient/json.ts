@@ -42,16 +42,16 @@ export default class json extends BotCommand {
 						},
 						{
 							name: 'repo discord server',
-							value: 'discord'
-						}
+							value: 'discord',
+						},
 					],
-					required: true
+					required: true,
 				},
 				{
 					name: 'query',
 					description: 'option',
 					type: 'STRING',
-					required: true
+					required: true,
 				},
 			],
 		})
@@ -64,7 +64,7 @@ export default class json extends BotCommand {
 			for (let mod of modJson) {
 				if (mod.id == args.query) {
 					mod = JSON.stringify(mod, null, '  ')
-					await msgutils.reply(message, { content: await utils.haste(mod) })
+					await msgutils.reply(message, { content: await this.generateOutput(mod) })
 				}
 			}
 		} else if (args.type == 'pack') {
@@ -73,29 +73,36 @@ export default class json extends BotCommand {
 			for (let pack of packJson) {
 				if (pack.id == args.query) {
 					pack = JSON.stringify(pack, null, '  ')
-					await msgutils.reply(message, { content: await utils.haste(pack) })
+					await msgutils.reply(message, { content: await this.generateOutput(pack) })
 				}
 			}
 		} else if (args.type == 'user') {
 			const user = await this.client.util.resolveUser(args.query, this.client.users.cache)
 
 			const stringUser = JSON.stringify(user, null, '  ')
-			await msgutils.reply(message, { content: await utils.haste(stringUser) })
+			await msgutils.reply(message, { content: await this.generateOutput(stringUser) })
 		} else if (args.type == 'channel') {
 			const channel = await this.client.util.resolveChannel(args.query, message.guild.channels.cache)
 
 			const stringChannel = JSON.stringify(channel, null, '  ')
-			await msgutils.reply(message, { content: await utils.haste(stringChannel) })
-		}
-		else if (args.type === 'discord') {
+			await msgutils.reply(message, { content: await this.generateOutput(stringChannel) })
+		} else if (args.type === 'discord') {
 			let discords = await skyclientutils.getRepo('discords.json')
 
 			for (let discord of discords) {
 				if (discord.id == args.query) {
 					discord = JSON.stringify(discord, null, '  ')
-					await msgutils.reply(message, { content: await utils.haste(discord) })
+					await msgutils.reply(message, { content: await this.generateOutput(discord) })
 				}
 			}
+		}
+	}
+
+	async generateOutput(content: string): Promise<string> {
+		if (content.length >= 10) {
+			return `\`\`\`json\n${content}\`\`\``
+		} else {
+			return await utils.haste(content)
 		}
 	}
 }
