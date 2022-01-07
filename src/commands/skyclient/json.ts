@@ -77,8 +77,14 @@ export default class json extends BotCommand {
 				}
 			}
 		} else if (args.type == 'user') {
-			const user = await this.client.util.resolveUser(args.query, this.client.users.cache)
+			return await message.reply({ content: "hey so this doesn't actually work rn", ephemeral: true })
+			let user = this.client.util.resolveUser(args.query, this.client.users.cache)
 
+			if (!user) {
+				await msgutils.reply(message, { content: "Couldn't find that user." })
+			}
+			user = await this.client.users.fetch(user)
+			await user.fetchFlags()
 			const stringUser = JSON.stringify(user, null, '  ')
 			await msgutils.reply(message, { content: await this.generateOutput(stringUser) })
 		} else if (args.type == 'channel') {
