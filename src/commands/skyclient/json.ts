@@ -99,7 +99,7 @@ export default class json extends BotCommand {
 	}
 
 	async generateOutput(content: string): Promise<string> {
-		if (content.length >= 10) {
+		if (content.length <= 1990) {
 			return `\`\`\`json\n${content}\`\`\``
 		} else {
 			return await utils.haste(content)
