@@ -12,9 +12,10 @@ export default class GeneralRenamer extends BotListener {
 
 	async exec(message: Message) {
 		try {
-			if (message.member.roles.cache.get('929157720328785920')) return
-
 			if (message.channel.id != '780181693553704973') return
+			if (message.webhookId) return
+			if (message.author.bot) return
+			if (message.member.roles.cache.get('929157720328785920')) return
 			if (!message.content) return
 			if (message.content.replaceAll(' ', '').length! >= 7) return
 			if (this.client.generalTimeout != 0) return
